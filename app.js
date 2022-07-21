@@ -24,4 +24,4 @@ app.get('/', (req, res) => {
 server.listen(port, function() {
     console.log(`Web server running on ${hostname} port ${port}`)
     return true
-  })
+})
