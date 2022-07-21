@@ -6,14 +6,11 @@ var http = require('http')
 const { hostname } = require('os')
 
 var app = express() // use the express framework to handle dynamic responses to different pages
-app.use(express.json()) // make sure express parses bodies with json
-app.use(cors()) // make sure we can access the api from the outside
+  app.use(express.json()) // make sure express parses bodies with json
+  app.use(cors()) // make sure we can access the api from the outside
+  app.set("view engine", "ejs") // set view engine to ejs
 
 var server = http.Server(app)
-
-// set view engine to ejs
-app.set("view engine", "ejs")
-
 
 const recipeList = [
     { id: 1, name: "Mat", taste: "digg", link: "recipes/1" },
