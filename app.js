@@ -12,6 +12,8 @@ var app = express() // use the express framework to handle dynamic responses to 
 
 var server = http.Server(app)
 
+const apiUrl = "https://lud-recipe-api.herokuapp.com"
+
 const recipeList = [
     { id: 1, name: "Mat", taste: "digg", link: "recipes/1" },
     { id: 2, name: "Drikk", taste: "usch", link: "recipes/2" },
@@ -19,7 +21,9 @@ const recipeList = [
 ]
 
 app.get("/", (req, res) => {
-  res.render("recipeList", { data: recipeList })
+  fetch(apiUrl + "/recipes")
+    .then(response => response.json())
+    .then(data => res.render("recipeList", { data: data }))
 })
 
 
