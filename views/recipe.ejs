@@ -4,8 +4,8 @@
         <title>Recipe - <%= data.name %></title>
     </head>
     <body>
-        <h1> <%= data.name %> </h1>
-        <div> has <%= data.id %> </div>
-        <div> is <%= data.taste %> </div>
+        <h1> <%= data.name %> (<%= data.id %>)</h1>
+        <div> is <%= data.description %> </div>
+        <div> created on <%= data.created_on %></div>
     </body>
 </html>

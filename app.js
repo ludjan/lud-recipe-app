@@ -40,6 +40,18 @@ app.get("/", (req, res) => {
     });
 })
 
+app.get("/recipe/:id", (req, res) => {
+  
+  const targetUrl = apiUrl + "/api/recipes/" + req.params.id
+  console.log(`Target url: ${targetUrl}`)
+  fetch(targetUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data)
+      res.render("recipe", { data: data })
+    });
+})
+
 
 server.listen(port, function() {
     console.log(`Web server running on ${hostname} port ${port}`)
