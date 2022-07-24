@@ -45,6 +45,7 @@ app.get("/", (req, res) => {
     .then((data) => {
       console.log(data)
       console.log("hest")
+      res.render("recipeList", { data: data })
     });
 })
 
