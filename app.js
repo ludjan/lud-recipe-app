@@ -33,8 +33,9 @@ app.get("/", (req, res) => {
   console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
     .then(response => {
-      console.log(response)
-      response.json()  
+      const json = response.json()
+      console.log(json)
+      json
     })
     .then(data => res.render("recipeList", { data: data }))
 })
