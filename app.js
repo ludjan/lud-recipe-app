@@ -29,7 +29,7 @@ const recipeList = [
 ]
 
 app.get("/", (req, res) => {
-  const targetUrl = apiUrl + "/recipes"
+  const targetUrl = apiUrl + "/api/recipes"
   console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
     .then(response => console.log(response))
