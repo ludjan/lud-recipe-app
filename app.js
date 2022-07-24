@@ -4,7 +4,7 @@ var express = require('express')
 const cors = require('cors')
 var http = require('http')
 const { hostname } = require('os')
-const fetch = require('node-fetch')
+import fetch from "node-fetch";
 
 
 var app = express() // use the express framework to handle dynamic responses to different pages
