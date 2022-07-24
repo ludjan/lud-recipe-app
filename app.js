@@ -39,10 +39,13 @@ app.get("/", (req, res) => {
     // })
     // .then(data => {
     //   console.log(data)
-    //   res.render("recipeList", { data: data })
+    //   
     // })
     .then((response) => response.json())
-    .then((data) => console.log(data));
+    .then((data) => {
+      console.log(data)
+      console.log("hest")
+    });
 })
 
 
