@@ -32,15 +32,17 @@ app.get("/", (req, res) => {
   const targetUrl = apiUrl + "/api/recipes"
   console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
-    .then(response => {
-      const json = response.json()
-      console.log(json)
-      json
-    })
-    .then(data => {
-      console.log(data)
-      res.render("recipeList", { data: data })
-    })
+    // .then(response => {
+    //   const json = response.json()
+    //   console.log(json)
+    //   json
+    // })
+    // .then(data => {
+    //   console.log(data)
+    //   res.render("recipeList", { data: data })
+    // })
+    .then((response) => response.json())
+    .then((data) => console.log(data));
 })
 
 
