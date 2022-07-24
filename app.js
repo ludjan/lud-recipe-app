@@ -63,4 +63,6 @@ server.listen(port, function() {
     return true
 })
 
-app.use(express.static('./public'))
+console.log(__dirname)
+console.log(path.join(__dirname, 'public'))
+app.use('/static', express.static(path.join(__dirname, 'public')))
