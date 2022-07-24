@@ -13,8 +13,6 @@ import fetch from "node-fetch"
 
 const { hostname } = os.hostname
 
-
-
 var app = express() // use the express framework to handle dynamic responses to different pages
   app.use(express.json()) // make sure express parses bodies with json
   app.use(cors()) // make sure we can access the api from the outside
@@ -34,6 +32,7 @@ app.get("/", (req, res) => {
   const targetUrl = apiUrl + "/recipes"
   console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
+    .then(console.log(response))
     .then(response => response.json())
     .then(data => res.render("recipeList", { data: data }))
 })
