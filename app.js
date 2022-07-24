@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data)
-      res.render("recipeList", { data: data, url : appUrl })
+      res.render("recipe-list", { data: data, url : appUrl })
     });
 })
 
@@ -52,10 +52,8 @@ app.get("/recipes/:id", (req, res) => {
     });
 })
 
-app.get("/create", (req, res) => {
-
-  
-
+app.get("/add-recipe", (req, res) => {
+  res.render("add-recipe")
 })
 
 
