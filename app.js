@@ -52,6 +52,12 @@ app.get("/recipes/:id", (req, res) => {
     });
 })
 
+app.get("/create", (req, res) => {
+
+  
+
+})
+
 
 server.listen(port, function() {
     console.log(`Web server running on ${hostname} port ${port}`)

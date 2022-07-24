@@ -7,6 +7,8 @@ const url='https://lud-recipe-app.herokuapp.com/api/recipes'
 
 console.log(`File name ${__filename}`)
 
+console.log("recipe.js kjorer")
+
 
 addRecipeForm.addEventListener("submit", () => {
   
