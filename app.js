@@ -37,7 +37,10 @@ app.get("/", (req, res) => {
       console.log(json)
       json
     })
-    .then(data => res.render("recipeList", { data: data }))
+    .then(data => {
+      console.log(data)
+      res.render("recipeList", { data: data })
+    })
 })
 
 
