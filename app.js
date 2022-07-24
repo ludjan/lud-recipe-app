@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
     });
 })
 
-app.get("/recipe/:id", (req, res) => {
+app.get("/recipes/:id", (req, res) => {
   
   const targetUrl = apiUrl + "/api/recipes/" + req.params.id
   console.log(`Target url: ${targetUrl}`)
