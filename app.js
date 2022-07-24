@@ -63,4 +63,4 @@ server.listen(port, function() {
     return true
 })
 
-app.use(express.static('./public'))
+app.use(express.static('public'))
