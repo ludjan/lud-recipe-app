@@ -4,6 +4,8 @@ var express = require('express')
 const cors = require('cors')
 var http = require('http')
 const { hostname } = require('os')
+const fetch = require('node-fetch')
+
 
 var app = express() // use the express framework to handle dynamic responses to different pages
   app.use(express.json()) // make sure express parses bodies with json
@@ -22,7 +24,7 @@ const recipeList = [
 
 app.get("/", (req, res) => {
   const targetUrl = apiUrl + "/recipes"
-  console.log(`Target url: targetUrl`)
+  console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
     .then(response => response.json())
     .then(data => res.render("recipeList", { data: data }))
