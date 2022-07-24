@@ -29,7 +29,7 @@
         <% for (let i = 0; i < data.length; i++) { 
             console.log(data[i].link) %> 
             <p> 
-                <a href="<%= data[i].link %>">
+                <a href="<%= url %>/recipes/<%= data[i].id %>">
                     <%= data[i].id %> <%= data[i].name %> <%= data[i].taste %>
                 </a> 
             </p>
