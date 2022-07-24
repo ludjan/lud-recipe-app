@@ -17,7 +17,7 @@ var app = express() // use the express framework to handle dynamic responses to 
   app.use(express.json()) // make sure express parses bodies with json
   app.use(cors()) // make sure we can access the api from the outside
   app.set("view engine", "ejs") // set view engine to ejs
-  app.use(express.static(path.join(__dirname, 'public')))
+  // app.use(express.static(path.join(__dirname, 'public')))
 
 var server = http.Server(app)
 
