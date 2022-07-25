@@ -1,1 +1,2 @@
-const isAlphaNumeric = str => /^[a-z0-9]+$/gi.test(str);
+const isAlphaNumeric = str => /^[\w\-\s]+$/gi.test(str);
+
