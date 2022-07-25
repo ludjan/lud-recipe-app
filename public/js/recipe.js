@@ -1,5 +1,5 @@
 const feed = document.getElementById('recipe-feed')
-const addRecipeForm = document.getElementById('add-recipe-form')
+// const addRecipeForm = document.getElementById('add-recipe-form')
 const recipeNameInput = document.getElementById('recipe-name')
 const recipeDescriptionInput = document.getElementById('recipe-description')
 
@@ -9,28 +9,28 @@ const apiUrl='https://lud-recipe-api.herokuapp.com/api/recipes'
 console.log("recipe.js kjorer")
 
 
-addRecipeForm.addEventListener("submit", () => {
+// addRecipeForm.addEventListener("submit", () => {
   
-  // create the new entry
-  const newRecipe = {
-    name: recipeNameInput.value,
-    description: recipeDescriptionInput.value
-  }
-  console.log(newRecipe)
+//   // create the new entry
+//   const newRecipe = {
+//     name: recipeNameInput.value,
+//     description: recipeDescriptionInput.value
+//   }
+//   console.log(newRecipe)
 
-  // clear the input field
-  recipeNameInput.innerText = ""
+//   // clear the input field
+//   recipeNameInput.innerText = ""
 
-  // async add, then re-render
-  addRecipe(newRecipe).then(data => {
-    if (!data.ok) {
-      const errorMessage = `Error ${data.status} - ${data.statusText}`
-      console.log(errorMessage)
-      return alert(errorMessage)
-    }
-    window.location.pathname = ('/..') // navigates user back to main page
-  })
-})
+//   // async add, then re-render
+//   addRecipe(newRecipe).then(data => {
+//     if (!data.ok) {
+//       const errorMessage = `Error ${data.status} - ${data.statusText}`
+//       console.log(errorMessage)
+//       return alert(errorMessage)
+//     }
+//     window.location.pathname = ('/..') // navigates user back to main page
+//   })
+// })
 
 async function addRecipe(recipe) {
 
