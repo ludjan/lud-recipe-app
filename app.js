@@ -18,11 +18,14 @@ app.get("/", (req, res) => {
   const targetUrl = apiUrl + "/api/recipes"
   console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
-    .then((response) => response.json())
+    .then((response) => {
+      console.log(response)
+      response.json()
+    })
     .then((data) => {
       console.log(data)
       res.render("recipe-list", { data: data, url : appUrl })
-    });
+    })
 })
 
 app.get("/recipes/:id", (req, res) => {
