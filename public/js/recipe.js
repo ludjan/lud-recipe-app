@@ -13,13 +13,14 @@ async function updateRecipe(recipe, id) {
 }
 
 async function addRecipe(recipe) {
-  return await fetch(apiUrl, {
+  const config = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(recipe)
-  })
+  }
+  return await fetch(apiUrl, config)
 }
 
 async function deleteRecipe(recipe) {
@@ -30,10 +31,5 @@ async function deleteRecipe(recipe) {
       'Content-Type': 'application/json'
     }
   }
-  fetch(targetUrl, config)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-      alert(data)
-    })
+  return await fetch(targetUrl, config)
 }
