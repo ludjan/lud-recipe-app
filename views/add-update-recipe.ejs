@@ -14,7 +14,7 @@
             <input type="submit" id="save-recipe-btn" value="Submit">
           </form>
           </div>
-          <!-- <script src="/static/js/recipe.js"></script> -->
+          <script src="/static/js/recipe.js"></script>
           <script type="text/javascript">
 
             const recipeHeading = document.getElementById('recipe-heading')
@@ -43,7 +43,7 @@
               } 
               console.log(newRecipe)
 
-              if (!id) {
+              if (!rId) {
 
                 // async add, then re-render
                 addRecipe(newRecipe).then(data => {
@@ -54,16 +54,17 @@
                   }
                   window.location.pathname = ('/..') // navigates user back to main page
                 })
-              } else {
-                saveRecipe(newRecipe, id).then(data => {
-                  if (!data.ok) {
-                    const errorMessage = `Error ${data.status} - ${data.statusText}`
-                    console.log(errorMessage)
-                    return alert(errorMessage)
-                  }
-                  window.loaction.pathname = (`/../recipes/${id}`)
-                })
               }
+              // } else {
+              //   saveRecipe(newRecipe, id).then(data => {
+              //     if (!data.ok) {
+              //       const errorMessage = `Error ${data.status} - ${data.statusText}`
+              //       console.log(errorMessage)
+              //       return alert(errorMessage)
+              //     }
+              //     window.loaction.pathname = (`/../recipes/${id}`)
+              //   })
+              // }
             })
 
           </script> 
