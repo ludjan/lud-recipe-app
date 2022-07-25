@@ -10,11 +10,7 @@ async function updateRecipe(recipe, id) {
     body: JSON.stringify(recipe)
   }
 
-  fetch(targetUrl, config)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-    })
+  return response = await fetch(targetUrl, config)
 }
 
 async function addRecipe(recipe) {
