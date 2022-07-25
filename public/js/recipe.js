@@ -1,7 +1,7 @@
-const feed = document.getElementById('recipe-feed')
+// const feed = document.getElementById('recipe-feed')
 // const addRecipeForm = document.getElementById('add-recipe-form')
-const recipeNameInput = document.getElementById('recipe-name')
-const recipeDescriptionInput = document.getElementById('recipe-description')
+// const recipeNameInput = document.getElementById('recipe-name')
+// const recipeDescriptionInput = document.getElementById('recipe-description')
 
 
 const apiUrl='https://lud-recipe-api.herokuapp.com/api/recipes'
