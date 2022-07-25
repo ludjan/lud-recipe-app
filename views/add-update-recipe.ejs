@@ -31,15 +31,10 @@
             '<% if (data) { %>'
               data = '<%= data %>'
               rId = '<%= data.id %>'
-              rName = '<%= data.name %>'
-              rDescription = '<%= data.description %>'
-            '<%}%>'
-            
-            if (data != -1) {
               recipeHeading.innerText = "Edit recipe"
               recipeNameInput.value = rName
               recipeDescriptionInput.value = rDescription
-            }
+            '<%}%>'
 
             saveRecipeForm.addEventListener("submit", () => {
               
