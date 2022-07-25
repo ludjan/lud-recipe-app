@@ -18,10 +18,12 @@
           <script type="text/javascript">
 
             const recipe = '<%= data %>'
-            console.log(recipe.json())
+            const id = '<%= data.id %>'
+            const recipeHeading = document.getElementById('recipe-heading')
+            console.log(recipe)
+            console.log(id)
 
             if (recipe) {
-              const recipeHeading = document.getElementById('recipe-heading')
               recipeHeading.innerText = recipe.name
             }
 
