@@ -3,34 +3,32 @@
 // const recipeNameInput = document.getElementById('recipe-name')
 // const recipeDescriptionInput = document.getElementById('recipe-description')
 
+import { json } from "express"
+
 
 const apiUrl='https://lud-recipe-api.herokuapp.com/api/recipes'
 
 console.log("recipe.js kjorer")
 
 
-// addRecipeForm.addEventListener("submit", () => {
-  
-//   // create the new entry
-//   const newRecipe = {
-//     name: recipeNameInput.value,
-//     description: recipeDescriptionInput.value
-//   }
-//   console.log(newRecipe)
+async function updateRecipe(recipe, id) {
 
-//   // clear the input field
-//   recipeNameInput.innerText = ""
+  const targetUrl = apiUrl + "/" + id
 
-//   // async add, then re-render
-//   addRecipe(newRecipe).then(data => {
-//     if (!data.ok) {
-//       const errorMessage = `Error ${data.status} - ${data.statusText}`
-//       console.log(errorMessage)
-//       return alert(errorMessage)
-//     }
-//     window.location.pathname = ('/..') // navigates user back to main page
-//   })
-// })
+  const config = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(recipe)
+  }
+
+  fetch(targetUrl, config)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+    })
+}
 
 async function addRecipe(recipe) {
 
