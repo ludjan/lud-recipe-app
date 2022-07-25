@@ -23,11 +23,12 @@
           const recipeDescriptionInput = document.getElementById('recipe-description')
           const saveRecipeForm = document.getElementById('save-recipe-form')
 
-          var data
+          var data = '<%= data %>'
           var rId
 
+          console.log(data)
+
           '<% if (data != -1) { %>'
-            data = '<%= data %>'
             rId = '<%= data.id %>'
             recipeHeading.innerText = "Edit recipe"
             recipeNameInput.value = '<%= data.name %>'
