@@ -25,15 +25,13 @@
             
             var data
             var rId
-            var rName
-            var rDescription
 
             '<% if (data) { %>'
               data = '<%= data %>'
               rId = '<%= data.id %>'
               recipeHeading.innerText = "Edit recipe"
-              recipeNameInput.value = rName
-              recipeDescriptionInput.value = rDescription
+              recipeNameInput.value = '<%= data.name %>'
+              recipeDescriptionInput.value = '<%= data.description %>'
             '<%}%>'
 
             saveRecipeForm.addEventListener("submit", () => {
