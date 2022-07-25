@@ -48,7 +48,7 @@ app.get("/edit/:id", (req, res) => {
     .then((response) => response.json())
     .then((data) => {
       // console.log(data)
-      res.render("add-update-recipe", { data: data })
+      res.render("add-update-recipe", { data: -1 })
     });
 })
 

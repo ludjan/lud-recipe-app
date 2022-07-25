@@ -24,13 +24,13 @@
             const saveRecipeForm = document.getElementById('save-recipe-form')
             
             const data = '<%= data %>'
-            if (data) {
+            if (data != -1) {
               const rId = '<%= data.id %>'
               const rName = '<%= data.name %>'
               const rDescription = '<%= data.description %>'
             }
             
-            if (data) {
+            if (data != -1) {
               recipeHeading.innerText = "Edit recipe"
               recipeNameInput.value = rName
               recipeDescriptionInput.value = rDescription
@@ -45,7 +45,7 @@
               } 
               console.log(newRecipe)
 
-              if (!data) {
+              if (data == -1) {
 
                 // async add, then re-render
                 addRecipe(newRecipe).then(data => {

@@ -1,20 +1,7 @@
-// const feed = document.getElementById('recipe-feed')
-// const addRecipeForm = document.getElementById('add-recipe-form')
-// const recipeNameInput = document.getElementById('recipe-name')
-// const recipeDescriptionInput = document.getElementById('recipe-description')
-
-import { json } from "express"
-
-
 const apiUrl='https://lud-recipe-api.herokuapp.com/api/recipes'
 
-console.log("recipe.js kjorer")
-
-
 async function updateRecipe(recipe, id) {
-
   const targetUrl = apiUrl + "/" + id
-
   const config = {
     method: 'PUT',
     headers: {
