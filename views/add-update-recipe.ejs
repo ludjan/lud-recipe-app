@@ -46,9 +46,9 @@
               if (data == -1) {
 
                 // async add, then re-render
-                addRecipe(newRecipe).then(data => {
-                  if (!data.ok) {
-                    const errorMessage = `Error ${data.status} - ${data.statusText}`
+                addRecipe(newRecipe).then(response => {
+                  if (!response.ok) {
+                    const errorMessage = `Error ${response.status} - ${response.statusText}`
                     console.log(errorMessage)
                     return alert(errorMessage)
                   }
@@ -56,9 +56,9 @@
                 })
               
               } else {
-                updateRecipe(newRecipe, rId).then(data => {
-                  if (!data.ok) {
-                    const errorMessage = `Error ${data.status} - ${data.statusText}`
+                updateRecipe(newRecipe, rId).then(response => {
+                  if (!response.ok) {
+                    const errorMessage = `Error ${response.status} - ${response.statusText}`
                     console.log(errorMessage)
                     return alert(errorMessage)
                   }
