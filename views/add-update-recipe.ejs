@@ -23,12 +23,17 @@
             const recipeDescriptionInput = document.getElementById('recipe-description')
             const saveRecipeForm = document.getElementById('save-recipe-form')
             
-            const data = '<%= data %>'
-            if (data != -1) {
-              const rId = '<%= data.id %>'
-              const rName = '<%= data.name %>'
-              const rDescription = '<%= data.description %>'
-            }
+            var data
+            var rId
+            var rName
+            var rDescription
+
+            '<% if (data) { %>'
+              data = '<%= data %>'
+              rId = '<%= data.id %>'
+              rName = '<%= data.name %>'
+              rDescription = '<%= data.description %>'
+            '<%}%>'
             
             if (data != -1) {
               recipeHeading.innerText = "Edit recipe"
