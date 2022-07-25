@@ -57,12 +57,6 @@ app.get("/add-recipe", (req, res) => {
   res.render("add-recipe")
 })
 
-
-server.listen(port, function() {
-    console.log(`Web server running on ${os.hostname()} port ${port}`)
-    return true
-})
-
 const __filename = fileURLToPath(import.meta.url);
 
 const dirname = path.dirname(__filename)
@@ -70,4 +64,12 @@ console.log(`Dirname: ${dirname}`)
 const publicDir = path.join(dirname, 'public')
 console.log(`Public dir: ${publicDir}`)
 // app.use('/static', express.static(publicDir))
+
 app.use(express.static('public'))
+app.use('/static', express.static('public'))
+
+server.listen(port, function() {
+    console.log(`Web server running on ${os.hostname()} port ${port}`)
+    return true
+})
+
