@@ -16,11 +16,11 @@ const appUrl = "https://lud-recipe-app.herokuapp.com"
 
 app.get("/", (req, res) => {
   const targetUrl = apiUrl + "/api/recipes"
-  // console.log(`Target url: ${targetUrl}`)
+  console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
     .then((response) => response.json())
     .then((data) => {
-      // console.log(data)
+      console.log(data)
       res.render("recipe-list", { data: data, url : appUrl })
     });
 })
