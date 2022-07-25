@@ -25,9 +25,7 @@
             })
 
             editBtn.addEventListener("click", () => {
-                editRecipe(recipeId).then(
-                    window.location.pathname = ('/../edit' + recipeId)
-                )
+                window.location.pathname = ('/../edit' + recipeId)
             })
 
             async function deleteRecipe(recipeId) {
