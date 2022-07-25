@@ -5,8 +5,8 @@
     </head>
     <body>
         <h1> <%= data.name %> (<%= data.id %>)</h1>
-        <div> is <%= data.description %> </div>
-        <div> created on <%= data.created_on %></div>
+        <div> <%= data.description %> </div>
+        <div> <%= data.created_on %> </div>
         
         <button type="edit" id="edit-recipe-btn">EDIT</button>
         <button type="delete" id="delete-recipe-btn">DELETE</button>
