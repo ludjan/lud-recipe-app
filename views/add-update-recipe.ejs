@@ -56,6 +56,7 @@
                 })
               
               } else {
+                console.log(`About to update recipe with id ${rId}`)
                 updateRecipe(newRecipe, rId).then(response => {
                   if (!response.ok) {
                     const errorMessage = `Error ${response.status} - ${response.statusText}`
