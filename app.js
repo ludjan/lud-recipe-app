@@ -38,7 +38,7 @@ app.get("/recipes/:id", (req, res) => {
 })
 
 app.get("/add-recipe", (req, res) => {
-  res.render("add-update-recipe", { data: null })
+  res.render("add-update-recipe", { data: -1 })
 })
 
 app.get("/edit/:id", (req, res) => {
@@ -48,7 +48,7 @@ app.get("/edit/:id", (req, res) => {
     .then((response) => response.json())
     .then((data) => {
       // console.log(data)
-      res.render("add-update-recipe", { data: -1 })
+      res.render("add-update-recipe", { data: data })
     });
 })
 
