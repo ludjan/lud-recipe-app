@@ -16,6 +16,7 @@
         </div>
           
         <script src="/static/js/recipe.js"></script>
+        <script src="/static/js/check_input.js"></script>
         <script type="text/javascript">
 
           const recipeHeading = document.getElementById('recipe-heading')
@@ -37,6 +38,16 @@
 
           saveRecipeForm.addEventListener("submit", () => {
             
+            const recipeName = recipeNameInput.value
+            const recipeDescription = recipeDescriptionInput.value
+
+            if (!isAlphaNumeric(recipeName)) {
+              return alert(`Name '${recipeName}' is not alphanumeric`)
+            } 
+            if (!isAlphaNumeric(recipeDescription)) {
+              return alert(`Description '${recipeDescription}' is not alphanumeric`)
+            }
+
             // create the new entry
             const newRecipe = {
               name: recipeNameInput.value,
