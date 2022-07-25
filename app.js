@@ -11,8 +11,8 @@ import http from 'http'
 import os from 'os'
 import fetch from "node-fetch"
 import path from "path"
+import {fileURLToPath} from 'url'
 
-const { hostname } = os.hostname
 
 var app = express() // use the express framework to handle dynamic responses to different pages
   app.use(express.json()) // make sure express parses bodies with json
@@ -59,10 +59,14 @@ app.get("/add-recipe", (req, res) => {
 
 
 server.listen(port, function() {
-    console.log(`Web server running on ${hostname} port ${port}`)
+    console.log(`Web server running on ${os.hostname()} port ${port}`)
     return true
 })
 
-console.log(__dirname)
-console.log(path.join(__dirname, 'public'))
-app.use('/static', express.static(path.join(__dirname, 'public')))
+const __filename = fileURLToPath(import.meta.url);
+
+const dirname = path.dirname(__filename)
+console.log(`Dirname: ${dirname}`)
+const publicDir = path.join(dirname, 'public')
+console.log(`Public dir: ${publicDir}`)
+app.use('/static', express.static(publicDir))
