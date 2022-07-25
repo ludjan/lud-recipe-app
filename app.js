@@ -10,9 +10,6 @@ import cors from 'cors'
 import http from 'http'
 import os from 'os'
 import fetch from "node-fetch"
-import path from "path"
-import {fileURLToPath} from 'url'
-
 
 var app = express() // use the express framework to handle dynamic responses to different pages
   app.use(express.json()) // make sure express parses bodies with json
@@ -24,11 +21,11 @@ const appUrl = "https://lud-recipe-app.herokuapp.com"
 
 app.get("/", (req, res) => {
   const targetUrl = apiUrl + "/api/recipes"
-  console.log(`Target url: ${targetUrl}`)
+  // console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
+      // console.log(data)
       res.render("recipe-list", { data: data, url : appUrl })
     });
 })
