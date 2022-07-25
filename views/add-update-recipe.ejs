@@ -6,26 +6,65 @@
     <body>
         <div>
           <h1 id="recipe-heading">New recipe</h1>
-          <form id="add-recipe-form" onsubmit="return false">
+          <form id="save-recipe-form" onsubmit="return false">
             <label for="recipe-name">Recipe name</label><br>
             <input id="recipe-name" type="text" name="hest"><br>
             <label for="recipe-description">Recipe Description</label><br>
             <input id="recipe-description" type="text" name="hist"><br>
-            <input type="submit" id="add-recipe-btn" value="Submit">
+            <input type="submit" id="save-recipe-btn" value="Submit">
           </form>
           </div>
-          <script src="/static/js/recipe.js"></script>
+          <!-- <script src="/static/js/recipe.js"></script> -->
           <script type="text/javascript">
 
-            const recipe = '<%= data %>'
-            const id = '<%= data.id %>'
             const recipeHeading = document.getElementById('recipe-heading')
-            console.log(recipe)
-            console.log(id)
+            const recipeNameInput = document.getElementById('recipe-name')
+            const recipeDescriptionInput = document.getElementById('recipe-description')
+            const saveRecipeForm = document.getElementById('save-recipe-form')
+            
+            const rId = '<%= data.id %>'
+            const rName = '<%= data.name %>'
+            const rDescription = '<%= data.description %>'
+            
+            const apiUrl='https://lud-recipe-api.herokuapp.com/api/recipes'
 
-            if (recipe) {
-              recipeHeading.innerText = recipe.name
+            if (id) {
+              recipeHeading.innerText = "Edit recipe"
+              recipeNameInput.value = rName
+              recipeDescriptionInput.value = rDescription
             }
+
+            saveRecipeBtn.addEventListener("submit", () => {
+              
+              // create the new entry
+              const newRecipe = {
+                name: recipeNameInput.value,
+                description: recipeDescriptionInput.value
+              } 
+              console.log(newRecipe)
+
+              if (!id) {
+
+                // async add, then re-render
+                addRecipe(newRecipe).then(data => {
+                  if (!data.ok) {
+                    const errorMessage = `Error ${data.status} - ${data.statusText}`
+                    console.log(errorMessage)
+                    return alert(errorMessage)
+                  }
+                  window.location.pathname = ('/..') // navigates user back to main page
+                })
+              } else {
+                saveRecipe(newRecipe, id).then(data => {
+                  if (!data.ok) {
+                    const errorMessage = `Error ${data.status} - ${data.statusText}`
+                    console.log(errorMessage)
+                    return alert(errorMessage)
+                  }
+                  window.loaction.pathname = (`/../recipes/${id}`)
+                })
+              }
+            })
 
           </script> 
     </body>
