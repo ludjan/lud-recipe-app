@@ -19,11 +19,8 @@ var app = express() // use the express framework to handle dynamic responses to 
   app.use(cors()) // make sure we can access the api from the outside
   app.set("view engine", "ejs") // set view engine to ejs
   
-var server = http.Server(app)
-
 const apiUrl = "https://lud-recipe-api.herokuapp.com"
 const appUrl = "https://lud-recipe-app.herokuapp.com"
-
 
 app.get("/", (req, res) => {
   const targetUrl = apiUrl + "/api/recipes"
@@ -39,11 +36,11 @@ app.get("/", (req, res) => {
 app.get("/recipes/:id", (req, res) => {
   
   const targetUrl = apiUrl + "/api/recipes/" + req.params.id
-  console.log(`Target url: ${targetUrl}`)
+  // console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
+      // console.log(data)
       res.render("recipe", { data: data })
     });
 })
@@ -56,9 +53,11 @@ const __filename = fileURLToPath(import.meta.url);
 
 
 // serve 
-app.use(express.static('public'))
+// app.use(express.static('public'))
 app.use('/static', express.static('public'))
 
+// listen on one port for connections to serve
+var server = http.Server(app)
 server.listen(port, function() {
     console.log(`Web server running on ${os.hostname()} port ${port}`)
     return true
