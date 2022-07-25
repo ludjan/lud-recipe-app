@@ -28,16 +28,17 @@ app.get("/", (req, res) => {
 app.get("/recipes/:id", (req, res) => {
   
   const targetUrl = apiUrl + "/api/recipes/" + req.params.id
-  // console.log(`Target url: ${targetUrl}`)
+  console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
     .then((response) => response.json())
     .then((data) => {
-      // console.log(data)
+      console.log(data)
       res.render("recipe", { data: data })
     });
 })
 
 app.get("/add-recipe", (req, res) => {
+  console.log(`Displaying page to add new recipe`)
   res.render("add-update-recipe", { data: -1 })
 })
 
@@ -47,7 +48,7 @@ app.get("/edit/:id", (req, res) => {
   fetch(targetUrl)
     .then((response) => response.json())
     .then((data) => {
-      // console.log(data)
+      console.log(data)
       res.render("add-update-recipe", { data: data })
     });
 })

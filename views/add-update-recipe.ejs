@@ -13,62 +13,64 @@
             <input id="recipe-description" type="text" name="hist"><br>
             <input type="submit" id="save-recipe-btn" value="Submit">
           </form>
-          </div>
+        </div>
           
-          <script src="/static/js/recipe.js"></script>
-          <script type="text/javascript">
+        <script src="/static/js/recipe.js"></script>
+        <script type="text/javascript">
 
-            const recipeHeading = document.getElementById('recipe-heading')
-            const recipeNameInput = document.getElementById('recipe-name')
-            const recipeDescriptionInput = document.getElementById('recipe-description')
-            const saveRecipeForm = document.getElementById('save-recipe-form')
+          const recipeHeading = document.getElementById('recipe-heading')
+          const recipeNameInput = document.getElementById('recipe-name')
+          const recipeDescriptionInput = document.getElementById('recipe-description')
+          const saveRecipeForm = document.getElementById('save-recipe-form')
+
+          var data
+          var rId
+
+          '<% if (data != -1) { %>'
+            data = '<%= data %>'
+            rId = '<%= data.id %>'
+            recipeHeading.innerText = "Edit recipe"
+            recipeNameInput.value = '<%= data.name %>'
+            recipeDescriptionInput.value = '<%= data.description %>'
+          '<%}%>'
+
+          saveRecipeForm.addEventListener("submit", () => {
             
-            var data
-            var rId
+            // create the new entry
+            const newRecipe = {
+              name: recipeNameInput.value,
+              description: recipeDescriptionInput.value
+            } 
+            console.log(newRecipe)
 
-            '<% if (data != -1) { %>'
-              data = '<%= data %>'
-              rId = '<%= data.id %>'
-              recipeHeading.innerText = "Edit recipe"
-              recipeNameInput.value = '<%= data.name %>'
-              recipeDescriptionInput.value = '<%= data.description %>'
-            '<%}%>'
+            console.log(`Data = ${data}`)
 
-            saveRecipeForm.addEventListener("submit", () => {
-              
-              // create the new entry
-              const newRecipe = {
-                name: recipeNameInput.value,
-                description: recipeDescriptionInput.value
-              } 
-              console.log(newRecipe)
+            if (data == null) {
 
-              if (data == -1) {
+              // async add, then re-render
+              addRecipe(newRecipe).then(response => {
+                if (!response.ok) {
+                  const errorMessage = `Error ${response.status} - ${response.statusText}`
+                  console.log(errorMessage)
+                } else {
+                  window.location.pathname = ('/..') // navigates user back to main page
+                }
+              })
+            
+            } else {
+              console.log(`About to update recipe with id ${rId}`)
+              updateRecipe(newRecipe, rId).then(response => {
+                if (!response.ok) {
+                  const errorMessage = `Error ${response.status} - ${response.statusText}`
+                  console.log(errorMessage)
+                  return alert(errorMessage)
+                } else {
+                  window.loaction.pathname = (`/../recipes/${id}`)
+                }
+              })
+            }
+          })
 
-                // async add, then re-render
-                addRecipe(newRecipe).then(response => {
-                  if (!response.ok) {
-                    const errorMessage = `Error ${response.status} - ${response.statusText}`
-                    console.log(errorMessage)
-                  } else {
-                    window.location.pathname = ('/..') // navigates user back to main page
-                  }
-                })
-              
-              } else {
-                console.log(`About to update recipe with id ${rId}`)
-                updateRecipe(newRecipe, rId).then(response => {
-                  if (!response.ok) {
-                    const errorMessage = `Error ${response.status} - ${response.statusText}`
-                    console.log(errorMessage)
-                    return alert(errorMessage)
-                  } else {
-                    window.loaction.pathname = (`/../recipes/${id}`)
-                  }
-                })
-              }
-            })
-
-          </script> 
+        </script> 
     </body>
 </html>
