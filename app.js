@@ -38,7 +38,18 @@ app.get("/recipes/:id", (req, res) => {
 })
 
 app.get("/add-recipe", (req, res) => {
-  res.render("add-recipe")
+  res.render("add-update-recipe")
+})
+
+app.get("/edit/:id", (req, res) => {
+  const targetUrl = apiUrl + "/api/recipes/" + req.params.id
+  // console.log(`Target url: ${targetUrl}`)
+  fetch(targetUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      // console.log(data)
+      res.render("add-update-recipe", { data: data })
+    });
 })
 
 // make js, css and other static files available from the 
