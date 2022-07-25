@@ -28,15 +28,16 @@ async function addRecipe(recipe) {
 
 async function deleteRecipe(recipe) {
 
+  const targetUrl = apiUrl + "/" + recipe.id
+
   const config = {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
-    },
-    body: "something"
+    }
   }
 
-  fetch(url, config)
+  fetch(targetUrl, config)
     .then(response => response.json())
     .then(data => {
       console.log(data)
