@@ -49,11 +49,9 @@ app.get("/add-recipe", (req, res) => {
   res.render("add-recipe")
 })
 
-const __filename = fileURLToPath(import.meta.url);
-
-
-// serve 
-// app.use(express.static('public'))
+// make js, css and other static files available from the 
+// __app__/static directory
+// they are in public folder
 app.use('/static', express.static('public'))
 
 // listen on one port for connections to serve
