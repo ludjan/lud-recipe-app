@@ -9,10 +9,10 @@
         <div> created on <%= data.created_on %></div>
         <button type="delete" id="delete-recipe-btn">Delete</button>
 
-        <% let recipeId=data.id%>
-
+        
         <script type="text/javascript">
             
+            var recipeId= '<%= data.id% >'
             const deleteBtn = document.getElementById('delete-recipe-btn')
 
             deleteBtn.addEventListener("click", () => {
