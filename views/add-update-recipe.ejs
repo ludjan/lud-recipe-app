@@ -56,7 +56,7 @@
                 })
               
               } else {
-                saveRecipe(newRecipe, rId).then(data => {
+                updateRecipe(newRecipe, rId).then(data => {
                   if (!data.ok) {
                     const errorMessage = `Error ${data.status} - ${data.statusText}`
                     console.log(errorMessage)
