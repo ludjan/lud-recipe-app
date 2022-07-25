@@ -24,11 +24,6 @@ var server = http.Server(app)
 const apiUrl = "https://lud-recipe-api.herokuapp.com"
 const appUrl = "https://lud-recipe-app.herokuapp.com"
 
-const recipeList = [
-    { id: 1, name: "Mat", taste: "digg", link: "recipes/1" },
-    { id: 2, name: "Drikk", taste: "usch", link: "recipes/2" },
-    { id: 3, name: "Hulda", taste: "nja", link: "recipes/3" }
-]
 
 app.get("/", (req, res) => {
   const targetUrl = apiUrl + "/api/recipes"
@@ -59,12 +54,8 @@ app.get("/add-recipe", (req, res) => {
 
 const __filename = fileURLToPath(import.meta.url);
 
-const dirname = path.dirname(__filename)
-console.log(`Dirname: ${dirname}`)
-const publicDir = path.join(dirname, 'public')
-console.log(`Public dir: ${publicDir}`)
-// app.use('/static', express.static(publicDir))
 
+// serve 
 app.use(express.static('public'))
 app.use('/static', express.static('public'))
 
