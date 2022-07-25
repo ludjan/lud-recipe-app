@@ -1,11 +1,10 @@
 const feed = document.getElementById('recipe-feed')
 const addRecipeForm = document.getElementById('add-recipe-form')
 const recipeNameInput = document.getElementById('recipe-name')
+const recipeDescriptionInput = document.getElementById('recipe-description')
 
 
-const url='https://lud-recipe-app.herokuapp.com/api/recipes'
-
-console.log(`File name ${__filename}`)
+const apiUrl='https://lud-recipe-api.herokuapp.com/api/recipes'
 
 console.log("recipe.js kjorer")
 
@@ -14,9 +13,10 @@ addRecipeForm.addEventListener("submit", () => {
   
   // create the new entry
   const newRecipe = {
-    name: recipeNameInput.value
+    name: recipeNameInput.value,
+    description: recipeDescriptionInput.value
   }
-  console.log(newRecipe.name)
+  console.log(newRecipe)
 
   // clear the input field
   recipeNameInput.innerText = ""
@@ -29,14 +29,14 @@ addRecipeForm.addEventListener("submit", () => {
       alert(errorMessage)
       return
     }
-    render()
+    // render()
   })
 })
 
 async function addRecipe(recipe) {
 
   // fetch the post 
-  const response = await fetch(url, {
+  const response = await fetch(apiUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -62,28 +62,28 @@ async function deleteRecipe(recipe) {
       console.log(data)
       alert(data)
     })
-    .then(render())
+    // .then(render())
 }
 
-async function render() {
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-      feed.innerHTML = `<ul>`
-      data.forEach(recipe => {
-        const recipeUrl = url + '/' + recipe.id
-        feed.innerHTML += `
-        <li>
-          <a href="${recipeUrl}">
-            ${recipe.name}
-          </a>
-        </li>`
-      })
-      feed.innerHTML += `</ul>`
-    })
-    .catch(err => console.log(err))
-}
+// async function render() {
+//   fetch(url)
+//     .then(response => response.json())
+//     .then(data => {
+//       console.log(data)
+//       feed.innerHTML = `<ul>`
+//       data.forEach(recipe => {
+//         const recipeUrl = url + '/' + recipe.id
+//         feed.innerHTML += `
+//         <li>
+//           <a href="${recipeUrl}">
+//             ${recipe.name}
+//           </a>
+//         </li>`
+//       })
+//       feed.innerHTML += `</ul>`
+//     })
+//     .catch(err => console.log(err))
+// }
 
 // render the page on first load
-render()
+// render()
