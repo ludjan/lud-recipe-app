@@ -43,7 +43,7 @@ app.get("/add-recipe", (req, res) => {
 
 app.get("/edit/:id", (req, res) => {
   const targetUrl = apiUrl + "/api/recipes/" + req.params.id
-  // console.log(`Target url: ${targetUrl}`)
+  console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
     .then((response) => response.json())
     .then((data) => {
