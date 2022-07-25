@@ -7,17 +7,26 @@
         <h1> <%= data.name %> (<%= data.id %>)</h1>
         <div> is <%= data.description %> </div>
         <div> created on <%= data.created_on %></div>
-        <button type="delete" id="delete-recipe-btn">Delete</button>
+        
+        <button type="edit" id="edit-recipe-btn">EDIT</button>
+        <button type="delete" id="delete-recipe-btn">DELETE</button>
 
         
         <script type="text/javascript">
             
             var recipeId= '<%= data.id %>'
             const deleteBtn = document.getElementById('delete-recipe-btn')
+            const editBtn = document.getElementById('edit-recipe-btn')
 
             deleteBtn.addEventListener("click", () => {
                 deleteRecipe(recipeId).then(
                     window.location.pathname = ('/..') // navigates user back to main page
+                )
+            })
+
+            editBtn.addEventListener("click", () => {
+                editRecipe(recipeId).then(
+                    window.location.pathname = ('/../edit' + recipeId)
                 )
             })
 
@@ -29,7 +38,6 @@
                         'Content-Type': 'application/json'
                     }
                 }
-
                 fetch(url, config)
             }
             

@@ -1,10 +1,5 @@
 var port = process.env.PORT || 5001
 
-// var express = require('express')
-// const cors = require('cors')
-// var http = require('http')
-// const { hostname } = require('os')
-
 import express from 'express'
 import cors from 'cors'
 import http from 'http'
