@@ -9,7 +9,42 @@
         <div> created on <%= data.created_on %></div>
         <button type="delete" id="delete-recipe-btn">Delete</button>
 
+        <% let recipeId=data.id%>
+
         <script type="text/javascript">
+            
+            const deleteBtn = document.getElementById('delete-recipe-btn')
+
+            deleteBtn.addEventListener("click", () => {
+                deleteRecipe(recipeId).then(data => {
+                    if (!data.ok) {
+                    const errorMessage = `Error ${data.status} - ${data.statusText}`
+                    console.log(errorMessage)
+                    return alert(errorMessage)
+                    }
+                    window.location.pathname = ('/..') // navigates user back to main page
+                })
+            })
+
+            async function deleteRecipe(recipeId) {
+
+                const url = "https://lud-recipe-api.herokuapp.com/api/recipes/" + recipeId
+
+                const config = {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+
+                fetch(url, config)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    alert(data)
+                })
+            }
+            
             console.log("test")
         </script>
     </body>
