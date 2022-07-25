@@ -26,10 +26,9 @@ addRecipeForm.addEventListener("submit", () => {
     if (!data.ok) {
       const errorMessage = `Error ${data.status} - ${data.statusText}`
       console.log(errorMessage)
-      alert(errorMessage)
-      return
+      return alert(errorMessage)
     }
-    // render()
+    window.location.pathname = ('/..') // navigates user back to main page
   })
 })
 
