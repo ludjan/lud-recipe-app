@@ -16,14 +16,9 @@
             const deleteBtn = document.getElementById('delete-recipe-btn')
 
             deleteBtn.addEventListener("click", () => {
-                deleteRecipe(recipeId).then(data => {
-                    if (!data.ok) {
-                    const errorMessage = `Error ${data.status} - ${data.statusText}`
-                    console.log(errorMessage)
-                    return alert(errorMessage)
-                    }
+                deleteRecipe(recipeId).then(
                     window.location.pathname = ('/..') // navigates user back to main page
-                })
+                )
             })
 
             async function deleteRecipe(recipeId) {
