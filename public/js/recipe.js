@@ -45,5 +45,5 @@ async function getStepsForRecipe(recipeId) {
       'Content-Type': 'application/json'
     }
   }
-  return await fetch(targetUrl, config)
+  return fetch(targetUrl, config)
 }
