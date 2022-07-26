@@ -1,4 +1,4 @@
-const apiUrl='https://lud-recipe-api.herokuapp.com/api/recipes'
+const apiUrl='https://lud-recipe-api.herokuapp.com/api'
 
 async function updateRecipe(recipe, id) {
   const targetUrl = apiUrl + "/" + id
@@ -13,6 +13,10 @@ async function updateRecipe(recipe, id) {
 }
 
 async function addRecipe(recipe) {
+  
+  
+  const targetUrl = apiUrl + "/recipes"
+  
   const config = {
     method: 'POST',
     headers: {
@@ -20,13 +24,24 @@ async function addRecipe(recipe) {
     },
     body: JSON.stringify(recipe)
   }
-  return await fetch(apiUrl, config)
+  return await fetch(targetUrl, config)
 }
 
 async function deleteRecipe(recipe) {
-  const targetUrl = apiUrl + "/" + recipe.id
+  const targetUrl = apiUrl + "/recipes/" + recipe.id
   const config = {
     method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  return await fetch(targetUrl, config)
+}
+
+async function getStepsForRecipe(recipe) {
+  const targetUrl = apiUrl + "/steps/" + recipe.id
+  const config = {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     }
