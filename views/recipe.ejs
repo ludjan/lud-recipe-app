@@ -37,11 +37,12 @@
                 console.log(steps)
             }
 
-            getSteps(recipeId)
-                .then((response) => {
-                    console.log(response.json())
+            getStepsForRecipe(recipeId)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
                 })
-
+            
             deleteBtn.addEventListener("click", () => {
                 deleteRecipe(recipeId).then(
                     window.location.pathname = ('/..') // navigates user back to main page
