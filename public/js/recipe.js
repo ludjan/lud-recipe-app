@@ -38,8 +38,8 @@ async function deleteRecipe(recipe) {
   return await fetch(targetUrl, config)
 }
 
-async function getStepsForRecipe(recipe) {
-  const targetUrl = apiUrl + "/steps/" + recipe.id
+async function getStepsForRecipe(recipeId) {
+  const targetUrl = apiUrl + "/steps/" + recipeId
   const config = {
     method: 'GET',
     headers: {
