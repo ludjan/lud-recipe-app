@@ -32,9 +32,10 @@
             function renderSteps(list) {
                 var stepsHtml = ""
                 for (let i=0; i < list.length; i++) {
-                    stepsHtml = `<p>${list[i]}</p>`
+                    stepsHtml += `<p>${list[i]}</p>`
                 }
                 stepsList.innerHTML = stepsHtml
+                console.log("Rendered steps")
             }
 
             getStepsForRecipe(recipeId)
