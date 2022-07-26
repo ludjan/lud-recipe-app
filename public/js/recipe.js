@@ -39,7 +39,7 @@ async function deleteRecipe(recipe) {
 }
 
 async function getStepsForRecipe(recipeId) {
-  const targetUrl = apiUrl + "/steps/" + recipeId
+  const targetUrl = apiUrl + "/steps/?recipeId=" + recipeId
   const config = {
     method: 'GET',
     headers: {
