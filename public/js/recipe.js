@@ -14,7 +14,6 @@ async function updateRecipe(recipe, id) {
 
 async function addRecipe(recipe) {
   
-  
   const targetUrl = apiUrl + "/recipes"
   
   const config = {
