@@ -32,7 +32,7 @@
             function renderSteps(list) {
                 var stepsHtml = ""
                 for (let i=0; i < list.length; i++) {
-                    stepsHtml += `<p>${list[i]}</p>`
+                    stepsHtml += `<p>${list[i].step_number} - ${list[i].description}</p>`
                 }
                 stepsList.innerHTML = stepsHtml
                 console.log("Rendered steps")
