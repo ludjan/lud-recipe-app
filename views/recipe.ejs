@@ -66,9 +66,8 @@
                 })
 
             deleteBtn.addEventListener("click", () => {
-                deleteRecipe(recipeId).then(
-                    window.location.pathname = ('/..') // navigates user back to main page
-                )
+                deleteRecipe(recipeId)
+                    .then(window.location.pathname = ('/..')) // navigates user back to main page                
             })
 
             editBtn.addEventListener("click", () => {
