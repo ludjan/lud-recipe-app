@@ -47,3 +47,14 @@ async function getStepsForRecipe(recipeId) {
   }
   return await fetch(targetUrl, config)
 }
+
+async function getIngredientsForRecipe(recipeId) {
+  const targetUrl = apiUrl + "/ingredientsForRecipe?recipeId=" + recipeId
+  const config = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  return await fetch(targetUrl, config)
+}

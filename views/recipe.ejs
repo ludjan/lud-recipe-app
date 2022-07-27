@@ -30,8 +30,8 @@
             const deleteBtn = document.getElementById('delete-recipe-btn')
             const editBtn = document.getElementById('edit-recipe-btn')
             const stepsList = document.getElementById('steps-list')
+            const ingredientList = document.getElementById('ingredients-list')
 
-            var steps = []
 
             function renderSteps(list) {
                 var stepsHtml = ""
@@ -42,11 +42,28 @@
                 console.log("Rendered steps")
             }
 
+            function renderIngredients(list) {
+                var ingredientsHtml = ""
+                for (let i=0; i < list.length; i++) {
+                    ingredientsHtml += `<p>${list[i].quantity} ${list[i].ingredient} ${liste[i].unit}</p>`
+                }
+                ingredientList.innerHTML = ingredientsHtml
+                console.log("Rendered ingredients")
+
+            }
+
             getStepsForRecipe(recipeId)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data)
                     renderSteps(data)
+                })
+
+            getIngredientsForRecipe(recipeId)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                    renderIngredients(data)
                 })
             
             deleteBtn.addEventListener("click", () => {
@@ -59,16 +76,7 @@
                 window.location.pathname = ('/../edit/' + recipeId)
             })
 
-            async function deleteRecipe(recipeId) {
-                const url = "https://lud-recipe-api.herokuapp.com/api/recipes/" + recipeId
-                const config = {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-                fetch(url, config)
-            }
+            
             
         </script>
     </body>
