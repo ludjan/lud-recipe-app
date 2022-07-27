@@ -45,7 +45,7 @@
             function renderIngredients(list) {
                 var ingredientsHtml = ""
                 for (let i=0; i < list.length; i++) {
-                    ingredientsHtml += `<p>${list[i].quantity} ${list[i].ingredient} ${list[i].unit}</p>`
+                    ingredientsHtml += `<p>${list[i].ingredient} ${list[i].quantity} ${list[i].unit}</p>`
                 }
                 ingredientList.innerHTML = ingredientsHtml
                 console.log("Rendered ingredients")
