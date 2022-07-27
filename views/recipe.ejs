@@ -45,12 +45,18 @@
             function renderIngredients(list) {
                 var ingredientsHtml = ""
                 for (let i=0; i < list.length; i++) {
-                    ingredientsHtml += `<p>${list[i].quantity} ${list[i].ingredient} ${liste[i].unit}</p>`
+                    ingredientsHtml += `<p>${list[i].quantity} ${list[i].ingredient} ${list[i].unit}</p>`
                 }
                 ingredientList.innerHTML = ingredientsHtml
                 console.log("Rendered ingredients")
-
             }
+
+            getIngredientsForRecipe(recipeId)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                    renderIngredients(data)
+                })
 
             getStepsForRecipe(recipeId)
                 .then((response) => response.json())
@@ -59,13 +65,6 @@
                     renderSteps(data)
                 })
 
-            getIngredientsForRecipe(recipeId)
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data)
-                    renderIngredients(data)
-                })
-            
             deleteBtn.addEventListener("click", () => {
                 deleteRecipe(recipeId).then(
                     window.location.pathname = ('/..') // navigates user back to main page
@@ -75,8 +74,6 @@
             editBtn.addEventListener("click", () => {
                 window.location.pathname = ('/../edit/' + recipeId)
             })
-
-            
             
         </script>
     </body>
