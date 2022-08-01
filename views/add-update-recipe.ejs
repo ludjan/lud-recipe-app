@@ -255,9 +255,10 @@
               console.log(`Ingredient: ${ingredientName}`)
               var amount = amountInput.value
               console.log(`Amount: ${amount}`)
-              var unit = unitSelect.options[unitSelect.selectedIndex].text
-              console.log(`Unit: ${unit}`)
+              var unitName = unitSelect.options[unitSelect.selectedIndex].text
+              console.log(`Unit: ${unitName}`)
 
+              // must find the id of the selected ingredient for api call
               var ingredientId
               for (let j=0; j<ingredients.length;j++) {
                 const ingredient = ingredients[j]
@@ -266,11 +267,18 @@
                 }
               }
 
+
+
               console.log(`${ingredientId} - ${ingredientName}`)
           
-              // newRecipeIngredients.push( {
-              //   "ingredientId": 
-              // })
+              const newRecipeIngredient = {
+                "ingredientId": ingredientId,
+                "quantity": amount,
+                "unit": unitName
+              } 
+              console.log(newRecipeIngredient)
+              newRecipeIngredients.push(newRecipeIngredient)
+
             }
 
             // steps
