@@ -122,6 +122,7 @@
 
             const newIngredientSelect = document.getElementById(`ingredients-select-${recipeIngredients.length}`)
             console.log(newIngredientSelect)
+            console.log(ingredients)
             appendIngredientsToSelect(ingredients, newIngredientSelect)
 
           })
@@ -158,6 +159,7 @@
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
+                ingredients = data
                 appendIngredientsToSelect(data, ingredientsSelect)
             })
 
