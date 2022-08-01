@@ -14,6 +14,10 @@
             <input type="submit" id="save-recipe-btn" value="Submit">
           </form>
           <button id="dummy-create">Dummy</button> 
+          <label for="ingredients">Choose a car:</label>
+
+          <select name="ingredient" id="ingredients-select"></select>
+
         </div>
           
         <script src="/static/js/recipe.js"></script>
@@ -25,6 +29,7 @@
           const recipeDescriptionInput = document.getElementById('recipe-description')
           const saveRecipeForm = document.getElementById('save-recipe-form')
           const dummyCreateButton = document.getElementById('dummy-create')
+          const ingredientsSelect = document.getElementById('ingredients-select')
 
           var data = '<%= data %>'
           var rId
@@ -85,12 +90,21 @@
             }
           })
 
-          var ingredients = []
+          appendIngredientsToSelect(ingredients, select) {
+            for (let i = 0; i < ingredients.length; i++) {
+              var option = document.createElement('option')
+              option.value = ingredients[i].name
+              option.innerHtml = ingredients[i].name
+              select.appendChild(option)
+            }
+          }
+
+          // var ingredients = []
           getIngredients()
             .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
-                ingredients = data
+            .then((ingredients) => {
+                console.log(ingredients)
+                appendIngredientsToSelect(ingredients, ingredientsSelect)
             })
 
           dummyCreateButton.addEventListener("click", () => {
