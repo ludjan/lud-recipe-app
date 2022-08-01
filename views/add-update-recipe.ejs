@@ -66,7 +66,6 @@
           const dummyCreateButton = document.getElementById('dummy-create')
 
           var data = '<%= data %>'
-          var rId
 
           // are set by fetch
           var ingredients = []
@@ -383,8 +382,8 @@
           })
 
           // if new entry, then rId is set to -1
-          if (rId != -1) {
-            getFullRecipe(rId)
+          if (data != -1) {
+            getFullRecipe(data)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data)
