@@ -85,8 +85,13 @@
             }
           })
 
-          const ingredients = getIngredients()
-          console.log(ingredients)
+          var ingredients = []
+          getIngredients()
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                ingredients = data
+            })
 
           dummyCreateButton.addEventListener("click", () => {
             const newRecipe = {
