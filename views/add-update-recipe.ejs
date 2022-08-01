@@ -118,6 +118,9 @@
               <label for="ingredients-select-${recipeIngredientInputs.length}">Choose ingredient:</label>
               <select name="ingredient" id="ingredients-select-${recipeIngredientInputs.length}"></select>
     
+              <label for="ingredients-amount-${recipeIngredientInputs.length}">Amount:</label>
+              <input type="number" min="1" name="amount" id="ingredients-amount-${recipeIngredientInputs.length}"</select>
+
               <label for="unit-select-${recipeIngredientInputs.length}">Choose unit:</label>
               <select name="unit" id="unit-select-${recipeIngredientInputs.length}"></select>
             </div>`
@@ -126,9 +129,11 @@
 
             const ingredientSelect = document.getElementById(`ingredients-select-${recipeIngredientInputs.length}`)
             const unitSelect = document.getElementById(`unit-select-${recipeIngredientInputs.length}`)
+            const amountInput = document.getElementById(`ingredients-amount-${recipeIngredientInputs.length}`)
             
             recipeIngredientInputs.push({
               ingredientSelect: ingredientSelect,
+              amountInput: amountInput,
               unitSelect: unitSelect  
             })
 
