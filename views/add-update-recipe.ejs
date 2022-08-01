@@ -26,6 +26,15 @@
           </div>
           <button id="add-ingredient-input">Add ingredient input</button>
 
+          <div id="recipe-step-feed">
+            <div>
+              <label for="step-description">Choose ingredient:</label>
+              <input type="text" name="step" id="step-description"></select>
+            </div> 
+          </div>
+          <button id="add-step-input">Add recipe input</button>
+
+
         </div>
           
         <script src="/static/js/recipe.js"></script>
@@ -38,6 +47,10 @@
           const saveRecipeForm = document.getElementById('save-recipe-form')
           const ingredientsSelect = document.getElementById('ingredients-select')
           const unitSelect = document.getElementById('unit-select')
+
+          const addStepInput = document.getElementById('add-step-input')
+          const recipeStepFeed = document.getElementById('recipe-step-feed')
+
           const addIngredientInput = document.getElementById('add-ingredient-input')
           const recipeIngredientsFeed = document.getElementById('recipe-ingredient-feed')
           
@@ -52,6 +65,9 @@
 
           var recipeIngredients = []
           var recipeIngredientInputs = []
+
+          var recipeSteps = []
+          var recipeStepInputs = []
 
           console.log(data)
 
@@ -143,6 +159,21 @@
             
             appendIngredientsToSelect(ingredients, ingredientSelect)
             appendUnitToSelect(units, unitSelect)
+          })
+
+          recipeStepFeed.addEventListener("click", () => {
+
+            const stepNumber = recipeStepInputs.length
+            console.log(`recipeStepInputs.length = ${stepNumber}`)
+
+            var newDiv = document.createElement('div')
+            newDiv.innerHTML = 
+            `<div>
+              <div>${stepNumber}</div>
+              <label for="step-description-${stepNumber}">Step description:</label>
+              <input type="text" name="step" id="step-description-${stepNumber}"></select>
+            </div>`
+
           })
 
           function appendIngredientsToSelect(ingredients, select) {
