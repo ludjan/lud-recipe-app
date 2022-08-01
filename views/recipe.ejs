@@ -51,12 +51,12 @@
                 console.log("Rendered ingredients")
             }
 
-            getIngredientsForRecipe(recipeId)
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data)
-                    renderIngredients(data)
-                })
+            // getIngredientsForRecipe(recipeId)
+            //     .then((response) => response.json())
+            //     .then((data) => {
+            //         console.log(data)
+            //         renderIngredients(data)
+            //     })
 
             // getStepsForRecipe(recipeId)
             //     .then((response) => response.json())
@@ -79,6 +79,7 @@
                 .then((data) => {
                     console.log(data)
                     renderSteps(data.steps)
+                    renderIngredients(data.ingredients)
                 })
 
         </script>
