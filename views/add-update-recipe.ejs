@@ -235,12 +235,41 @@
 
             console.log(`RecipeIngredientInputs ${recipeIngredientInputs}`)
 
+            const newRecipe = {
+              "recipe": {
+                "name": recipeNameInput.value,
+                "description": recipeDescriptionInput.value,
+                "portions": 2
+              },
+              "ingredients": null,
+              "steps": null
+            }
+
+            var newRecipeIngredients = []
+            var newRecipeSteps = []
+
             // ingredients
             for (let i=0; i<recipeIngredientInputs.length;i++) {
               const { ingredientSelect, amountInput, unitSelect } = recipeIngredientInputs[i]
-              console.log(`Ingredient: ${ingredientSelect.options[ingredientSelect.selectedIndex].text}`)
-              console.log(`Amount: ${amountInput.value}`)
-              console.log(`Unit: ${unitSelect.options[unitSelect.selectedIndex].text}`)
+              var ingredientName = ingredientSelect.options[ingredientSelect.selectedIndex].text
+              console.log(`Ingredient: ${ingredientName}`)
+              var amount = amountInput.value
+              console.log(`Amount: ${amount}`)
+              var unit = unitSelect.options[unitSelect.selectedIndex].text
+              console.log(`Unit: ${unit}`)
+
+              var ingredientId
+              for (let j=0; j<ingredients.length;j++) {
+                if (ingredient.name == ingredientName) {
+                  ingredientId = ingredient.id
+                }
+              }
+
+              console.log(`${ingredientId} - ${ingredientName}`)
+          
+              // newRecipeIngredients.push( {
+              //   "ingredientId": 
+              // })
             }
 
             // steps
