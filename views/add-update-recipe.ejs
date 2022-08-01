@@ -279,17 +279,21 @@
 
             // steps
             var newRecipeSteps = []
+            // newRecipeSteps.sort ( compareSteps )
             for (let i=0; i<recipeStepInputs.length;i++) {
               const { stepNumber, description } = recipeStepInputs[i]
 
               var stepDescription = description.value
 
-              console.log(`Step number: ${stepNumber}`)
-              console.log(`Description: ${stepDescription}`)  
-              
+              const newRecipeStep = {
+                "description": stepsDescription
+              }
+
+              // console.log(`Step number: ${stepNumber}`)
+              // console.log(`Description: ${stepDescription}`)  
+              newRecipeStep.push(newRecipeStep)              
             }
 
-            newRecipeSteps.sort ( compareSteps )
 
             // hei
 
