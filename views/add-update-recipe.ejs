@@ -36,11 +36,12 @@
           const recipeNameInput = document.getElementById('recipe-name')
           const recipeDescriptionInput = document.getElementById('recipe-description')
           const saveRecipeForm = document.getElementById('save-recipe-form')
-          const dummyCreateButton = document.getElementById('dummy-create')
           const ingredientsSelect = document.getElementById('ingredients-select')
           const unitSelect = document.getElementById('unit-select')
           const addIngredientInput = document.getElementById('add-ingredient-input')
           const recipeIngredientsFeed = document.getElementById('recipe-ingredient-feed')
+          
+          const dummyCreateButton = document.getElementById('dummy-create')
 
           var data = '<%= data %>'
           var rId
@@ -142,19 +143,14 @@
             
             appendIngredientsToSelect(ingredients, ingredientSelect)
             appendUnitToSelect(units, unitSelect)
-
           })
 
           function appendIngredientsToSelect(ingredients, select) {
             for (let i = 0; i < ingredients.length; i++) {
-              // new select element
               var option = document.createElement('option')
-              
               console.log(`ingredient ${ingredients[i].name}`)
-              
               option.value = ingredients[i].name
               option.innerHTML = ingredients[i].name
-              
               select.appendChild(option)
             }
           }
