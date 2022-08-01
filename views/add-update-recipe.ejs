@@ -121,9 +121,13 @@
             recipeIngredientsFeed.appendChild(newDiv)
 
             const newIngredientSelect = document.getElementById(`ingredients-select-${recipeIngredients.length}`)
+            const newUnitSelect = document.getElementById(`unit-select${recipeIngredients.length}`)
+            
             console.log(newIngredientSelect)
             console.log(ingredients)
+            
             appendIngredientsToSelect(ingredients, newIngredientSelect)
+            appendUnitToSelect(units, newUnitSelect)
 
           })
 
@@ -167,6 +171,7 @@
             .then((response) => response.json())
             .then((data) => {
               console.log(data)
+              units = data
               appendUnitToSelect(data, unitSelect)
             })
 
