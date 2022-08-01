@@ -45,18 +45,18 @@
           const recipeNameInput = document.getElementById('recipe-name')
           const recipeDescriptionInput = document.getElementById('recipe-description')
           const saveRecipeForm = document.getElementById('save-recipe-form')
-          const ingredientsSelect = document.getElementById('ingredients-select')
-          const unitSelect = document.getElementById('unit-select')
           
+          // steps
           const addStepInputBtn = document.getElementById('add-step-input-btn')
           const recipeStepFeed = document.getElementById('recipe-step-feed')
           var recipeSteps = [] // actual recipeSteps
-          var recipeStepInputs = [] // the inputs
+          var recipeStepInputArray = [] // the inputs
           
+          // ingredients
           const addIngredientInputBtn = document.getElementById('add-ingredient-input-btn')
           const recipeIngredientsFeed = document.getElementById('recipe-ingredient-feed')
           var recipeIngredients = [] // actual recipeIngredients
-          var recipeIngredientInputs = [] // the inputs
+          var recipeIngredientInputArray = [] // the inputs
           
           // for testing
           
@@ -69,8 +69,6 @@
           // are set by fetch
           var ingredients = []
           var units = []
-
-
 
           console.log(data)
 
@@ -128,59 +126,63 @@
             // }
           })
 
-          function renderAddedIngredientInput(ingredientArray) {
-          }
-
-          function addIngredientInput(ingredient) {
-
-            // add new ingredient input
-
-            if (ingredient != null) {
-              // add input with filled ingredient
-
+          function loadIngredientInputs(ingredientArray) {
+            for (let i=0; i<ingredientArray.length; i++) {
+              const ingredient = ingredientArray[i]
             }
           }
 
-          addIngredientInputBtn.addEventListener("click", () => {
+          function createAndAppenIngredientInput(inputNumber) {
 
-            console.log(`recipeIngredientInputs.length = ${recipeIngredientInputs.length}`)
+            inputNumber = recipeIngredientInputs.length
 
+            // add new ingredient input
             var newDiv = document.createElement('div')
             newDiv.innerHTML = 
-            `<div id="ingredient-input-${recipeIngredientInputs.length}">
-              <label for="ingredients-select-${recipeIngredientInputs.length}">Choose ingredient:</label>
-              <select name="ingredient" id="ingredients-select-${recipeIngredientInputs.length}"></select>
+            `<div id="ingredient-input-${inputNumber}">
+              <label for="ingredients-select-${inputNumber}">Choose ingredient:</label>
+              <select name="ingredient" id="ingredients-select-${inputNumber}"></select>
     
-              <label for="ingredients-amount-${recipeIngredientInputs.length}">Amount:</label>
-              <input type="number" min="1" name="amount" id="ingredients-amount-${recipeIngredientInputs.length}"</select>
+              <label for="ingredients-amount-${inputNumber}">Amount:</label>
+              <input type="number" min="1" name="amount" id="ingredients-amount-${inputNumber}"</select>
 
-              <label for="unit-select-${recipeIngredientInputs.length}">Choose unit:</label>
-              <select name="unit" id="unit-select-${recipeIngredientInputs.length}"></select>
+              <label for="unit-select-${inputNumber}">Choose unit:</label>
+              <select name="unit" id="unit-select-${inputNumber}"></select>
             </div>`
 
             recipeIngredientsFeed.appendChild(newDiv)
 
-            const ingredientSelect = document.getElementById(`ingredients-select-${recipeIngredientInputs.length}`)
-            const unitSelect = document.getElementById(`unit-select-${recipeIngredientInputs.length}`)
-            const amountInput = document.getElementById(`ingredients-amount-${recipeIngredientInputs.length}`)
+            const ingredientSelect = document.getElementById(`ingredients-select-${inputNumber}`)
+            const unitSelect = document.getElementById(`unit-select-${inputNumber}`)
+            const amountInput = document.getElementById(`ingredients-amount-${inputNumber}`)
             
-            recipeIngredientInputs.push({
+            const recipeIngredientInput = {
               ingredientSelect: ingredientSelect,
               amountInput: amountInput,
               unitSelect: unitSelect  
-            })
+            }
 
-            console.log(ingredientSelect)
-            console.log(ingredients)
+            recipeIngredientInputArray.push(recipeIngredientInput)
+
+            return recipeIngredientInput
+          }
+
+          addIngredientInputBtn.addEventListener("click", () => {
+
+            const nextIngredientInputId = recipeIngredientInputArray.length
+            const ingredientInput = createAndAppenIngredientInput(nextIngredientInputId)
+
+            // console.log(ingredientInput.ingredientSelect)
+            // console.log(ingredients)
             
-            appendIngredientsToSelect(ingredients, ingredientSelect)
-            appendUnitToSelect(units, unitSelect)
+            appendIngredientsToSelect(ingredients, ingredientInput.ingredientSelect)
+            appendUnitToSelect(units, ingredientInput.unitSelect)
           })
 
           addStepInputBtn.addEventListener("click", () => {
 
-            const stepNumber = recipeStepInputs.length
-            console.log(`recipeStepInputs.length = ${stepNumber}`)
+            const stepNumber = recipeStepInputArray.length
+            console.log(`recipeStepInputArray.length = ${stepNumber}`)
 
             var newDiv = document.createElement('div')
             newDiv.innerHTML = 
@@ -193,12 +195,10 @@
 
             const stepDescriptionInput = document.getElementById(`step-description-${stepNumber}`)
 
-            recipeStepInputs.push({
+            recipeStepInputArray.push({
               stepNumber: stepNumber,
               description: stepDescriptionInput
             })
-
-
           })
 
           function appendIngredientsToSelect(ingredients, select) {
@@ -292,8 +292,8 @@
             // steps
             var newRecipeStepArray = []
             // newRecipeStepArray.sort ( compareSteps )
-            for (let i=0; i<recipeStepInputs.length;i++) {
-              const { stepNumber, description } = recipeStepInputs[i]
+            for (let i=0; i<recipeStepInputArray.length;i++) {
+              const { stepNumber, description } = recipeStepInputArray[i]
 
               var stepDescription = description.value
 
