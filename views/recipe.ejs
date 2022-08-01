@@ -58,12 +58,12 @@
                     renderIngredients(data)
                 })
 
-            getStepsForRecipe(recipeId)
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data)
-                    renderSteps(data)
-                })
+            // getStepsForRecipe(recipeId)
+            //     .then((response) => response.json())
+            //     .then((data) => {
+            //         console.log(data)
+            //         renderSteps(data)
+            //     })
 
             deleteBtn.addEventListener("click", () => {
                 deleteRecipe(recipeId)
@@ -78,8 +78,9 @@
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data)
+                    renderSteps(data.steps)
                 })
-                 
+
         </script>
     </body>
 </html>
