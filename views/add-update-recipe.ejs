@@ -16,25 +16,16 @@
           <button id="dummy-create">Dummy</button> 
 
           <div id="recipe-ingredient-feed">
-            <!-- <div>
-              <label for="ingredients-select">Choose ingredient:</label>
-              <select name="ingredient" id="ingredients-select"></select>
-    
-              <label for="unit-select">Choose unit:</label>
-              <select name="unit" id="unit-select"></select>
-            </div>  -->
           </div>
           <button id="add-ingredient-input">Add ingredient input</button>
 
           <div id="recipe-step-feed">
-            <!-- <div>
-              <label for="step-description">Choose ingredient:</label>
-              <input type="text" name="step" id="step-description"></select>
-            </div>  -->
           </div>
           <button id="add-step-input">Add recipe input</button>
-
-          <button id="test-show-me">Show me</button>
+          
+          <br>
+          <br>
+          <button id="console-log-input">Show me</button>
 
 
         </div>
@@ -49,14 +40,16 @@
           const saveRecipeForm = document.getElementById('save-recipe-form')
           const ingredientsSelect = document.getElementById('ingredients-select')
           const unitSelect = document.getElementById('unit-select')
-          const testShowMe = document.getElementById('test-show-me')
-
+          
           const addStepInput = document.getElementById('add-step-input')
           const recipeStepFeed = document.getElementById('recipe-step-feed')
-
+          
           const addIngredientInput = document.getElementById('add-ingredient-input')
           const recipeIngredientsFeed = document.getElementById('recipe-ingredient-feed')
           
+          // for testing
+          
+          const consoleLogInputBtn = document.getElementById('console-log-input')
           const dummyCreateButton = document.getElementById('dummy-create')
 
           var data = '<%= data %>'
@@ -230,7 +223,7 @@
             })
 
 
-          testShowMe.addEventListener("click", () => {
+          consoleLogInputBtn.addEventListener("click", () => {
             console.log(`Clicked!`)
 
             console.log(`RecipeIngredientInputs ${recipeIngredientInputs}`)
