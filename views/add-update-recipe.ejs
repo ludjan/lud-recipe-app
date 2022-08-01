@@ -176,15 +176,16 @@
               <label for="step-description-${stepNumber}">Step description:</label>
               <input type="text" name="step" id="step-description-${stepNumber}"></select>
             </div>`
+            
+            recipeStepFeed.appendChild(newDiv)
 
-            const stepDescriptionInput = document.getElementById(`ingredients-select-${stepNumber}`)
+            const stepDescriptionInput = document.getElementById(`step-description-${stepNumber}`)
 
             recipeStepInputs.push({
               stepNumber: stepNumber,
               description: stepDescriptionInput
             })
 
-            recipeStepFeed.appendChild(newDiv)
 
           })
 
