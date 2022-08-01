@@ -242,7 +242,7 @@
           consoleLogInputBtn.addEventListener("click", () => {
             console.log(`Clicked!`)
 
-            console.log(`RecipeIngredientInputs ${recipeIngredientInputs}`)
+            console.log(`recipeIngredientInputArray ${recipeIngredientInputArray}`)
 
             const newRecipe = {
               "recipe": {
@@ -258,8 +258,8 @@
             var newRecipeStepArray = []
 
             // ingredients
-            for (let i=0; i<recipeIngredientInputs.length;i++) {
-              const { ingredientSelect, amountInput, unitSelect } = recipeIngredientInputs[i]
+            for (let i=0; i<recipeIngredientInputArray.length;i++) {
+              const { ingredientSelect, amountInput, unitSelect } = recipeIngredientInputArray[i]
               var ingredientName = ingredientSelect.options[ingredientSelect.selectedIndex].text
               console.log(`Ingredient: ${ingredientName}`)
               var amount = amountInput.value
