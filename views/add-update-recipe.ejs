@@ -50,6 +50,7 @@
           var units = []
 
           var recipeIngredients = []
+          var recipeIngredientInputs = []
 
           console.log(data)
 
@@ -109,23 +110,28 @@
 
           addIngredientInput.addEventListener("click", () => {
 
-            console.log(`RecipeIngredients.length = ${recipeIngredients.length}`)
+            console.log(`RecipeIngredients.length = ${recipeIngredientInputs.length}`)
 
             var newDiv = document.createElement('div')
             newDiv.innerHTML = 
-            `<div id="ingredient-input-${recipeIngredients.length}">
-              <label for="ingredients-select-${recipeIngredients.length}">Choose ingredient:</label>
-              <select name="ingredient" id="ingredients-select-${recipeIngredients.length}"></select>
+            `<div id="ingredient-input-${recipeIngredientInputs.length}">
+              <label for="ingredients-select-${recipeIngredientInputs.length}">Choose ingredient:</label>
+              <select name="ingredient" id="ingredients-select-${recipeIngredientInputs.length}"></select>
     
-              <label for="unit-select-${recipeIngredients.length}">Choose unit:</label>
-              <select name="unit" id="unit-select-${recipeIngredients.length}"></select>
+              <label for="unit-select-${recipeIngredientInputs.length}">Choose unit:</label>
+              <select name="unit" id="unit-select-${recipeIngredientInputs.length}"></select>
             </div>`
 
             recipeIngredientsFeed.appendChild(newDiv)
 
-            const newIngredientSelect = document.getElementById(`ingredients-select-${recipeIngredients.length}`)
-            const newUnitSelect = document.getElementById(`unit-select-${recipeIngredients.length}`)
+            const ingredientSelect = document.getElementById(`ingredients-select-${recipeIngredientInputs.length}`)
+            const unitSelect = document.getElementById(`unit-select-${recipeIngredientInputs.length}`)
             
+            recipeIngredientInputs.push({
+              ingredientSelect: ingredientSelect,
+              unitSelect: unitSelect  
+            })
+
             console.log(newIngredientSelect)
             console.log(ingredients)
             
