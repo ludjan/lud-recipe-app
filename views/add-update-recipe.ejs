@@ -126,9 +126,20 @@
             // }
           })
 
+
+          function renderIngredients(list) {
+                var ingredientsHtml = ""
+                for (let i=0; i < list.length; i++) {
+                    ingredientsHtml += `<p>${list[i].ingredient} ${list[i].quantity} ${list[i].unit}</p>`
+                }
+                ingredientList.innerHTML = ingredientsHtml
+                console.log("Rendered ingredients")
+            }
+
           function loadIngredientInputs(ingredientArray) {
-            for (let i=0; i<ingredientArray.length; i++) {
-              const ingredient = ingredientArray[i]
+            for (let i=0; i<recipeIngredienInputArray.length; i++) {
+              const recipeIngredientInput = createAndAppendIngredientInput(recipeIngredienInputArray.length)
+              console.log(`Array: ${ingredientArray[i]}`)
             }
           }
 
@@ -211,12 +222,9 @@
             for (let i = 0; i < units.length; i++) {
               // new select element
               var option = document.createElement('option')
-              
               console.log(`Unit: ${units[i].name}`)
-              
               option.value = units[i].name
               option.innerHTML = units[i].name
-              
               select.appendChild(option)
             }
           }
@@ -377,7 +385,7 @@
                 .then((data) => {
                     console.log(data)
                     renderSteps(data.steps)
-                    renderIngredients(data.ingredients)
+                    loadIngredientInputs(data.ingredients)
                 })
           }
 
