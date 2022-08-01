@@ -19,13 +19,13 @@
           <div id="recipe-ingredient-feed"></div>
           <br>
           <br>
-          <button id="add-ingredient-input">Add ingredient input</button>
+          <button id="add-ingredient-input-btn">Add ingredient input</button>
 
           <div id="recipe-step-feed">
           </div>
           <br>
           <br>
-          <button id="add-step-input">Add recipe input</button>
+          <button id="add-step-input-btn">Add recipe input</button>
           
           <br>
           <br>
@@ -48,11 +48,15 @@
           const ingredientsSelect = document.getElementById('ingredients-select')
           const unitSelect = document.getElementById('unit-select')
           
-          const addStepInput = document.getElementById('add-step-input')
+          const addStepInputBtn = document.getElementById('add-step-input-btn')
           const recipeStepFeed = document.getElementById('recipe-step-feed')
+          var recipeSteps = [] // actual recipeSteps
+          var recipeStepInputs = [] // the inputs
           
-          const addIngredientInput = document.getElementById('add-ingredient-input')
+          const addIngredientInputBtn = document.getElementById('add-ingredient-input-btn')
           const recipeIngredientsFeed = document.getElementById('recipe-ingredient-feed')
+          var recipeIngredients = [] // actual recipeIngredients
+          var recipeIngredientInputs = [] // the inputs
           
           // for testing
           
@@ -66,11 +70,7 @@
           var ingredients = []
           var units = []
 
-          var recipeIngredients = []
-          var recipeIngredientInputs = []
 
-          var recipeSteps = []
-          var recipeStepInputs = []
 
           console.log(data)
 
@@ -129,7 +129,6 @@
           })
 
           function renderAddedIngredientInput(ingredientArray) {
-            for 
           }
 
           function addIngredientInput(ingredient) {
@@ -142,7 +141,7 @@
             }
           }
 
-          addIngredientInput.addEventListener("click", () => {
+          addIngredientInputBtn.addEventListener("click", () => {
 
             console.log(`recipeIngredientInputs.length = ${recipeIngredientInputs.length}`)
 
@@ -178,7 +177,7 @@
             appendUnitToSelect(units, unitSelect)
           })
 
-          addStepInput.addEventListener("click", () => {
+          addStepInputBtn.addEventListener("click", () => {
 
             const stepNumber = recipeStepInputs.length
             console.log(`recipeStepInputs.length = ${stepNumber}`)
