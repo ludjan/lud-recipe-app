@@ -90,7 +90,7 @@
             }
           })
 
-          appendIngredientsToSelect(ingredients, select) {
+          function appendIngredientsToSelect(ingredients, select) {
             for (let i = 0; i < ingredients.length; i++) {
               var option = document.createElement('option')
               option.value = ingredients[i].name
