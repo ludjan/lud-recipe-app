@@ -237,7 +237,6 @@
             // ingredients
             for (let i=0; i<recipeIngredientInputs.length;i++) {
               const { ingredientSelect, amountInput, unitSelect } = recipeIngredientInputs[i]
-              console.log(ingredientSelect)
               console.log(`Ingredient: ${ingredientSelect.options[ingredientSelect.selectedIndex].text}`)
               console.log(`Amount: ${amountInput.value}`)
               console.log(`Unit: ${unitSelect.options[unitSelect.selectedIndex].text}`)
@@ -247,9 +246,8 @@
             for (let i=0; i<recipeStepInputs.length;i++) {
               const { stepNumber, description } = recipeStepInputs[i]
               console.log(`Step number: ${stepNumber}`)
-              console.log(`Description: ${description.value}`)
+              console.log(`Description: ${description}`)
             }
-
           })
 
           dummyCreateButton.addEventListener("click", () => {
