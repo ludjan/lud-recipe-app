@@ -72,39 +72,39 @@
               return alert(`Description '${recipeDescription}' is not alphanumeric`)
             }
 
-            // create the new entry
-            const newRecipe = {
-              name: recipeNameInput.value,
-              description: recipeDescriptionInput.value
-            } 
-            console.log(newRecipe)
+            // // create the new entry
+            // const newRecipe = {
+            //   name: recipeNameInput.value,
+            //   description: recipeDescriptionInput.value
+            // } 
+            // console.log(newRecipe)
 
-            console.log(`Data = ${data}`)
+            // console.log(`Data = ${data}`)
 
-            if (rId == null) {
+            // if (rId == null) {
 
-              // async add, then re-render
-              addRecipe(newRecipe).then(response => {
-                if (!response.ok) {
-                  const errorMessage = `Error ${response.status} - ${response.statusText}`
-                  console.log(errorMessage)
-                } else {
-                  window.location.pathname = ('/..') // navigates user back to main page
-                }
-              })
+            //   // async add, then re-render
+            //   addRecipe(newRecipe).then(response => {
+            //     if (!response.ok) {
+            //       const errorMessage = `Error ${response.status} - ${response.statusText}`
+            //       console.log(errorMessage)
+            //     } else {
+            //       window.location.pathname = ('/..') // navigates user back to main page
+            //     }
+            //   })
             
-            } else {
-              console.log(`About to update recipe with id ${rId}`)
-              updateRecipe(newRecipe, rId).then(response => {
-                if (!response.ok) {
-                  const errorMessage = `Error ${response.status} - ${response.statusText}`
-                  console.log(errorMessage)
-                  return alert(errorMessage)
-                } else {
-                  window.location.pathname = (`/../recipes/${rId}`)
-                }
-              })
-            }
+            // } else {
+            //   console.log(`About to update recipe with id ${rId}`)
+            //   updateRecipe(newRecipe, rId).then(response => {
+            //     if (!response.ok) {
+            //       const errorMessage = `Error ${response.status} - ${response.statusText}`
+            //       console.log(errorMessage)
+            //       return alert(errorMessage)
+            //     } else {
+            //       window.location.pathname = (`/../recipes/${rId}`)
+            //     }
+            //   })
+            // }
           })
 
           addIngredientInput.addEventListener("click", () => {
