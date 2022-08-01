@@ -120,6 +120,9 @@
 
             recipeIngredientsFeed.appendChild(newDiv)
 
+            const newIngredientSelect = document.getElementById(`ingredients-select-${recipeIngredients.length}`)
+            appendIngredientsToSelect(ingredients, newIngredientSelect)
+
           })
 
           function appendIngredientsToSelect(ingredients, select) {
