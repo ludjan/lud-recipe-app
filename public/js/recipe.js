@@ -71,7 +71,7 @@ async function getIngredients() {
 }
 
 async function getUnits() {
-  const targetUrl = `${apiUrl}/ingredients`
+  const targetUrl = `${apiUrl}/units`
   const config = {
     method: 'GET',
     headers: {
