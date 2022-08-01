@@ -245,8 +245,8 @@
               "steps": null
             }
 
-            var newRecipeIngredients = []
-            var newRecipeSteps = []
+            var newRecipeIngredientArray = []
+            var newRecipeStepArray = []
 
             // ingredients
             for (let i=0; i<recipeIngredientInputs.length;i++) {
@@ -272,14 +272,14 @@
                 "quantity": amount,
                 "unit": unitName
               } 
-              newRecipeIngredients.push(newRecipeIngredient)
+              newRecipeIngredientArray.push(newRecipeIngredient)
             }
 
-            console.log(newRecipeIngredients)
+            console.log(newRecipeIngredientArray)
 
             // steps
-            var newRecipeSteps = []
-            // newRecipeSteps.sort ( compareSteps )
+            var newRecipeStepArray = []
+            // newRecipeStepArray.sort ( compareSteps )
             for (let i=0; i<recipeStepInputs.length;i++) {
               const { stepNumber, description } = recipeStepInputs[i]
 
@@ -291,14 +291,14 @@
 
               // console.log(`Step number: ${stepNumber}`)
               // console.log(`Description: ${stepDescription}`)  
-              newRecipeSteps.push(newRecipeStep)              
+              newRecipeStepArray.push(newRecipeStep)              
             }
 
 
             // hei
 
-            newRecipe.ingredients = newRecipeIngredients
-            newRecipe.steps = newRecipeSteps
+            newRecipe.ingredients = newRecipeIngredientArray
+            newRecipe.steps = newRecipeStepArray
 
             console.log(newRecipe)
           
