@@ -232,8 +232,10 @@
           testShowMe.addEventListener("click", () => {
             console.log(`Clicked!`)
 
+            console.log(`${recipeIngredientInputs}`)
+
             // ingredients
-            for (let i=0; i<recipeIngredientInputs;i++) {
+            for (let i=0; i<recipeIngredientInputs.length;i++) {
               console.log(recipeIngredientInputs[i])
               console.log(recipeIngredientInputs[i].value)
             }
