@@ -382,15 +382,15 @@
               })
           })
 
-          // if (rId != -1) {
-          //   getFullRecipe(rId)
-          //       .then((response) => response.json())
-          //       .then((data) => {
-          //           console.log(data)
-          //           renderSteps(data.steps)
-          //           loadIngredientInputs(data.ingredients)
-          //       })
-          // }
+          if (rId != -1) {
+            getFullRecipe(rId)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                    renderSteps(data.steps)
+                    loadIngredientInputs(data.ingredients)
+                })
+          }
 
         </script> 
     </body>
