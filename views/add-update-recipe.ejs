@@ -34,6 +34,8 @@
           </div>
           <button id="add-step-input">Add recipe input</button>
 
+          <button id="test-show-me">Show me</button>
+
 
         </div>
           
@@ -47,6 +49,7 @@
           const saveRecipeForm = document.getElementById('save-recipe-form')
           const ingredientsSelect = document.getElementById('ingredients-select')
           const unitSelect = document.getElementById('unit-select')
+          const testShowMe = document.getElementById('test-show-me')
 
           const addStepInput = document.getElementById('add-step-input')
           const recipeStepFeed = document.getElementById('recipe-step-feed')
@@ -224,6 +227,19 @@
               units = data
               appendUnitToSelect(data, unitSelect)
             })
+
+
+          testShowMe.addEventListener("click", () => {
+            console.log(`Clicked!`)
+
+            // ingredients
+            for (let i=0; i<recipeIngredientInputs;i++) {
+              console.log(recipeIngredientInputs[i])
+              console.log(recipeIngredientInputs[i].value)
+            }
+
+            // steps
+          })
 
           dummyCreateButton.addEventListener("click", () => {
             const newRecipe = {
