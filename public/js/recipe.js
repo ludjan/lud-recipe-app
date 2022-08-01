@@ -49,7 +49,7 @@ async function getStepsForRecipe(recipeId) {
 }
 
 async function getIngredientsForRecipe(recipeId) {
-  const targetUrl = `${apiUrl}/ingredientForRecipe?recipeId=${recipeId}`
+  const targetUrl = `${apiUrl}/getRecipeSteps?recipeId=${recipeId}`
   const config = {
     method: 'GET',
     headers: {
