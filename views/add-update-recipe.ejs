@@ -132,8 +132,9 @@
             }
           }
 
-          function createAndAppenIngredientInput(inputNumber) {
+          function createAndAppendIngredientInput(inputNumber) {
 
+            // create the html element
             var newDiv = document.createElement('div')
             newDiv.innerHTML = 
             `<div id="ingredient-input-${inputNumber}">
@@ -147,33 +148,31 @@
               <select name="unit" id="unit-select-${inputNumber}"></select>
             </div>`
 
+            // add new html to the file
             recipeIngredientsFeed.appendChild(newDiv)
 
+            // find the newly added ids
             const ingredientSelect = document.getElementById(`ingredients-select-${inputNumber}`)
             const unitSelect = document.getElementById(`unit-select-${inputNumber}`)
             const amountInput = document.getElementById(`ingredients-amount-${inputNumber}`)
             
+            // add it to the global input list
             const recipeIngredientInput = {
               ingredientSelect: ingredientSelect,
               amountInput: amountInput,
               unitSelect: unitSelect  
             }
+            recipeIngredienInputArray.push(recipeIngredientInput)
 
-            recipeIngredientInputArray.push(recipeIngredientInput)
+            appendIngredientsToSelect(ingredients, ingredientInput.ingredientSelect)
+            appendUnitToSelect(units, ingredientInput.unitSelect)
 
             return recipeIngredientInput
           }
 
           addIngredientInputBtn.addEventListener("click", () => {
-
             const nextIngredientInputId = recipeIngredientInputArray.length
-            const ingredientInput = createAndAppenIngredientInput(nextIngredientInputId)
-
-            // console.log(ingredientInput.ingredientSelect)
-            // console.log(ingredients)
-            
-            appendIngredientsToSelect(ingredients, ingredientInput.ingredientSelect)
-            appendUnitToSelect(units, ingredientInput.unitSelect)
+            createAndAppendIngredientInput(nextIngredientInputId)
           })
 
           addStepInputBtn.addEventListener("click", () => {
@@ -373,7 +372,13 @@
           })
 
           if (rId != -1) {
-
+            getFullRecipe(recipeId)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                    renderSteps(data.steps)
+                    renderIngredients(data.ingredients)
+                })
           }
 
         </script> 
