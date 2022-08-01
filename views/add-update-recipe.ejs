@@ -14,8 +14,8 @@
             <input type="submit" id="save-recipe-btn" value="Submit">
           </form>
           <button id="dummy-create">Dummy</button> 
-          <label for="ingredients">Choose a car:</label>
 
+          <label for="ingredients-select">Choose ingredient:</label>
           <select name="ingredient" id="ingredients-select"></select>
 
         </div>
@@ -92,10 +92,14 @@
 
           function appendIngredientsToSelect(ingredients, select) {
             for (let i = 0; i < ingredients.length; i++) {
+              // new select element
               var option = document.createElement('option')
+              
               console.log(`ingredient ${ingredients[i].name}`)
+              
               option.value = ingredients[i].name
-              option.innerHtml = ingredients[i].name
+              option.innerHTML = ingredients[i].name
+              
               select.appendChild(option)
             }
           }
