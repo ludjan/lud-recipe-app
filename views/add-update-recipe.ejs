@@ -385,8 +385,8 @@
           })
 
           // if new entry, then rId is set to -1
-          if (rId == null) {
-            getFullRecipe(rId)
+          if (data != -1) {
+            getFullRecipe(data)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data)
