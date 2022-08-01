@@ -110,7 +110,7 @@
 
           addIngredientInput.addEventListener("click", () => {
 
-            console.log(`RecipeIngredients.length = ${recipeIngredientInputs.length}`)
+            console.log(`recipeIngredientInputs.length = ${recipeIngredientInputs.length}`)
 
             var newDiv = document.createElement('div')
             newDiv.innerHTML = 
@@ -132,11 +132,11 @@
               unitSelect: unitSelect  
             })
 
-            console.log(newIngredientSelect)
+            console.log(ingredientSelect)
             console.log(ingredients)
             
-            appendIngredientsToSelect(ingredients, newIngredientSelect)
-            appendUnitToSelect(units, newUnitSelect)
+            appendIngredientsToSelect(ingredients, ingredientSelect)
+            appendUnitToSelect(units, unitSelect)
 
           })
 
