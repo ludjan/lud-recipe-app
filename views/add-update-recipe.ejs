@@ -108,6 +108,9 @@
           })
 
           addIngredientInput.addEventListener("click", () => {
+
+            console.log(`RecipeIngredients.length = ${recipeIngredients.length}`)
+
             var newDiv = document.createElement('div')
             newDiv.innerHTML = 
             `<div id="ingredient-input-${recipeIngredients.length}">
