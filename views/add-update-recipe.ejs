@@ -236,11 +236,11 @@
 
             // ingredients
             for (let i=0; i<recipeIngredientInputs.length;i++) {
-              const element = recipeIngredientInputs[i]
-              console.log(element.ingredientSelect)
-              console.log(`Ingredient: ${element.ingredientsSelect.options[ingredientsSelect.selectedIndex].value}`)
-              console.log(`Amount: ${element.amountInput.value}`)
-              console.log(`Unit: ${element.unitSelect.value}`)
+              const { ingredientSelect, amountInput, unitSelect } = recipeIngredientInputs[i]
+              console.log(ingredientSelect)
+              console.log(`Ingredient: ${ingredientSelect.options[ingredientSelect.selectedIndex].text}`)
+              console.log(`Amount: ${amountInput.value}`)
+              console.log(`Unit: ${unitSelect.options[unitSelect.selectedIndex].text}`)
             }
 
             // steps
