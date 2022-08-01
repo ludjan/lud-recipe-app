@@ -12,6 +12,7 @@
             <label for="recipe-description">Recipe Description</label><br>
             <input id="recipe-description" type="text" name="hist"><br>
             <input type="submit" id="save-recipe-btn" value="Submit">
+            <button id="dummy-create">Dummy</button> 
           </form>
         </div>
           
@@ -23,6 +24,7 @@
           const recipeNameInput = document.getElementById('recipe-name')
           const recipeDescriptionInput = document.getElementById('recipe-description')
           const saveRecipeForm = document.getElementById('save-recipe-form')
+          const dummyCreateButton = document.getElementById('dummy-create')
 
           var data = '<%= data %>'
           var rId
@@ -81,6 +83,59 @@
                 }
               })
             }
+          })
+
+          dummyCreateButton.addEventListener("click", () => {
+            const newRecipe = {
+              "recipe": {
+                  "name": "Goda pannkakor",
+                  "description": "Supergoda pannkakor",
+                  "portions": 4
+              },
+              "ingredients": [
+                  {
+                      "ingredientId": 2,
+                      "quantity": 2,
+                      "unit": "piece"
+                  },
+                  {
+                      "ingredientId": 4,
+                      "quantity": 2,
+                      "unit": "spicespoon"
+                  },
+                  {
+                      "ingredientId": 3,
+                      "quantity": 2,
+                      "unit": "deciliter"
+                  },
+                  {
+                      "ingredientId": 5,
+                      "quantity": 4,
+                      "unit": "deciliter"
+                  }
+              ],
+              "steps": [
+                  {
+                      "description": "A first step"
+                  },
+                  {
+                      "description": "A second step"
+                  },
+                  {
+                      "description": "A third step"
+                  }
+              ]
+            }
+            console.log(`About to create ${newRecipe}`)
+            createFullRecipe(recipe).then(response => {
+                if (!response.ok) {
+                  const errorMessage = `Error ${response.status} - ${response.statusText}`
+                  console.log(errorMessage)
+                  return alert(errorMessage)
+                } else {
+                  window.location.pathname = (`/..`)
+                }
+              })
           })
 
         </script> 

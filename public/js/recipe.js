@@ -69,3 +69,17 @@ async function getFullRecipe(recipeId) {
   }
   return await fetch(targetUrl, config)
 }
+
+async function createFullRecipe(recipe) {
+  
+  const targetUrl = apiUrl + "/fullRecipe"
+  
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(recipe)
+  }
+  return await fetch(targetUrl, config)
+}
