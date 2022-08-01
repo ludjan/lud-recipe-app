@@ -245,7 +245,7 @@
 
             // steps
             for (let i=0; i<recipeStepInputs.length;i++) {
-              const { stepNumber, description } = recipeStepInputs
+              const { stepNumber, description } = recipeStepInputs[i]
               console.log(`Step number: ${stepNumber}`)
               console.log(`Description: ${description.value}`)
             }
