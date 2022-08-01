@@ -236,7 +236,8 @@
 
             // ingredients
             for (let i=0; i<recipeIngredientInputs.length;i++) {
-              console.log(recipeIngredientInputs[i].value)
+              const element = recipeIngredientInputs[i]
+              console.log(`Value: ${element.amountInput.value}`)
             }
 
             // steps
