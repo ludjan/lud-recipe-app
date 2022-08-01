@@ -16,21 +16,21 @@
           <button id="dummy-create">Dummy</button> 
 
           <div id="recipe-ingredient-feed">
-            <div>
+            <!-- <div>
               <label for="ingredients-select">Choose ingredient:</label>
               <select name="ingredient" id="ingredients-select"></select>
     
               <label for="unit-select">Choose unit:</label>
               <select name="unit" id="unit-select"></select>
-            </div> 
+            </div>  -->
           </div>
           <button id="add-ingredient-input">Add ingredient input</button>
 
           <div id="recipe-step-feed">
-            <div>
+            <!-- <div>
               <label for="step-description">Choose ingredient:</label>
               <input type="text" name="step" id="step-description"></select>
-            </div> 
+            </div>  -->
           </div>
           <button id="add-step-input">Add recipe input</button>
 
@@ -266,20 +266,16 @@
                   ingredientId = ingredient.id
                 }
               }
-
-
-
-              console.log(`${ingredientId} - ${ingredientName}`)
           
               const newRecipeIngredient = {
                 "ingredientId": ingredientId,
                 "quantity": amount,
                 "unit": unitName
               } 
-              console.log(newRecipeIngredient)
               newRecipeIngredients.push(newRecipeIngredient)
-
             }
+
+            console.log(newRecipeIngredients)
 
             // steps
             for (let i=0; i<recipeStepInputs.length;i++) {
