@@ -93,7 +93,7 @@
           function appendIngredientsToSelect(ingredients, select) {
             for (let i = 0; i < ingredients.length; i++) {
               var option = document.createElement('option')
-              console.log(`ingredient ${ingredients.[i].name}`)
+              console.log(`ingredient ${ingredients[i].name}`)
               option.value = ingredients[i].name
               option.innerHtml = ingredients[i].name
               select.appendChild(option)
