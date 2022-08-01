@@ -18,6 +18,9 @@
           <label for="ingredients-select">Choose ingredient:</label>
           <select name="ingredient" id="ingredients-select"></select>
 
+          <label for="unit-select">Choose unit:</label>
+          <select name="unit" id="unit-select"></select>
+
         </div>
           
         <script src="/static/js/recipe.js"></script>
@@ -30,6 +33,7 @@
           const saveRecipeForm = document.getElementById('save-recipe-form')
           const dummyCreateButton = document.getElementById('dummy-create')
           const ingredientsSelect = document.getElementById('ingredients-select')
+          const unitSelect = document.getElementById('unit-select')
 
           var data = '<%= data %>'
           var rId
@@ -104,12 +108,33 @@
             }
           }
 
+          function appendIngredientsToSelect(units, select) {
+            for (let i = 0; i < units.length; i++) {
+              // new select element
+              var option = document.createElement('option')
+              
+              console.log(`Unit: ${units[i].name}`)
+              
+              option.value = units[i].name
+              option.innerHTML = units[i].name
+              
+              select.appendChild(option)
+            }
+          }
+
           // var ingredients = []
           getIngredients()
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
                 appendIngredientsToSelect(data, ingredientsSelect)
+            })
+
+          getUnits()
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data)
+              appendUnitToSelect(data, unitSelect)
             })
 
           dummyCreateButton.addEventListener("click", () => {
