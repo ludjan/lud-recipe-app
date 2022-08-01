@@ -15,7 +15,7 @@
           </form>
           <button id="dummy-create">Dummy</button> 
 
-          <div id="ingredient-feed">
+          <div id="recipe-ingredient-feed">
             <div>
               <label for="ingredients-select">Choose ingredient:</label>
               <select name="ingredient" id="ingredients-select"></select>
@@ -40,7 +40,7 @@
           const ingredientsSelect = document.getElementById('ingredients-select')
           const unitSelect = document.getElementById('unit-select')
           const addIngredientInput = document.getElementById('add-ingredient-input')
-          const ingredientFeed = document.getElementById('ingredient-feed')
+          const recipeIngredientFeed = document.getElementById('recipe-ingredient-feed')
 
           var data = '<%= data %>'
           var rId
@@ -108,7 +108,8 @@
           })
 
           addIngredientInput.addEventListener("click", () => {
-            var html = document.createElement('div')
+            var newDiv = document.createElement('div')
+            newDiv.innerHTML = 
             `<div id="ingredient-input-${recipeIngredients.length}">
               <label for="ingredients-select-${recipeIngredients.length}">Choose ingredient:</label>
               <select name="ingredient" id="ingredients-select-${recipeIngredients.length}"></select>
@@ -116,7 +117,9 @@
               <label for="unit-select-${recipeIngredients.length}">Choose unit:</label>
               <select name="unit" id="unit-select-${recipeIngredients.length}"></select>
             </div>`
-            ingredientFeed.innerHTML = html
+
+            recipeIngredientsFeed.appendChild(newDiv)
+
           })
 
           function appendIngredientsToSelect(ingredients, select) {
