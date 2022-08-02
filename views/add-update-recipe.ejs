@@ -341,8 +341,8 @@
           const recipeStepInput = recipeStepInputArray[i];
           console.log(recipeStepInput);
 
-          const newDiv = document.createElement('div');
-          newDiv.innerHTML = recipeStepInput.innerHTML;
+          var newDiv = document.createElement('div');
+          newDiv.innerHTML = recipeStepInput.toString();
 
           recipeStepFeed.appendChild(newDiv);
         }
