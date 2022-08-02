@@ -30,12 +30,6 @@
 
       <br />
       <br />
-      <div id="recipe-step-feed-2"></div>
-      <br />
-      <button id="add-step-input-btn-2">Add recipe input 2</button>
-
-      <br />
-      <br />
       <button id="console-log-input">Console log input</button>
 
       <br />
@@ -59,12 +53,6 @@
       const recipeStepFeed = document.getElementById('recipe-step-feed');
       var recipeSteps = []; // actual recipeSteps
       var recipeStepInputArray = []; // the inputs
-
-      // steps
-      const addStepInputBtn2 = document.getElementById('add-step-input-btn-2');
-      const recipeStepFeed2 = document.getElementById('recipe-step-feed-2');
-      var recipeSteps2 = []; // actual recipeSteps
-      var recipeStepInputArray2 = []; // the inputs
 
       // ingredients
       const addIngredientInputBtn = document.getElementById(
@@ -337,11 +325,11 @@
         while (element.firstChild) {
           element.removeChild(element.firstChild);
         }
+        console.log('Clear element done');
       }
 
       function rerenderRecipeStepInputArray() {
         clearElement(recipeStepFeed);
-
         for (let i = 0; i < recipeStepInputArray.length; i++) {
           // add new html to the file
 
