@@ -346,10 +346,7 @@
           newRecipeStepInput.descriptionInput.value =
             recipeStepInput.descriptionInput.value;
 
-          var newDiv = document.createElement('div');
-          newDiv.innerHTML = recipeStepInput.toString();
-
-          recipeStepFeed.appendChild(newDiv);
+          recipeStepFeed.appendChild(newRecipeStepInput);
         }
         console.log('renderRecipeStepInputArray');
       }
