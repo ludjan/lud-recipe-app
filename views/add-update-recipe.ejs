@@ -51,7 +51,7 @@
       // steps
       const addStepInputBtn = document.getElementById('add-step-input-btn');
       const recipeStepFeed = document.getElementById('recipe-step-feed');
-      var recipeSteps = []; // actual recipeSteps
+      var recipeStepArray = []; // actual recipeSteps
       var recipeStepInputArray = []; // the inputs
 
       // ingredients
@@ -331,20 +331,17 @@
       function rerenderRecipeStepInputArray() {
         clearElement(recipeStepFeed);
 
-        console.log(
-          `Length of recipeStepInputArray ${recipeStepInputArray.length}`
-        );
+        console.log(`Length of recipeStepInputArray ${recipeStepArray.length}`);
 
-        for (let i = 0; i < recipeStepInputArray.length; i++) {
+        for (let i = 0; i < recipeStepArray.length; i++) {
           // add new html to the file
 
-          const recipeStepInput = recipeStepInputArray[i];
+          const recipeStep = recipeStepArray[i];
           console.log(recipeStepInput);
 
           const newRecipeStepInput = createAndAppendStepInput(i);
 
-          newRecipeStepInput.descriptionInput.value =
-            recipeStepInput.descriptionInput.value;
+          newRecipeStepInput.descriptionInput.value = recipeStep.description;
 
           recipeStepFeed.appendChild(newRecipeStepInput);
         }
@@ -528,6 +525,8 @@
             console.log(data.ingredients);
             loadIngredientInputs(data.ingredients);
             loadStepInputs(data.steps);
+
+            recipeStepArray = data.steps;
           });
       }
     </script>
