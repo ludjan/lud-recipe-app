@@ -153,15 +153,15 @@
         const element = document.getElementById(`ingredients-input${id}`)
         console.log(removedInput)
 
-        // while (removedInput.firstChild) {
-        //   removedInput.removeChild(removedInput.firstChild)
-        // }
-        // removedInput.remove()
-
-        while (element.firstChild) {
-          element.removeChild(element.firstChild)
+        while (removedInput.firstChild) {
+          removedInput.removeChild(removedInput.firstChild)
         }
-        element.remove()
+        removedInput.remove()
+
+        // while (element.firstChild) {
+        //   element.removeChild(element.firstChild)
+        // }
+        // element.remove()
       }
 
       function loadIngredientInputs(ingredientArray) {
