@@ -132,7 +132,8 @@
           })
 
           function loadIngredientInputs(ingredientArray) {
-            for (let i=0; i<recipeIngredientInputArray.length; i++) {
+            console.log(`loadIngredientInputs start`)
+            for (let i=0; i<ingredientArray.length; i++) {
               const recipeIngredientInput = createAndAppendIngredientInput(recipeIngredienInputArray.length)
               console.log(`Array: ${ingredientArray[i]}`)
             }
