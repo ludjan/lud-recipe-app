@@ -333,7 +333,9 @@
         renderRecipeStepInputArray();
       }
 
-      function renderRecipeStepInputArray() {
+      function rerenderRecipeStepInputArray() {
+        recipeStepFeed.remove();
+
         for (let i = 0; i < recipeStepInputArray.length; i++) {
           // add new html to the file
 
