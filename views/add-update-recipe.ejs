@@ -147,6 +147,12 @@
         // }
       })
 
+      function removeIngredientInput(id) {
+        // remove the recipeIngredientInput from array
+        const removedInput = recipeIngredientInputArray.splice(id, 1)
+        console.log(removedInput)
+      }
+
       function loadIngredientInputs(ingredientArray) {
         console.log(`loadIngredientInputs start`)
         console.log(ingredientArray)
@@ -237,6 +243,8 @@
 
               <label for="unit-select-${inputNumber}">Choose unit:</label>
               <select name="unit" id="unit-select-${inputNumber}"></select>
+
+              <button onClick="removeIngredientInput(${inputNumber}">Remove<button>
             </div>`
 
         // add new html to the file
