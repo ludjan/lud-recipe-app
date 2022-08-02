@@ -301,23 +301,23 @@
           stepNumber: stepNumber,
           descriptionInput: stepDescriptionInput,
         };
-        recipeStepInputArray.push(recipeStepInput);
+        // recipeStepInputArray.push(recipeStepInput);
 
         return recipeStepInput;
       }
 
       function moveStepInputUp(id) {
         // check it's a valid id
-        if (id <= 0 || id >= recipeStepInputArray.length) return;
+        if (id <= 0 || id >= recipeStepArray.length) return;
 
-        console.log(recipeStepInputArray);
+        console.log(recipeStepArray);
 
         // swap places in input and ingredient array
-        const tmp = recipeStepInputArray[id];
-        recipeStepInputArray[id] = recipeStepInputArray[id - 1];
-        recipeStepInputArray[id - 1] = tmp;
+        const tmp = recipeStepArray[id];
+        recipeStepArray[id] = recipeStepArray[id - 1];
+        recipeStepArray[id - 1] = tmp;
 
-        console.log(recipeStepInputArray);
+        console.log(recipeStepArray);
         rerenderRecipeStepInputArray();
       }
 
@@ -445,8 +445,6 @@
           // console.log(`Description: ${stepDescription}`)
           newRecipeStepArray.push(newRecipeStep);
         }
-
-        // hei
 
         newRecipe.ingredients = newRecipeIngredientArray;
         newRecipe.steps = newRecipeStepArray;
