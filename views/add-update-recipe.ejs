@@ -130,16 +130,6 @@
             // }
           })
 
-
-          function renderIngredients(list) {
-                var ingredientsHtml = ""
-                for (let i=0; i < list.length; i++) {
-                    ingredientsHtml += `<p>${list[i].ingredient} ${list[i].quantity} ${list[i].unit}</p>`
-                }
-                ingredientList.innerHTML = ingredientsHtml
-                console.log("Rendered ingredients")
-            }
-
           function loadIngredientInputs(ingredientArray) {
             for (let i=0; i<recipeIngredienInputArray.length; i++) {
               const recipeIngredientInput = createAndAppendIngredientInput(recipeIngredienInputArray.length)
@@ -386,6 +376,7 @@
 
           // if new entry, then rId is set to -1
           if (data != -1) {
+            console.log(`About to get full recipe with id ${data}`)
             getFullRecipe(data)
                 .then((response) => response.json())
                 .then((data) => {
