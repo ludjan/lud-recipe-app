@@ -336,7 +336,11 @@
       function renderRecipeStepInputArray() {
         for (let i = 0; i < recipeStepInputArray.length; i++) {
           // add new html to the file
-          recipeStepFeed.appendChild(recipeStepInputArray[i][0]);
+
+          recipeStepInput = recipeStepInputArray[i];
+          console.log(recipeStepInput.inneHTML);
+
+          // recipeStepFeed.appendChild(recipeStepInputArray[i][0]);
         }
         console.log('renderRecipeStepInputArray');
       }
