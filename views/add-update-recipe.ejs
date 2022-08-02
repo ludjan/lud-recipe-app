@@ -333,8 +333,14 @@
         rerenderRecipeStepInputArray();
       }
 
+      function clearElement(element) {
+        while (element.firstChild) {
+          element.removeChild(element.firstChild);
+        }
+      }
+
       function rerenderRecipeStepInputArray() {
-        recipeStepFeed.remove();
+        clearElement(recipeStepFeed);
 
         for (let i = 0; i < recipeStepInputArray.length; i++) {
           // add new html to the file
