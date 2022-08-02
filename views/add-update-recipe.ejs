@@ -67,7 +67,8 @@
           const consoleLogInputBtn = document.getElementById('console-log-input')
           const dummyCreateButton = document.getElementById('dummy-create')
 
-          var data = '<%= data %>'
+          // var data = '<%= data %>'
+          var data = '<%- JSON.stringify(data) %>'
           var rId
 
           // are set by fetchh
