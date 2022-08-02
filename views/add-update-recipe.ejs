@@ -140,11 +140,11 @@
               const row = ingredientArray[i]
 
               console.log(`Looking at row ${row}`)
-              console.log(`Array ingredient: ${ingredientArray[i].name}`)
+              console.log(`Array ingredient: ${ingredientArray[i].ingredient}`)
               console.log(`Array quantity: ${ingredientArray[i].quantity}`)
               console.log(`Array unit: ${ingredientArray[i].unit}`)
 
-              setValueInSelectorIfExists(recipeIngredientInput.ingredientSelect, ingredientArray[i].name)
+              setValueInSelectorIfExists(recipeIngredientInput.ingredientSelect, ingredientArray[i].ingredient)
               recipeIngredientInput.amountInput.value = ingredientArray[i].quantity
               setValueInSelectorIfExists(recipeIngredientInput.ingredientUnit, ingredientArray[i].unit)
 
