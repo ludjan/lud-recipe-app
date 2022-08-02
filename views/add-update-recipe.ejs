@@ -136,6 +136,9 @@
             for (let i=0; i<ingredientArray.length; i++) {
               const recipeIngredientInput = createAndAppendIngredientInput(recipeIngredientInputArray.length)
               console.log(`Array: ${ingredientArray[i]}`)
+
+              recipeIngredientInput.amountInput.value = ingredientArray[i].quantity
+
             }
           }
 
