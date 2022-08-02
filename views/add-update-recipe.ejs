@@ -330,6 +330,11 @@
 
       function rerenderRecipeStepInputArray() {
         clearElement(recipeStepFeed);
+
+        console.log(
+          `Length of recipeStepInputArray ${recipeStepInputArray.length}`
+        );
+
         for (let i = 0; i < recipeStepInputArray.length; i++) {
           // add new html to the file
 
