@@ -30,6 +30,12 @@
 
       <br />
       <br />
+      <div id="recipe-step-feed-2"></div>
+      <br />
+      <button id="add-step-input-btn-2">Add recipe input 2</button>
+
+      <br />
+      <br />
       <button id="console-log-input">Console log input</button>
 
       <br />
@@ -54,6 +60,12 @@
       var recipeSteps = []; // actual recipeSteps
       var recipeStepInputArray = []; // the inputs
 
+      // steps
+      const addStepInputBtn2 = document.getElementById('add-step-input-btn-2');
+      const recipeStepFeed2 = document.getElementById('recipe-step-feed-2');
+      var recipeSteps2 = []; // actual recipeSteps
+      var recipeStepInputArray2 = []; // the inputs
+
       // ingredients
       const addIngredientInputBtn = document.getElementById(
         'add-ingredient-input-btn'
@@ -65,7 +77,6 @@
       var recipeIngredientInputArray = []; // the inputs
 
       // for testing
-
       const consoleLogInputBtn = document.getElementById('console-log-input');
       const dummyCreateButton = document.getElementById('dummy-create');
 
@@ -194,59 +205,6 @@
         console.log(`loadIngredientInputs end`);
       }
 
-      function loadStepInputs(stepArray) {
-        console.log(stepArray);
-        for (let i = 0; i < stepArray.length; i++) {
-          const row = stepArray[i];
-
-          const recipeStepInput = createAndAppendStepInput(
-            recipeStepInputArray.length
-          );
-
-          console.log(`Looking at row ${row}`);
-          console.log(`Array ${i + 1} ${row.description}`);
-
-          recipeStepInput.descriptionInput.value = row.description;
-        }
-      }
-
-      function setValueInSelectorIfExists(selector, value) {
-        var element = 0;
-        for (let i = 0; i < selector.options.length; i++) {
-          if (selector.options[i].value == value) {
-            element = i;
-            break;
-          }
-        }
-        selector.selectedIndex = element;
-      }
-
-      function createAndAppendStepInput(stepNumber) {
-        // create the html element
-        var newDiv = document.createElement('div');
-        newDiv.innerHTML = `<div>
-              <label for="step-description-${stepNumber}">${stepNumber} - Step description:</label>
-              <input type="text" name="step" id="step-description-${stepNumber}"></select>
-            </div>`;
-
-        // add new html to the file
-        recipeStepFeed.appendChild(newDiv);
-
-        // find the newly added id
-        const stepDescriptionInput = document.getElementById(
-          `step-description-${stepNumber}`
-        );
-
-        // add it to global list of step inputs
-        const recipeStepInput = {
-          stepNumber: stepNumber,
-          descriptionInput: stepDescriptionInput,
-        };
-        recipeStepInputArray.push(recipeStepInput);
-
-        return recipeStepInput;
-      }
-
       function createAndAppendIngredientInput(inputNumber) {
         // create the html element
         var newDiv = document.createElement('div');
@@ -295,6 +253,59 @@
         return recipeIngredientInput;
       }
 
+      function setValueInSelectorIfExists(selector, value) {
+        var element = 0;
+        for (let i = 0; i < selector.options.length; i++) {
+          if (selector.options[i].value == value) {
+            element = i;
+            break;
+          }
+        }
+        selector.selectedIndex = element;
+      }
+
+      function loadStepInputs(stepArray) {
+        console.log(stepArray);
+        for (let i = 0; i < stepArray.length; i++) {
+          const row = stepArray[i];
+
+          const recipeStepInput = createAndAppendStepInput(
+            recipeStepInputArray.length
+          );
+
+          console.log(`Looking at row ${row}`);
+          console.log(`Array ${i + 1} ${row.description}`);
+
+          recipeStepInput.descriptionInput.value = row.description;
+        }
+      }
+
+      function createAndAppendStepInput(stepNumber) {
+        // create the html element
+        var newDiv = document.createElement('div');
+        newDiv.innerHTML = `<div>
+              <label for="step-description-${stepNumber}">${stepNumber} - Step description:</label>
+              <input type="text" name="step" id="step-description-${stepNumber}"></select>
+            </div>`;
+
+        // add new html to the file
+        recipeStepFeed.appendChild(newDiv);
+
+        // find the newly added id
+        const stepDescriptionInput = document.getElementById(
+          `step-description-${stepNumber}`
+        );
+
+        // add it to global list of step inputs
+        const recipeStepInput = {
+          stepNumber: stepNumber,
+          descriptionInput: stepDescriptionInput,
+        };
+        recipeStepInputArray.push(recipeStepInput);
+
+        return recipeStepInput;
+      }
+
       addIngredientInputBtn.addEventListener('click', () => {
         const nextIngredientInputId = recipeIngredientInputArray.length;
         createAndAppendIngredientInput(nextIngredientInputId);
@@ -309,7 +320,7 @@
         console.log(`Set values to ingredients selector`);
         for (let i = 0; i < ingredients.length; i++) {
           var option = document.createElement('option');
-          console.log(`ingredient ${ingredients[i].name}`);
+          // console.log(`ingredient ${ingredients[i].name}`);
           option.value = ingredients[i].name;
           option.innerHTML = ingredients[i].name;
           select.appendChild(option);
@@ -320,7 +331,7 @@
         for (let i = 0; i < units.length; i++) {
           // new select element
           var option = document.createElement('option');
-          console.log(`Unit: ${units[i].name}`);
+          // console.log(`Unit: ${units[i].name}`);
           option.value = units[i].name;
           option.innerHTML = units[i].name;
           select.appendChild(option);
@@ -466,12 +477,15 @@
         var id = data.id;
         console.log(`Id: ${id}`);
         // getFullRecipe(id)//
-        getFullRecipe(1)
+        getFullRecipe(1) // hard coded value for testing
           .then((response) => response.json())
           .then((data) => {
             console.log(data.ingredients);
             loadIngredientInputs(data.ingredients);
             loadStepInputs(data.steps);
+
+            recipeSteps2 = data.steps;
+            renderSteps2();
           });
       }
     </script>
