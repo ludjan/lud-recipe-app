@@ -151,6 +151,8 @@
         // remove the recipeIngredientInput from array
         const removedInput = recipeIngredientInputArray.splice(id, 1)
         console.log(removedInput)
+
+        removedInput.unitSelect.remove()
       }
 
       function loadIngredientInputs(ingredientArray) {
