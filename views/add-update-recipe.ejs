@@ -152,7 +152,7 @@
         const removedInput = recipeIngredientInputArray.splice(id, 1)
         console.log(removedInput)
 
-        removedInput.unitSelect.remove()
+        removedInput[0].unitSelect.remove()
         removedInput.amountInput.remove()
         removedInput.ingredientSelect.remove()
       }
