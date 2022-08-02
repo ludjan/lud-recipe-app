@@ -150,12 +150,18 @@
       function removeIngredientInput(id) {
         // remove the recipeIngredientInput from array
         const removedInput = recipeIngredientInputArray.splice(id, 1)
+        const element = document.getElementById(`ingredients-input${id}`)
         console.log(removedInput)
 
-        while (removedInput.firstChild) {
-          removedInput.removeChild(removedInput.firstChild)
+        // while (removedInput.firstChild) {
+        //   removedInput.removeChild(removedInput.firstChild)
+        // }
+        // removedInput.remove()
+
+        while (element.firstChild) {
+          element.removeChild(element.firstChild)
         }
-        removedInput.remove()
+        element.remove()
       }
 
       function loadIngredientInputs(ingredientArray) {
