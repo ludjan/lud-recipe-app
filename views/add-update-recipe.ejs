@@ -334,10 +334,11 @@
       }
 
       function renderRecipeStepInputArray() {
-        for (let i = 0; i < recipeStepInputArray; i++) {
+        for (let i = 0; i < recipeStepInputArray.length; i++) {
           // add new html to the file
           recipeStepFeed.appendChild(recipeStepInputArray[i]);
         }
+        console.log('renderRecipeStepInputArray');
       }
 
       addIngredientInputBtn.addEventListener('click', () => {
