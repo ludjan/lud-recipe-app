@@ -264,6 +264,17 @@
         selector.selectedIndex = element;
       }
 
+      // function renderStepInputs2() {
+      //   let html = '';
+      //   for (let i = 0; i < recipeSteps2.length; i++) {
+      //     html += `<div id="step-input-${stepNumber}">
+      //               <label for="step-description-${stepNumber}">${stepNumber} - Step description:</label>
+      //               <input type="text" name="step" id="step-description-${stepNumber}"></select>
+      //               <button onclick="removeStep(${stepNumber})">Remove step</button>
+      //             </div>`;
+      //   }
+      // }
+
       function loadStepInputs(stepArray) {
         console.log(stepArray);
         for (let i = 0; i < stepArray.length; i++) {
@@ -286,6 +297,7 @@
         newDiv.innerHTML = `<div>
               <label for="step-description-${stepNumber}">${stepNumber} - Step description:</label>
               <input type="text" name="step" id="step-description-${stepNumber}"></select>
+              <button onclick="moveStepInputUp(${stepNumber})">Move step up</button>
             </div>`;
 
         // add new html to the file
@@ -304,6 +316,20 @@
         recipeStepInputArray.push(recipeStepInput);
 
         return recipeStepInput;
+      }
+
+      function moveStepInputUp(id) {
+        console.log(recipeStepInputArray);
+
+        // check it's a valid id
+        if (id <= 0 && id <= recipeStepsInputArray.length - 1) return;
+
+        // swap places in input and ingredient array
+        const tmp = recipeStepInputArray[id];
+        recipeStepInputArray[id] = recipeStepInputArray[id - 1];
+        recipeStepInputArray[id - 1] = tmp;
+
+        console.log(recipeStepInputArray);
       }
 
       addIngredientInputBtn.addEventListener('click', () => {
@@ -485,7 +511,7 @@
             loadStepInputs(data.steps);
 
             recipeSteps2 = data.steps;
-            renderSteps2();
+            renderStepInputs2();
           });
       }
     </script>
