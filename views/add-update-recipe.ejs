@@ -341,6 +341,11 @@
           const recipeStepInput = recipeStepInputArray[i];
           console.log(recipeStepInput);
 
+          const newRecipeStepInput = createAndAppendStepInput(i);
+
+          newRecipeStepInput.descriptionInput.value =
+            recipeStepInput.descriptionInput.value;
+
           var newDiv = document.createElement('div');
           newDiv.innerHTML = recipeStepInput.toString();
 
