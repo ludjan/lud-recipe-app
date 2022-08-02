@@ -319,10 +319,10 @@
       }
 
       function moveStepInputUp(id) {
-        console.log(recipeStepInputArray);
-
         // check it's a valid id
         if (id <= 0 || id <= recipeStepInputArray.length - 1) return;
+
+        console.log(recipeStepInputArray);
 
         // swap places in input and ingredient array
         const tmp = recipeStepInputArray[id];
