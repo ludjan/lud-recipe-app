@@ -231,6 +231,7 @@
           })
 
           function appendIngredientsToSelect(ingredients, select) {
+            console.log(`Set values to ingredients selector`)
             for (let i = 0; i < ingredients.length; i++) {
               var option = document.createElement('option')
               console.log(`ingredient ${ingredients[i].name}`)
