@@ -1,0 +1,9 @@
+{
+    "prettier.semi": false,
+    "prettier.trailingComma": "es5",
+    "prettier.singleQuote": true,
+    "less.completion.completePropertyWithSemicolon": false,
+    "javascript.format.semicolons": "ignore",
+    "scss.completion.completePropertyWithSemicolon": false,
+    "css.completion.completePropertyWithSemicolon": false
+}

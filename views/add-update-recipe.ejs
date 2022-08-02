@@ -69,7 +69,7 @@
       const consoleLogInputBtn = document.getElementById('console-log-input')
       const dummyCreateButton = document.getElementById('dummy-create')
 
-      // var data = '<%= data %>'
+      // var data = <%= data %>
       var data = '<%- JSON.stringify(data) %>'
       var rId
 
@@ -93,11 +93,13 @@
           // appendUnitToSelect(data, unitSelect)
         })
 
-      console.log(`data: ${data}`)('<% if (data != -1) { %>')
+      console.log(`data: ${data}`)
+      ;('<% if (data != -1) { %>')
       rId = '<%= data %>'
       recipeHeading.innerText = 'Edit recipe'
       recipeNameInput.value = '<%= data.name %>'
-      recipeDescriptionInput.value = '<%= data.description %>'('<%}%>')
+      recipeDescriptionInput.value = '<%= data.description %>'
+      ;('<%}%>')
 
       saveRecipeForm.addEventListener('submit', () => {
         const recipeName = recipeNameInput.value
