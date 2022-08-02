@@ -331,7 +331,7 @@
       function rerenderRecipeStepInputArray() {
         clearElement(recipeStepFeed);
 
-        console.log(`Length of recipeStepInputArray ${recipeStepArray.length}`);
+        console.log(`Length of recipeStepArray ${recipeStepArray.length}`);
 
         for (let i = 0; i < recipeStepArray.length; i++) {
           // add new html to the file
@@ -343,7 +343,7 @@
 
           newRecipeStepInput.descriptionInput.value = recipeStep.description;
 
-          recipeStepFeed.appendChild(newRecipeStepInput);
+          // recipeStepFeed.appendChild(newRecipeStepInput);
         }
         console.log('renderRecipeStepInputArray');
       }
