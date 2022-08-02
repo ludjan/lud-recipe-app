@@ -1,230 +1,240 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Recipe - Add or edit recipe</title>
-    </head>
-    <body>
-        <div>
-          <h1 id="recipe-heading">New recipe</h1>
-          <form id="save-recipe-form" onsubmit="return false">
-            <label for="recipe-name">Recipe name</label><br>
-            <input id="recipe-name" type="text" name="hest"><br>
-            <label for="recipe-description">Recipe Description</label><br>
-            <input id="recipe-description" type="text" name="hist">
-            <br>
-            <br>
-            <input type="submit" id="save-recipe-btn" value="Submit">
-          </form>
-          
-          <br>
-          <br>
-          <div id="recipe-ingredient-feed"></div>
-          <br>
-          <button id="add-ingredient-input-btn">Add ingredient input</button>
-          
-          <br>
-          <br>
-          <div id="recipe-step-feed">
-          </div>
-          <br>
-          <button id="add-step-input-btn">Add recipe input</button>
-          
-          <br>
-          <br>
-          <button id="console-log-input">Console log input</button>
-          
-          <br>
-          <br>
-          <button id="dummy-create">Dummy</button> 
+  <head>
+    <title>Recipe - Add or edit recipe</title>
+  </head>
+  <body>
+    <div>
+      <h1 id="recipe-heading">New recipe</h1>
+      <form id="save-recipe-form" onsubmit="return false">
+        <label for="recipe-name">Recipe name</label><br />
+        <input id="recipe-name" type="text" name="hest" /><br />
+        <label for="recipe-description">Recipe Description</label><br />
+        <input id="recipe-description" type="text" name="hist" />
+        <br />
+        <br />
+        <input type="submit" id="save-recipe-btn" value="Submit" />
+      </form>
 
-          <div id="recipeId"></div>
+      <br />
+      <br />
+      <div id="recipe-ingredient-feed"></div>
+      <br />
+      <button id="add-ingredient-input-btn">Add ingredient input</button>
 
-        </div>
-          
-        <script src="/static/js/recipe.js"></script>
-        <script src="/static/js/check_input.js"></script>
-        <script type="text/javascript">
+      <br />
+      <br />
+      <div id="recipe-step-feed"></div>
+      <br />
+      <button id="add-step-input-btn">Add recipe input</button>
 
-          const recipeHeading = document.getElementById('recipe-heading')
-          const recipeNameInput = document.getElementById('recipe-name')
-          const recipeDescriptionInput = document.getElementById('recipe-description')
-          const saveRecipeForm = document.getElementById('save-recipe-form')
-          
-          // steps
-          const addStepInputBtn = document.getElementById('add-step-input-btn')
-          const recipeStepFeed = document.getElementById('recipe-step-feed')
-          var recipeSteps = [] // actual recipeSteps
-          var recipeStepInputArray = [] // the inputs
-          
-          // ingredients
-          const addIngredientInputBtn = document.getElementById('add-ingredient-input-btn')
-          const recipeIngredientsFeed = document.getElementById('recipe-ingredient-feed')
-          var recipeIngredients = [] // actual recipeIngredients
-          var recipeIngredientInputArray = [] // the inputs
-          
-          // for testing
-          
-          const consoleLogInputBtn = document.getElementById('console-log-input')
-          const dummyCreateButton = document.getElementById('dummy-create')
+      <br />
+      <br />
+      <button id="console-log-input">Console log input</button>
 
-          // var data = '<%= data %>'
-          var data = '<%- JSON.stringify(data) %>'
-          var rId
+      <br />
+      <br />
+      <button id="dummy-create">Dummy</button>
 
-          // are set by fetchhh
-          var ingredients = []
-          var units = []
+      <div id="recipeId"></div>
+    </div>
 
-          getIngredients()
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
-                ingredients = data
-                // appendIngredientsToSelect(data, ingredientsSelect)
-            })
+    <script src="/static/js/recipe.js"></script>
+    <script src="/static/js/check_input.js"></script>
+    <script type="text/javascript">
+      const recipeHeading = document.getElementById("recipe-heading");
+      const recipeNameInput = document.getElementById("recipe-name");
+      const recipeDescriptionInput =
+        document.getElementById("recipe-description");
+      const saveRecipeForm = document.getElementById("save-recipe-form");
 
-          getUnits()
-            .then((response) => response.json())
-            .then((data) => {
-              console.log(data)
-              units = data
-              // appendUnitToSelect(data, unitSelect)
-            })
+      // steps
+      const addStepInputBtn = document.getElementById("add-step-input-btn");
+      const recipeStepFeed = document.getElementById("recipe-step-feed");
+      var recipeSteps = []; // actual recipeSteps
+      var recipeStepInputArray = []; // the inputs
 
+      // ingredients
+      const addIngredientInputBtn = document.getElementById(
+        "add-ingredient-input-btn"
+      );
+      const recipeIngredientsFeed = document.getElementById(
+        "recipe-ingredient-feed"
+      );
+      var recipeIngredients = []; // actual recipeIngredients
+      var recipeIngredientInputArray = []; // the inputs
 
-          console.log(`data: ${data}`)
+      // for testing
 
-          '<% if (data != -1) { %>'
-            rId = '<%= data %>'
-            recipeHeading.innerText = "Edit recipe"
-            recipeNameInput.value = '<%= data.name %>'
-            recipeDescriptionInput.value = '<%= data.description %>'
-          '<%}%>'
+      const consoleLogInputBtn = document.getElementById("console-log-input");
+      const dummyCreateButton = document.getElementById("dummy-create");
 
-          saveRecipeForm.addEventListener("submit", () => {
-            
-            const recipeName = recipeNameInput.value
-            const recipeDescription = recipeDescriptionInput.value
+      // var data = '<%= data %>'
+      var data = "<%- JSON.stringify(data) %>";
+      var rId;
 
-            if (!isAlphaNumeric(recipeName)) {
-              return alert(`Name '${recipeName}' is not alphanumeric`)
-            } 
-            if (!isAlphaNumeric(recipeDescription)) {
-              return alert(`Description '${recipeDescription}' is not alphanumeric`)
-            }
+      // are set by fetchhh
+      var ingredients = [];
+      var units = [];
 
-            // // create the new entry
-            // const newRecipe = {
-            //   name: recipeNameInput.value,
-            //   description: recipeDescriptionInput.value
-            // } 
-            // console.log(newRecipe)
+      getIngredients()
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          ingredients = data;
+          // appendIngredientsToSelect(data, ingredientsSelect)
+        });
 
-            // console.log(`Data = ${data}`)
+      getUnits()
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          units = data;
+          // appendUnitToSelect(data, unitSelect)
+        });
 
-            // if (rId == null) {
+      console.log(`data: ${data}`);
 
-            //   // async add, then re-render
-            //   addRecipe(newRecipe).then(response => {
-            //     if (!response.ok) {
-            //       const errorMessage = `Error ${response.status} - ${response.statusText}`
-            //       console.log(errorMessage)
-            //     } else {
-            //       window.location.pathname = ('/..') // navigates user back to main page
-            //     }
-            //   })
-            
-            // } else {
-            //   console.log(`About to update recipe with id ${rId}`)
-            //   updateRecipe(newRecipe, rId).then(response => {
-            //     if (!response.ok) {
-            //       const errorMessage = `Error ${response.status} - ${response.statusText}`
-            //       console.log(errorMessage)
-            //       return alert(errorMessage)
-            //     } else {
-            //       window.location.pathname = (`/../recipes/${rId}`)
-            //     }
-            //   })
-            // }
-          })
+      ("<% if (data != -1) { %>");
+      rId = "<%= data %>";
+      recipeHeading.innerText = "Edit recipe";
+      recipeNameInput.value = "<%= data.name %>";
+      recipeDescriptionInput.value = "<%= data.description %>";
+      ("<%}%>");
 
-          function loadIngredientInputs(ingredientArray) {
-            console.log(`loadIngredientInputs start`)
-            console.log(ingredientArray)
-            for (let i=0; i<ingredientArray.length; i++) {
-              const recipeIngredientInput = createAndAppendIngredientInput(recipeIngredientInputArray.length)
-              
-              const row = ingredientArray[i]
+      saveRecipeForm.addEventListener("submit", () => {
+        const recipeName = recipeNameInput.value;
+        const recipeDescription = recipeDescriptionInput.value;
 
-              console.log(`Looking at row ${row}`)
-              console.log(`Array ingredient: ${row.ingredient}`)
-              console.log(`Array quantity: ${row.quantity}`)
-              console.log(`Array unit: ${row.unit}`)
+        if (!isAlphaNumeric(recipeName)) {
+          return alert(`Name '${recipeName}' is not alphanumeric`);
+        }
+        if (!isAlphaNumeric(recipeDescription)) {
+          return alert(
+            `Description '${recipeDescription}' is not alphanumeric`
+          );
+        }
 
-              setValueInSelectorIfExists(recipeIngredientInput.ingredientSelect, row.ingredient)
-              recipeIngredientInput.amountInput.value = row.quantity
-              setValueInSelectorIfExists(recipeIngredientInput.unitSelect, row.unit)
-            }
-            console.log(`loadIngredientInputs end`)
+        // // create the new entry
+        // const newRecipe = {
+        //   name: recipeNameInput.value,
+        //   description: recipeDescriptionInput.value
+        // }
+        // console.log(newRecipe)
+
+        // console.log(`Data = ${data}`)
+
+        // if (rId == null) {
+
+        //   // async add, then re-render
+        //   addRecipe(newRecipe).then(response => {
+        //     if (!response.ok) {
+        //       const errorMessage = `Error ${response.status} - ${response.statusText}`
+        //       console.log(errorMessage)
+        //     } else {
+        //       window.location.pathname = ('/..') // navigates user back to main page
+        //     }
+        //   })
+
+        // } else {
+        //   console.log(`About to update recipe with id ${rId}`)
+        //   updateRecipe(newRecipe, rId).then(response => {
+        //     if (!response.ok) {
+        //       const errorMessage = `Error ${response.status} - ${response.statusText}`
+        //       console.log(errorMessage)
+        //       return alert(errorMessage)
+        //     } else {
+        //       window.location.pathname = (`/../recipes/${rId}`)
+        //     }
+        //   })
+        // }
+      });
+
+      function loadIngredientInputs(ingredientArray) {
+        console.log(`loadIngredientInputs start`);
+        console.log(ingredientArray);
+        for (let i = 0; i < ingredientArray.length; i++) {
+          const recipeIngredientInput = createAndAppendIngredientInput(
+            recipeIngredientInputArray.length
+          );
+
+          const row = ingredientArray[i];
+
+          console.log(`Looking at row ${row}`);
+          console.log(`Array ingredient: ${row.ingredient}`);
+          console.log(`Array quantity: ${row.quantity}`);
+          console.log(`Array unit: ${row.unit}`);
+
+          setValueInSelectorIfExists(
+            recipeIngredientInput.ingredientSelect,
+            row.ingredient
+          );
+          recipeIngredientInput.amountInput.value = row.quantity;
+          setValueInSelectorIfExists(
+            recipeIngredientInput.unitSelect,
+            row.unit
+          );
+        }
+        console.log(`loadIngredientInputs end`);
+      }
+
+      function loadStepInputs(stepArray) {
+        console.log(stepArray);
+        for (let i = 0; i < stepArray.length; i++) {
+          const row = stepArray[i];
+
+          const recipeStepInput = createAndAppendStepInput(
+            recipeStepInputArray.length
+          );
+
+          console.log(`Looking at row ${row}`);
+          console.log(`Array ${i + 1} ${row.description}`);
+
+          recipeStepInput.descriptionInput.value = row.description;
+        }
+      }
+
+      function setValueInSelectorIfExists(selector, value) {
+        var element = 0;
+        for (let i = 0; i < selector.options.length; i++) {
+          if (selector.options[i].value == value) {
+            element = i;
+            break;
           }
+        }
+        selector.selectedIndex = element;
+      }
 
-          function loadStepInputs(stepArray) {
-            console.log(stepArray)
-            for (let i=0; i<stepArray.length;i++) {
-              const row = stepArray[i]
-
-              const recipeStepInput = createAndAppendStepInput()
-
-              console.log(`Looking at row ${row}`)
-              console.log(`Array ${i+1} ${row.description}`)
-
-              recipeStepInput.descriptionInput.value = row.description
-            }
-          }
-
-          function setValueInSelectorIfExists(selector, value) {
-            var element = 0
-            for (let i=0; i<selector.options.length; i++) {
-              if (selector.options[i].value == value) {
-                element = i
-                break
-              }
-            }
-            selector.selectedIndex = element
-          }
-
-          function createAndAppendStepInput() {
-            
-            // create the html element
-            var newDiv = document.createElement('div')
-            newDiv.innerHTML = 
-            `<div>
+      function createAndAppendStepInput(stepNumber) {
+        // create the html element
+        var newDiv = document.createElement("div");
+        newDiv.innerHTML = `<div>
               <label for="step-description-${stepNumber}">${stepNumber} - Step description:</label>
               <input type="text" name="step" id="step-description-${stepNumber}"></select>
-            </div>`
-            
-            // add new html to the file
-            recipeStepFeed.appendChild(newDiv)
+            </div>`;
 
-            // find the newly added id
-            const stepDescriptionInput = document.getElementById(`step-description-${stepNumber}`)
+        // add new html to the file
+        recipeStepFeed.appendChild(newDiv);
 
-            // add it to global list of step inputs
-            const recipeStepInput = {
-              stepNumber: stepNumber,
-              descriptionInput: stepDescriptionInput
-            }
-            recipeStepInputArray.push(recipeStepInput)
+        // find the newly added id
+        const stepDescriptionInput = document.getElementById(
+          `step-description-${stepNumber}`
+        );
 
-            return recipeStepInput
-          }
+        // add it to global list of step inputs
+        const recipeStepInput = {
+          stepNumber: stepNumber,
+          descriptionInput: stepDescriptionInput,
+        };
+        recipeStepInputArray.push(recipeStepInput);
 
-          function createAndAppendIngredientInput(inputNumber) {
+        return recipeStepInput;
+      }
 
-            // create the html element
-            var newDiv = document.createElement('div')
-            newDiv.innerHTML = 
-            `<div id="ingredient-input-${inputNumber}">
+      function createAndAppendIngredientInput(inputNumber) {
+        // create the html element
+        var newDiv = document.createElement("div");
+        newDiv.innerHTML = `<div id="ingredient-input-${inputNumber}">
               <label for="ingredients-select-${inputNumber}">Choose ingredient:</label>
               <select name="ingredient" id="ingredients-select-${inputNumber}"></select>
     
@@ -233,211 +243,219 @@
 
               <label for="unit-select-${inputNumber}">Choose unit:</label>
               <select name="unit" id="unit-select-${inputNumber}"></select>
-            </div>`
+            </div>`;
 
-            // add new html to the file
-            recipeIngredientsFeed.appendChild(newDiv)
+        // add new html to the file
+        recipeIngredientsFeed.appendChild(newDiv);
 
-            // find the newly added ids
-            const ingredientSelect = document.getElementById(`ingredients-select-${inputNumber}`)
-            const unitSelect = document.getElementById(`unit-select-${inputNumber}`)
-            const amountInput = document.getElementById(`ingredients-amount-${inputNumber}`)
-            
-            // add it to the global input list
-            const recipeIngredientInput = {
-              ingredientSelect: ingredientSelect,
-              amountInput: amountInput,
-              unitSelect: unitSelect  
+        // find the newly added ids
+        const ingredientSelect = document.getElementById(
+          `ingredients-select-${inputNumber}`
+        );
+        const unitSelect = document.getElementById(
+          `unit-select-${inputNumber}`
+        );
+        const amountInput = document.getElementById(
+          `ingredients-amount-${inputNumber}`
+        );
+
+        // add it to the global input list
+        const recipeIngredientInput = {
+          ingredientSelect: ingredientSelect,
+          amountInput: amountInput,
+          unitSelect: unitSelect,
+        };
+        recipeIngredientInputArray.push(recipeIngredientInput);
+
+        // set the values for the selectors
+        appendIngredientsToSelect(
+          ingredients,
+          recipeIngredientInput.ingredientSelect
+        );
+        appendUnitToSelect(units, recipeIngredientInput.unitSelect);
+
+        return recipeIngredientInput;
+      }
+
+      addIngredientInputBtn.addEventListener("click", () => {
+        const nextIngredientInputId = recipeIngredientInputArray.length;
+        createAndAppendIngredientInput(nextIngredientInputId);
+      });
+
+      addStepInputBtn.addEventListener("click", () => {
+        const stepNumber = recipeStepInputArray.length;
+        createAndAppendStepInput(stepNumber);
+      });
+
+      function appendIngredientsToSelect(ingredients, select) {
+        console.log(`Set values to ingredients selector`);
+        for (let i = 0; i < ingredients.length; i++) {
+          var option = document.createElement("option");
+          console.log(`ingredient ${ingredients[i].name}`);
+          option.value = ingredients[i].name;
+          option.innerHTML = ingredients[i].name;
+          select.appendChild(option);
+        }
+      }
+
+      function appendUnitToSelect(units, select) {
+        for (let i = 0; i < units.length; i++) {
+          // new select element
+          var option = document.createElement("option");
+          console.log(`Unit: ${units[i].name}`);
+          option.value = units[i].name;
+          option.innerHTML = units[i].name;
+          select.appendChild(option);
+        }
+      }
+
+      consoleLogInputBtn.addEventListener("click", () => {
+        console.log(`Clicked!`);
+
+        console.log(`recipeIngredientInputArray ${recipeIngredientInputArray}`);
+
+        const newRecipe = {
+          recipe: {
+            name: recipeNameInput.value,
+            description: recipeDescriptionInput.value,
+            portions: 2,
+          },
+          ingredients: null,
+          steps: null,
+        };
+
+        var newRecipeIngredientArray = [];
+        var newRecipeStepArray = [];
+
+        // ingredients
+        for (let i = 0; i < recipeIngredientInputArray.length; i++) {
+          const { ingredientSelect, amountInput, unitSelect } =
+            recipeIngredientInputArray[i];
+          var ingredientName =
+            ingredientSelect.options[ingredientSelect.selectedIndex].text;
+          console.log(`Ingredient: ${ingredientName}`);
+          var amount = amountInput.value;
+          console.log(`Amount: ${amount}`);
+          var unitName = unitSelect.options[unitSelect.selectedIndex].text;
+          console.log(`Unit: ${unitName}`);
+
+          // must find the id of the selected ingredient for api call
+          var ingredientId;
+          for (let j = 0; j < ingredients.length; j++) {
+            const ingredient = ingredients[j];
+            if (ingredient.name == ingredientName) {
+              ingredientId = ingredient.id;
             }
-            recipeIngredientInputArray.push(recipeIngredientInput)
-
-            // set the values for the selectors
-            appendIngredientsToSelect(ingredients, recipeIngredientInput.ingredientSelect)
-            appendUnitToSelect(units, recipeIngredientInput.unitSelect)
-
-            return recipeIngredientInput
           }
 
-          addIngredientInputBtn.addEventListener("click", () => {
-            const nextIngredientInputId = recipeIngredientInputArray.length
-            createAndAppendIngredientInput(nextIngredientInputId)
-          })
+          const newRecipeIngredient = {
+            ingredientId: ingredientId,
+            quantity: amount,
+            unit: unitName,
+          };
+          newRecipeIngredientArray.push(newRecipeIngredient);
+        }
 
-          addStepInputBtn.addEventListener("click", () => {
-            const stepNumber = recipeStepInputArray.length
-            createAndAppendStepInput(stepNumber)
-          })
+        console.log(newRecipeIngredientArray);
 
-          function appendIngredientsToSelect(ingredients, select) {
-            console.log(`Set values to ingredients selector`)
-            for (let i = 0; i < ingredients.length; i++) {
-              var option = document.createElement('option')
-              console.log(`ingredient ${ingredients[i].name}`)
-              option.value = ingredients[i].name
-              option.innerHTML = ingredients[i].name
-              select.appendChild(option)
-            }
+        // steps
+        var newRecipeStepArray = [];
+        // newRecipeStepArray.sort ( compareSteps )
+        for (let i = 0; i < recipeStepInputArray.length; i++) {
+          const { stepNumber, description } = recipeStepInputArray[i];
+
+          var stepDescription = description.value;
+
+          const newRecipeStep = {
+            description: stepDescription,
+          };
+
+          // console.log(`Step number: ${stepNumber}`)
+          // console.log(`Description: ${stepDescription}`)
+          newRecipeStepArray.push(newRecipeStep);
+        }
+
+        // hei
+
+        newRecipe.ingredients = newRecipeIngredientArray;
+        newRecipe.steps = newRecipeStepArray;
+
+        console.log(newRecipe);
+      });
+
+      function compareSteps(a, b) {
+        if (a.stepNumber < b.stepNumber) return -1;
+        if (a.stepNumber > b.stepNumber) return 1;
+        else return 0;
+      }
+
+      dummyCreateButton.addEventListener("click", () => {
+        const newRecipe = {
+          recipe: {
+            name: "Goda pannkakor",
+            description: "Supergoda pannkakor",
+            portions: 4,
+          },
+          ingredients: [
+            {
+              ingredientId: 2,
+              quantity: 2,
+              unit: "piece",
+            },
+            {
+              ingredientId: 4,
+              quantity: 2,
+              unit: "spicespoon",
+            },
+            {
+              ingredientId: 3,
+              quantity: 2,
+              unit: "deciliter",
+            },
+            {
+              ingredientId: 5,
+              quantity: 4,
+              unit: "deciliter",
+            },
+          ],
+          steps: [
+            {
+              description: "A first step",
+            },
+            {
+              description: "A second step",
+            },
+            {
+              description: "A third step",
+            },
+          ],
+        };
+        console.log(`About to create ${newRecipe}`);
+        createFullRecipe(newRecipe).then((response) => {
+          if (!response.ok) {
+            const errorMessage = `Error ${response.status} - ${response.statusText}`;
+            console.log(errorMessage);
+            return alert(errorMessage);
+          } else {
+            window.location.pathname = `/..`;
           }
+        });
+      });
 
-          function appendUnitToSelect(units, select) {
-            for (let i = 0; i < units.length; i++) {
-              // new select element
-              var option = document.createElement('option')
-              console.log(`Unit: ${units[i].name}`)
-              option.value = units[i].name
-              option.innerHTML = units[i].name
-              select.appendChild(option)
-            }
-          }
-
-          consoleLogInputBtn.addEventListener("click", () => {
-            console.log(`Clicked!`)
-
-            console.log(`recipeIngredientInputArray ${recipeIngredientInputArray}`)
-
-            const newRecipe = {
-              "recipe": {
-                "name": recipeNameInput.value,
-                "description": recipeDescriptionInput.value,
-                "portions": 2
-              },
-              "ingredients": null,
-              "steps": null
-            }
-
-            var newRecipeIngredientArray = []
-            var newRecipeStepArray = []
-
-            // ingredients
-            for (let i=0; i<recipeIngredientInputArray.length;i++) {
-              const { ingredientSelect, amountInput, unitSelect } = recipeIngredientInputArray[i]
-              var ingredientName = ingredientSelect.options[ingredientSelect.selectedIndex].text
-              console.log(`Ingredient: ${ingredientName}`)
-              var amount = amountInput.value
-              console.log(`Amount: ${amount}`)
-              var unitName = unitSelect.options[unitSelect.selectedIndex].text
-              console.log(`Unit: ${unitName}`)
-
-              // must find the id of the selected ingredient for api call
-              var ingredientId
-              for (let j=0; j<ingredients.length;j++) {
-                const ingredient = ingredients[j]
-                if (ingredient.name == ingredientName) {
-                  ingredientId = ingredient.id
-                }
-              }
-          
-              const newRecipeIngredient = {
-                "ingredientId": ingredientId,
-                "quantity": amount,
-                "unit": unitName
-              } 
-              newRecipeIngredientArray.push(newRecipeIngredient)
-            }
-
-            console.log(newRecipeIngredientArray)
-
-            // steps
-            var newRecipeStepArray = []
-            // newRecipeStepArray.sort ( compareSteps )
-            for (let i=0; i<recipeStepInputArray.length;i++) {
-              const { stepNumber, description } = recipeStepInputArray[i]
-
-              var stepDescription = description.value
-
-              const newRecipeStep = {
-                "description": stepDescription
-              }
-
-              // console.log(`Step number: ${stepNumber}`)
-              // console.log(`Description: ${stepDescription}`)  
-              newRecipeStepArray.push(newRecipeStep)              
-            }
-
-
-            // hei
-
-            newRecipe.ingredients = newRecipeIngredientArray
-            newRecipe.steps = newRecipeStepArray
-
-            console.log(newRecipe)
-          
-          })
-
-          function compareSteps (a, b) {
-            if ( a.stepNumber < b.stepNumber) return -1
-            if ( a.stepNumber > b.stepNumber) return 1
-            else return 0
-          }
-
-          dummyCreateButton.addEventListener("click", () => {
-            const newRecipe = {
-              "recipe": {
-                  "name": "Goda pannkakor",
-                  "description": "Supergoda pannkakor",
-                  "portions": 4
-              },
-              "ingredients": [
-                  {
-                      "ingredientId": 2,
-                      "quantity": 2,
-                      "unit": "piece"
-                  },
-                  {
-                      "ingredientId": 4,
-                      "quantity": 2,
-                      "unit": "spicespoon"
-                  },
-                  {
-                      "ingredientId": 3,
-                      "quantity": 2,
-                      "unit": "deciliter"
-                  },
-                  {
-                      "ingredientId": 5,
-                      "quantity": 4,
-                      "unit": "deciliter"
-                  }
-              ],
-              "steps": [
-                  {
-                      "description": "A first step"
-                  },
-                  {
-                      "description": "A second step"
-                  },
-                  {
-                      "description": "A third step"
-                  }
-              ]
-            }
-            console.log(`About to create ${newRecipe}`)
-            createFullRecipe(newRecipe).then(response => {
-                if (!response.ok) {
-                  const errorMessage = `Error ${response.status} - ${response.statusText}`
-                  console.log(errorMessage)
-                  return alert(errorMessage)
-                } else {
-                  window.location.pathname = (`/..`)
-                }
-              })
-          })
-
-          // if new entry, then rId is set to -1
-          if (data != -1) {
-            console.log(`About to get full recipe with id ${data}`)
-            var id = data.id
-            console.log(`Id: ${id}`)
-            // getFullRecipe(id)//
-            getFullRecipe(1)
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data.ingredients)
-                    loadIngredientInputs(data.ingredients)
-                    loadStepInputs(data.steps)
-                })
-          }
-
-        </script> 
-    </body>
+      // if new entry, then rId is set to -1
+      if (data != -1) {
+        console.log(`About to get full recipe with id ${data}`);
+        var id = data.id;
+        console.log(`Id: ${id}`);
+        // getFullRecipe(id)//
+        getFullRecipe(1)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.ingredients);
+            loadIngredientInputs(data.ingredients);
+            loadStepInputs(data.steps);
+          });
+      }
+    </script>
+  </body>
 </html>
