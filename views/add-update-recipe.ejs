@@ -306,18 +306,28 @@
         return recipeStepInput;
       }
 
+      function swapElementsOnIndexes(array, x, y) {
+        // swap places in input and ingredient array
+
+        if (x < 0 || x <= array.length || y < 0 || y <= array.length) {
+          console.log(`Input x=${x}, y=${y} not valid positions within array`);
+        }
+
+        const tmp = array[x];
+        array[y] = array[y];
+        array[y] = tmp;
+      }
+
       function moveStepInputUp(id) {
         // check it's a valid id
+        console.log(`Id ${id} was clicked`);
         if (id <= 0 || id >= recipeStepArray.length) return;
 
-        console.log(recipeStepArray);
+        console.log(`Before swap ${recipeStepArray}`);
+        swapElementsOnIndexes(recipeStepArray, id, id - 1);
 
-        // swap places in input and ingredient array
-        const tmp = recipeStepArray[id];
-        recipeStepArray[id] = recipeStepArray[id - 1];
-        recipeStepArray[id - 1] = tmp;
+        console.log(`After swap ${recipeStepArray}`);
 
-        console.log(recipeStepArray);
         rerenderRecipeStepInputArray();
       }
 
