@@ -252,20 +252,6 @@
         selector.selectedIndex = element;
       }
 
-      // function loadStepInputs(stepArray) {
-      //   console.log(stepArray);
-      //   for (let i = 0; i < stepArray.length; i++) {
-      //     const row = stepArray[i];
-
-      //     const recipeStepInput = createAndAppendStepInput(i);
-
-      //     console.log(`Looking at row ${row}`);
-      //     console.log(`Array ${i + 1} ${row.description}`);
-
-      //     recipeStepInput.descriptionInput.value = row.description;
-      //   }
-      // }
-
       function createAndAppendStepInput(stepNumber) {
         console.log(`Creating step div with id ${stepNumber}`);
 
@@ -309,7 +295,7 @@
         console.log(`Input x=${x}, y=${y} not valid positions within array`);
       }
 
-      function saveEditedRecipes() {
+      function saveCurrentRecipes() {
         var newArray = [];
         for (let i = 0; i < recipeStepArray.length; i++) {
           newArray.push(recipeStepArray[i]);
@@ -322,14 +308,10 @@
         // check it's a valid id
         console.log(`Id ${id} was clicked`);
         if (id <= 0 || id > recipeStepArray.length) return;
-
         console.log(`Before swap ${recipeStepArray}`);
         swapElementsOnIndexes(recipeStepArray, id, id - 1);
-
         console.log(`After swap ${recipeStepArray}`);
-
-        saveEditedRecipes();
-
+        saveCurrentRecipes();
         rerenderRecipeStepInputArray();
       }
 
@@ -340,26 +322,6 @@
         console.log('Clear element done');
       }
 
-      function rerenderRecipeStepInputArray() {
-        clearElement(recipeStepFeed);
-
-        console.log(`Length of recipeStepArray ${recipeStepArray.length}`);
-
-        for (let i = 0; i < recipeStepArray.length; i++) {
-          // add new html to the file
-
-          const recipeStep = recipeStepArray[i];
-          console.log(recipeStep);
-
-          const newRecipeStepInput = createAndAppendStepInput(i);
-
-          newRecipeStepInput.descriptionInput.value = recipeStep;
-
-          // recipeStepFeed.appendChild(newRecipeStepInput);
-        }
-        console.log('renderRecipeStepInputArray');
-      }
-
       addIngredientInputBtn.addEventListener('click', () => {
         const nextIngredientInputId = recipeIngredientInputArray.length;
         createAndAppendIngredientInput(nextIngredientInputId);
@@ -367,6 +329,7 @@
 
       addStepInputBtn.addEventListener('click', () => {
         recipeStepArray.push(''); // push an empty string as the last element of recipeStepArray
+        saveCurrentRecipes();
         rerenderRecipeStepInputArray();
       });
 
