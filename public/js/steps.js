@@ -48,7 +48,7 @@ function rerenderRecipeSteps() {
       const recipeStep = recipeStepArray[i];
       newRecipeStepInput.descriptionInput.value = recipeStep;
     }
-    console.log('Rerendered steps');
+    // console.log('Rerendered steps');
 }
 
 function createAndAppendStepInput(stepNumber) {
