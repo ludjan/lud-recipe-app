@@ -327,6 +327,26 @@
         createAndAppendIngredientInput(nextIngredientInputId);
       });
 
+      function rerenderRecipeStepInputArray() {
+        clearElement(recipeStepFeed);
+
+        console.log(`Length of recipeStepArray ${recipeStepArray.length}`);
+
+        for (let i = 0; i < recipeStepArray.length; i++) {
+          // add new html to the file
+
+          const recipeStep = recipeStepArray[i];
+          console.log(recipeStep);
+
+          const newRecipeStepInput = createAndAppendStepInput(i);
+
+          newRecipeStepInput.descriptionInput.value = recipeStep;
+
+          // recipeStepFeed.appendChild(newRecipeStepInput);
+        }
+        console.log('renderRecipeStepInputArray');
+      }
+
       addStepInputBtn.addEventListener('click', () => {
         recipeStepArray.push(''); // push an empty string as the last element of recipeStepArray
         saveCurrentRecipes();
