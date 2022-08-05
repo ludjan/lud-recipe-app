@@ -285,7 +285,9 @@
         newDiv.innerHTML = `<div>
               <label for="step-description-${stepNumber}">${stepNumber} - Step description:</label>
               <input type="text" name="step" id="step-description-${stepNumber}"></select>`;
-        if (stepNumber != 0) {
+        if (stepNumber == 0) {
+          newDiv.innerHTML += `<button onclick="moveStepInputUp(${stepNumber})" disabled>Move step up</button>`;
+        } else {
           newDiv.innerHTML += `<button onclick="moveStepInputUp(${stepNumber})">Move step up</button>`;
         }
         newDiv.innerHTML += `</div>`;
