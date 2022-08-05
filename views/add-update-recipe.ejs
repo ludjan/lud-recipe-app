@@ -300,7 +300,7 @@
       }
 
       function swapElementsOnIndexes(array, x, y) {
-        if (x < 0 || x >= array.length || y <= 0 || y > array.length) {
+        if (x < 1 || x >= array.length || y < 0 || y > array.length) {
           console.log(`Input x=${x}, y=${y} not valid positions within array`);
           return;
         }
