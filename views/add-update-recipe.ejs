@@ -309,6 +309,15 @@
         console.log(`Input x=${x}, y=${y} not valid positions within array`);
       }
 
+      function saveEditedRecipes() {
+        var newArray = [];
+        for (let i = 0; i < recipeStepArray.length; i++) {
+          newArray.push(recipeStepArray[i]);
+        }
+        recipeStepArray = newArray;
+        console.log(`Updated recipeStepArray`);
+      }
+
       function moveStepInputUp(id) {
         // check it's a valid id
         console.log(`Id ${id} was clicked`);
@@ -318,6 +327,8 @@
         swapElementsOnIndexes(recipeStepArray, id, id - 1);
 
         console.log(`After swap ${recipeStepArray}`);
+
+        saveEditedRecipes();
 
         rerenderRecipeStepInputArray();
       }
