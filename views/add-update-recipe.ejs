@@ -285,9 +285,7 @@
         newDiv.innerHTML = `<div>
               <label for="step-description-${stepNumber}">${stepNumber} - Step description:</label>
               <input type="text" name="step" id="step-description-${stepNumber}"></select>`;
-        if (stepNumber == 0) {
-          newDiv.innerHTML += `<button onclick="moveStepInputUp(${stepNumber})" disabled>Move step up</button>`;
-        } else {
+        if (stepNumber != 0) {
           newDiv.innerHTML += `<button onclick="moveStepInputUp(${stepNumber})">Move step up</button>`;
         }
         newDiv.innerHTML += `</div>`;
@@ -311,8 +309,6 @@
       }
 
       function swapElementsOnIndexes(array, x, y) {
-        // swap places in input and ingredient array
-
         if (x < 0 || x <= array.length || y < 0 || y <= array.length) {
           console.log(`Input x=${x}, y=${y} not valid positions within array`);
         }
@@ -368,8 +364,9 @@
       });
 
       addStepInputBtn.addEventListener('click', () => {
-        const stepNumber = recipeStepInputArray.length;
+        const stepNumber = recipeStepArray.length;
         createAndAppendStepInput(stepNumber);
+        // rerenderRecipeStepInputArray()
       });
 
       function appendIngredientsToSelect(ingredients, select) {
