@@ -347,6 +347,26 @@
         console.log('renderRecipeStepInputArray');
       }
 
+      function rerenderRecipeStepInputArray2() {
+        clearElement(recipeStepFeed);
+
+        console.log(`Length of recipeStepArray ${recipeStepArray.length}`);
+
+        for (let i = 0; i < recipeStepArray.length; i++) {
+          // add new html to the file
+
+          const recipeStep = recipeStepArray[i];
+          console.log(recipeStep);
+
+          const newRecipeStepInput = createAndAppendStepInput(i);
+
+          newRecipeStepInput.descriptionInput.value = recipeStep;
+
+          // recipeStepFeed.appendChild(newRecipeStepInput);
+        }
+        console.log('renderRecipeStepInputArray');
+      }
+
       addIngredientInputBtn.addEventListener('click', () => {
         const nextIngredientInputId = recipeIngredientInputArray.length;
         createAndAppendIngredientInput(nextIngredientInputId);
@@ -530,7 +550,7 @@
 
             recipeStepArray = getStepDescriptionArray(data.steps);
             console.log(recipeStepArray);
-            rerenderRecipeStepInputArray();
+            rerenderRecipeStepInputArray2();
           });
       }
 
