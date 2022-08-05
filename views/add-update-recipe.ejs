@@ -313,7 +313,7 @@
       function moveStepInputUp(id) {
         // check it's a valid id
         console.log(`Id ${id} was clicked`);
-        if (id < 0 || id > recipeStepArray.length) return;
+        if (id <= 0 || id > recipeStepArray.length) return;
 
         console.log(`Before swap ${recipeStepArray}`);
         swapElementsOnIndexes(recipeStepArray, id, id - 1);
