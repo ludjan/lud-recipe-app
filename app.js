@@ -12,7 +12,11 @@ var app = express() // use the express framework to handle dynamic responses to 
   app.set("view engine", "ejs") // set view engine to ejs
   
 const apiUrl = "https://lud-recipe-api.herokuapp.com"
-const appUrl = "https://lud-recipe-app.herokuapp.com"
+var appUrl = "https://lud-recipe-app.herokuapp.com"
+if (port == 5001) {
+  appUrl = "http://localhost:5001"
+  console.log(`Running locally`);
+}
 
 app.get("/", (req, res) => {
   const targetUrl = apiUrl + "/api/recipes"

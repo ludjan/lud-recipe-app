@@ -1,87 +1,80 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Recipe - <%= data.name %></title>
-    </head>
-    <body>
+  <head>
+    <title>Recipe - <%= data.name %></title>
+  </head>
+  <body>
+    <div>
+      <a href="/..">&lt-- To the recipe list</a>
+    </div>
+    <h1><%= data.name %> (<%= data.id %>)</h1>
+    <div><%= data.description %></div>
+    <div><%= data.created_on %></div>
 
-        <div>
-            <a href="/..">&lt-- To the recipe list</a>
-        </div> 
-        <h1> <%= data.name %> (<%= data.id %>)</h1>
-        <div> <%= data.description %> </div>
-        <div> <%= data.created_on %> </div>
-        
-        <button type="edit" id="edit-recipe-btn">EDIT</button>
-        <button type="delete" id="delete-recipe-btn">DELETE</button>
-        <br>
-        <h2>Ingredients</h2>
-        <div id="ingredients-list"></div>
-        <br>
-        <h2>Steps</h2>
-        <div id="steps-list">
+    <button type="edit" id="edit-recipe-btn">EDIT</button>
+    <button type="delete" id="delete-recipe-btn">DELETE</button>
+    <br />
+    <h2>Ingredients</h2>
+    <div id="ingredients-list"></div>
+    <br />
+    <h2>Steps</h2>
+    <div id="steps-list"></div>
 
-        </div>
+    <script src="/static/js/api_calls.js"></script>
+    <script type="text/javascript">
+      var recipeId = '<%= data.id %>';
+      const deleteBtn = document.getElementById('delete-recipe-btn');
+      const editBtn = document.getElementById('edit-recipe-btn');
+      const stepsList = document.getElementById('steps-list');
+      const ingredientList = document.getElementById('ingredients-list');
 
-        <script src="/static/js/recipe.js"></script>
-        <script type="text/javascript">
-            
-            var recipeId= '<%= data.id %>'
-            const deleteBtn = document.getElementById('delete-recipe-btn')
-            const editBtn = document.getElementById('edit-recipe-btn')
-            const stepsList = document.getElementById('steps-list')
-            const ingredientList = document.getElementById('ingredients-list')
+      function renderSteps(list) {
+        var stepsHtml = '';
+        for (let i = 0; i < list.length; i++) {
+          stepsHtml += `<p>${list[i].step_number} - ${list[i].description}</p>`;
+        }
+        stepsList.innerHTML = stepsHtml;
+        console.log('Rendered steps');
+      }
 
+      function renderIngredients(list) {
+        var ingredientsHtml = '';
+        for (let i = 0; i < list.length; i++) {
+          ingredientsHtml += `<p>${list[i].ingredient} ${list[i].quantity} ${list[i].unit}</p>`;
+        }
+        ingredientList.innerHTML = ingredientsHtml;
+        console.log('Rendered ingredients');
+      }
 
-            function renderSteps(list) {
-                var stepsHtml = ""
-                for (let i=0; i < list.length; i++) {
-                    stepsHtml += `<p>${list[i].step_number} - ${list[i].description}</p>`
-                }
-                stepsList.innerHTML = stepsHtml
-                console.log("Rendered steps")
-            }
+      // getIngredientsForRecipe(recipeId)
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //         console.log(data)
+      //         renderIngredients(data)
+      //     })
 
-            function renderIngredients(list) {
-                var ingredientsHtml = ""
-                for (let i=0; i < list.length; i++) {
-                    ingredientsHtml += `<p>${list[i].ingredient} ${list[i].quantity} ${list[i].unit}</p>`
-                }
-                ingredientList.innerHTML = ingredientsHtml
-                console.log("Rendered ingredients")
-            }
+      // getStepsForRecipe(recipeId)
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //         console.log(data)
+      //         renderSteps(data)
+      //     })
 
-            // getIngredientsForRecipe(recipeId)
-            //     .then((response) => response.json())
-            //     .then((data) => {
-            //         console.log(data)
-            //         renderIngredients(data)
-            //     })
+      deleteBtn.addEventListener('click', () => {
+        deleteRecipe(recipeId).then((window.location.pathname = '/..')); // navigates user back to main page
+      });
 
-            // getStepsForRecipe(recipeId)
-            //     .then((response) => response.json())
-            //     .then((data) => {
-            //         console.log(data)
-            //         renderSteps(data)
-            //     })
+      editBtn.addEventListener('click', () => {
+        window.location.pathname = '/../edit/' + recipeId;
+      });
 
-            deleteBtn.addEventListener("click", () => {
-                deleteRecipe(recipeId)
-                    .then(window.location.pathname = ('/..')) // navigates user back to main page                
-            })
-
-            editBtn.addEventListener("click", () => {
-                window.location.pathname = ('/../edit/' + recipeId)
-            })
-            
-            getFullRecipe(recipeId)
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data)
-                    renderSteps(data.steps)
-                    renderIngredients(data.ingredients)
-                })
-
-        </script>
-    </body>
+      getFullRecipe(recipeId)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          renderSteps(data.steps);
+          renderIngredients(data.ingredients);
+        });
+    </script>
+  </body>
 </html>
