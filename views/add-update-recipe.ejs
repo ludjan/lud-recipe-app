@@ -252,17 +252,6 @@
         selector.selectedIndex = element;
       }
 
-      // function renderStepInputs2() {
-      //   let html = '';
-      //   for (let i = 0; i < recipeSteps2.length; i++) {
-      //     html += `<div id="step-input-${stepNumber}">
-      //               <label for="step-description-${stepNumber}">${stepNumber} - Step description:</label>
-      //               <input type="text" name="step" id="step-description-${stepNumber}"></select>
-      //               <button onclick="removeStep(${stepNumber})">Remove step</button>
-      //             </div>`;
-      //   }
-      // }
-
       function loadStepInputs(stepArray) {
         console.log(stepArray);
         for (let i = 0; i < stepArray.length; i++) {
@@ -364,9 +353,12 @@
       });
 
       addStepInputBtn.addEventListener('click', () => {
-        const stepNumber = recipeStepArray.length;
-        createAndAppendStepInput(stepNumber);
-        // rerenderRecipeStepInputArray()
+        // const stepNumber = recipeStepArray.length;
+        // const recipeInput = createAndAppendStepInput(stepNumber);
+
+        recipeStepArray.push('');
+
+        rerenderRecipeStepInputArray();
       });
 
       function appendIngredientsToSelect(ingredients, select) {
@@ -532,8 +524,8 @@
           .then((response) => response.json())
           .then((data) => {
             console.log(data.ingredients);
-            recipeStepArray = data.steps;
             loadIngredientInputs(data.ingredients);
+            recipeStepArray = data.steps;
             loadStepInputs(data.steps);
           });
       }
