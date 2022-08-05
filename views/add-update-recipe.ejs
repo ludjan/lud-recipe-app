@@ -525,9 +525,21 @@
           .then((data) => {
             console.log(data.ingredients);
             loadIngredientInputs(data.ingredients);
-            recipeStepArray = data.steps;
-            loadStepInputs(data.steps);
+            // recipeStepArray = data.steps;
+            // loadStepInputs(data.steps);
+
+            recipeStepArray = getStepDescriptionArray(data.steps);
+            rerenderRecipeStepInputArray();
           });
+      }
+
+      function getStepDescriptionArray(array) {
+        var newArray = [];
+        for (let i = 0; i < array.length; i++) {
+          const step = array[i];
+          newArray.push(step.description);
+        }
+        return newArray;
       }
     </script>
   </body>
