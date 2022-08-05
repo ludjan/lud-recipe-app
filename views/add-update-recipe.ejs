@@ -34,7 +34,9 @@
 
       <br />
       <br />
-      <button id="before-send-btn">Before send button</button>
+      <button id="before-send-btn">
+        Before send button (logs what will be sent)
+      </button>
 
       <br />
       <br />
@@ -141,8 +143,13 @@
       });
 
       addIngredientInputBtn.addEventListener('click', () => {
-        const nextIngredientInputId = recipeIngredientInputArray.length;
-        createAndAppendIngredientInput(nextIngredientInputId);
+        saveCurrentIngredientInputs();
+        recipeIngredientArray.push({
+          ingredient: null,
+          quantity: null,
+          unit: null,
+        });
+        rerenderRecipeIngredients();
       });
 
       addStepInputBtn.addEventListener('click', () => {
@@ -161,12 +168,10 @@
         };
 
         // recipe
-
-        // ingredients
+        // TODO
 
         // steps
         saveCurrentStepInputs();
-        // steps
         var newRecipeStepArray = [];
         for (let i = 0; i < recipeStepArray.length; i++) {
           const stepDescription = recipeStepArray[i];

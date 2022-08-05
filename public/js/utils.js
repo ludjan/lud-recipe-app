@@ -1,3 +1,4 @@
+// TODO generalize
 function appendOptionsToSelect(optionsArray, select) {
     for (let i = 0; i < optionsArray.length; i++) {
       var newOption = document.createElement('option');
@@ -20,7 +21,7 @@ function appendOptionsToSelect(optionsArray, select) {
   }
 
 
-  function appendUnitToSelect(units, select) {
+  function appendUnitsToSelect(units, select) {
     for (let i = 0; i < units.length; i++) {
       // new select element
       var option = document.createElement('option');

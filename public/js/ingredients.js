@@ -85,13 +85,27 @@ function createAndAppendIngredientInput2(inputNumber) {
     recipeIngredientInputArray.push(recipeIngredientInput);
 
     console.log(ingredients);
-    appendOptionsToSelect(ingredients, recipeIngredientInput.ingredientSelect);
-    appendOptionsToSelect(units, recipeIngredientInput.unitSelect);
+    appendIngredientsToSelect(ingredients, recipeIngredientInput.ingredientSelect);
+    appendUnitsToSelect(units, recipeIngredientInput.unitSelect);
 
     return recipeIngredientInput;
   }
 
+  function saveCurrentIngredientInputs() {
 
+    var newArray = [];
+    for (let i = 0; i < recipeIngredientInputArray.length; i++) {
+        const recipeIngredient = {
+            ingredient: recipeIngredientInputArray[i].ingredientSelect.value,
+            quantity: recipeIngredientInputArray[i].amountInput.value,
+            unit: recipeIngredientInputArray[i].unitSelect.value,
+        }
+        console.log(`Saving ${recipeIngredient} to recipeIngredientArray`);
+        newArray.push(recipeIngredient);
+      }
+      recipeIngredientArray = newArray;
+
+  }
 
 
 
