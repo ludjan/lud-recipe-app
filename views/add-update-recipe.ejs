@@ -267,13 +267,14 @@
       // }
 
       function createAndAppendStepInput(stepNumber) {
-        stepNumber++;
         console.log(`Creating step div with id ${stepNumber}`);
 
         // create the html element
         var newDiv = document.createElement('div');
         newDiv.innerHTML = `<div>
-              <label for="step-description-${stepNumber}">${stepNumber} - Step description:</label>
+              <label for="step-description-${stepNumber}">${
+          stepNumber + 1
+        } - Step description:</label>
               <input type="text" name="step" id="step-description-${stepNumber}"></select>`;
         if (stepNumber != 0) {
           newDiv.innerHTML += `<button onclick="moveStepInputUp(${stepNumber})">Move step up</button>`;
@@ -312,14 +313,14 @@
       function moveStepInputUp(id) {
         // check it's a valid id
         console.log(`Id ${id} was clicked`);
-        if (id <= 0 || id >= recipeStepArray.length) return;
+        if (id < 0 || id > recipeStepArray.length) return;
 
         console.log(`Before swap ${recipeStepArray}`);
         swapElementsOnIndexes(recipeStepArray, id, id - 1);
 
         console.log(`After swap ${recipeStepArray}`);
 
-        rerenderRecipeStepInputArray2();
+        rerenderRecipeStepInputArray();
       }
 
       function clearElement(element) {
@@ -329,27 +330,7 @@
         console.log('Clear element done');
       }
 
-      // function rerenderRecipeStepInputArray() {
-      //   clearElement(recipeStepFeed);
-
-      //   console.log(`Length of recipeStepArray ${recipeStepArray.length}`);
-
-      //   for (let i = 0; i < recipeStepArray.length; i++) {
-      //     // add new html to the file
-
-      //     const recipeStep = recipeStepArray[i];
-      //     console.log(recipeStep);
-
-      //     const newRecipeStepInput = createAndAppendStepInput(i);
-
-      //     newRecipeStepInput.descriptionInput.value = recipeStep.description;
-
-      //     // recipeStepFeed.appendChild(newRecipeStepInput);
-      //   }
-      //   console.log('renderRecipeStepInputArray');
-      // }
-
-      function rerenderRecipeStepInputArray2() {
+      function rerenderRecipeStepInputArray() {
         clearElement(recipeStepFeed);
 
         console.log(`Length of recipeStepArray ${recipeStepArray.length}`);
@@ -375,12 +356,8 @@
       });
 
       addStepInputBtn.addEventListener('click', () => {
-        // const stepNumber = recipeStepArray.length;
-        // const recipeInput = createAndAppendStepInput(stepNumber);
-
-        recipeStepArray.push('');
-
-        rerenderRecipeStepInputArray2();
+        recipeStepArray.push(''); // push an empty string as the last element of recipeStepArray
+        rerenderRecipeStepInputArray();
       });
 
       function appendIngredientsToSelect(ingredients, select) {
@@ -552,7 +529,7 @@
 
             recipeStepArray = getStepDescriptionArray(data.steps);
             console.log(recipeStepArray);
-            rerenderRecipeStepInputArray2();
+            rerenderRecipeStepInputArray();
           });
       }
 
