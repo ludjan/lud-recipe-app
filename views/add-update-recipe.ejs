@@ -30,10 +30,6 @@
 
       <br />
       <br />
-      <button id="console-log-input">Console log input</button>
-
-      <br />
-      <br />
       <button id="before-send-btn">
         Before send button (logs what will be sent)
       </button>
@@ -58,7 +54,6 @@
       const saveRecipeForm = document.getElementById('save-recipe-form');
 
       // for testing
-      const consoleLogInputBtn = document.getElementById('console-log-input');
       const dummyCreateButton = document.getElementById('dummy-create');
       const beforeSendBtn = document.getElementById('before-send-btn');
 
@@ -70,21 +65,21 @@
       var ingredients = [];
       var units = [];
 
-      getIngredients()
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          ingredients = data;
-          // appendIngredientsToSelect(data, ingredientsSelect)
-        });
+      // getIngredients()
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //     ingredients = data;
+      //     // appendIngredientsToSelect(data, ingredientsSelect)
+      //   });
 
-      getUnits()
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          units = data;
-          // appendUnitToSelect(data, unitSelect)
-        });
+      // getUnits()
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //     units = data;
+      //     // appendUnitToSelect(data, unitSelect)
+      //   });
 
       console.log(`data: ${data}`);
       ('<% if (data != -1) { %>');
@@ -149,7 +144,7 @@
           quantity: null,
           unit: null,
         });
-        rerenderRecipeIngredients();
+        rerenderRecipeIngredientsFeed();
       });
 
       addStepInputBtn.addEventListener('click', () => {
@@ -161,102 +156,31 @@
       beforeSendBtn.addEventListener('click', () => {
         console.log('beforeSendButton was clicked');
 
+        // the object we are sending
         var newRecipe = {
-          recipe: null,
-          ingredients: null,
-          steps: null,
-        };
-
-        // recipe
-        // TODO
-
-        // steps
-        saveCurrentStepInputs();
-        var newRecipeStepArray = [];
-        for (let i = 0; i < recipeStepArray.length; i++) {
-          const stepDescription = recipeStepArray[i];
-
-          const newRecipeStep = {
-            description: stepDescription,
-          };
-
-          newRecipeStepArray.push(newRecipeStep);
-        }
-
-        newRecipe.steps = newRecipeStepArray;
-
-        console.log(`About to send:`);
-        console.log(newRecipe);
-      });
-
-      consoleLogInputBtn.addEventListener('click', () => {
-        console.log(`Clicked!`);
-
-        console.log(`recipeIngredientInputArray ${recipeIngredientInputArray}`);
-
-        const newRecipe = {
           recipe: {
-            name: recipeNameInput.value,
-            description: recipeDescriptionInput.value,
-            portions: 2,
+            name: null,
+            description: null,
+            portions: null,
           },
           ingredients: null,
           steps: null,
         };
 
-        var newRecipeIngredientArray = [];
-        var newRecipeStepArray = [];
+        // recipe
+        newRecipe.recipe.name = recipeNameInput.value;
+        newRecipe.recipe.description = recipeDescriptionInput.value;
+        newRecipe.recipe.portions = 2; // for testing
 
         // ingredients
-        for (let i = 0; i < recipeIngredientInputArray.length; i++) {
-          const { ingredientSelect, amountInput, unitSelect } =
-            recipeIngredientInputArray[i];
-          var ingredientName =
-            ingredientSelect.options[ingredientSelect.selectedIndex].text;
-          console.log(`Ingredient: ${ingredientName}`);
-          var amount = amountInput.value;
-          console.log(`Amount: ${amount}`);
-          var unitName = unitSelect.options[unitSelect.selectedIndex].text;
-          console.log(`Unit: ${unitName}`);
-
-          // must find the id of the selected ingredient for api call
-          var ingredientId;
-          for (let j = 0; j < ingredients.length; j++) {
-            const ingredient = ingredients[j];
-            if (ingredient.name == ingredientName) {
-              ingredientId = ingredient.id;
-            }
-          }
-
-          const newRecipeIngredient = {
-            ingredientId: ingredientId,
-            quantity: amount,
-            unit: unitName,
-          };
-          newRecipeIngredientArray.push(newRecipeIngredient);
-        }
-
-        console.log(newRecipeIngredientArray);
+        saveCurrentIngredientInputs();
+        newRecipe.ingredients = getFormattedRecipeIngredients();
 
         // steps
-        var newRecipeStepArray = [];
-        for (let i = 0; i < recipeStepInputArray.length; i++) {
-          const { stepNumber, description } = recipeStepInputArray[i];
+        saveCurrentStepInputs();
+        newRecipe.steps = getFormattedRecipeSteps();
 
-          var stepDescription = description.value;
-
-          const newRecipeStep = {
-            description: stepDescription,
-          };
-
-          // console.log(`Step number: ${stepNumber}`)
-          // console.log(`Description: ${stepDescription}`)
-          newRecipeStepArray.push(newRecipeStep);
-        }
-
-        newRecipe.ingredients = newRecipeIngredientArray;
-        newRecipe.steps = newRecipeStepArray;
-
+        console.log(`About to send:`);
         console.log(newRecipe);
       });
 
@@ -318,21 +242,22 @@
         console.log(`About to get full recipe with id ${data}`);
         var id = data.id;
         console.log(`Id: ${id}`);
-        // getFullRecipe(id)//
-        getFullRecipe(1) // hard coded value for testing
-          .then((response) => response.json())
-          .then((data) => {
-            // console.log(data.ingredients);
-            // loadIngredientInputs(data.ingredients);
 
-            recipeIngredientArray = data.ingredients;
-            console.log(`Arrya:`);
-            console.log(recipeIngredientArray);
-            rerenderRecipeIngredients();
-
-            recipeStepArray = getStepDescriptionArray(data.steps);
-            // console.log(recipeStepArray);
-            rerenderRecipeSteps();
+        // fetch the recipe, available ingredients and units
+        Promise.all([getFullRecipe(1), getIngredients(), getUnits()])
+          .then((responses) => Promise.all(responses.map((res) => res.json())))
+          .then(([recipeResponse, ingredientResponse, unitResponse]) => {
+            // ingredients and units must be set first
+            ingredients = ingredientResponse;
+            console.log(ingredients);
+            units = unitResponse;
+            console.log(units);
+            // recipe
+            recipeIngredientArray = recipeResponse.ingredients;
+            recipeStepArray = getStepDescriptionArray(recipeResponse.steps);
+            // rerender the feeds
+            rerenderRecipeIngredientsFeed();
+            rerenderRecipeStepsFeed();
           });
       }
     </script>

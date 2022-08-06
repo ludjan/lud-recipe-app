@@ -17,7 +17,7 @@ function moveStepInputUp(id) {
     if (id <= 0 || id > recipeStepArray.length) return; // validate incoming clicked id
     saveCurrentStepInputs(); // save input fields to string array of descriptions
     swapElementsOnIndexes(recipeStepArray, id, id - 1); // swap the elements
-    rerenderRecipeSteps(); // rerender
+    rerenderRecipeStepsFeed(); // rerender
     console.log(`Swapped places of step ${id + 1} and ${id + 2}`);
 }
 
@@ -25,8 +25,16 @@ function moveStepInputDown(id) {
     if (id < 0 || id >= recipeStepArray.length) return; // validate incoming clicked id
     saveCurrentStepInputs(); // save input fields to string array of descriptions
     swapElementsOnIndexes(recipeStepArray, id, id + 1); // swap the elements
-    rerenderRecipeSteps(); // rerender
+    rerenderRecipeStepsFeed(); // rerender
     console.log(`Swapped places of step ${id + 1} and ${id + 2}`);
+}
+
+function removeStepInput(id) {
+    if (id < 0 || id > recipeStepArray.lenght) return;
+    saveCurrentStepInputs();
+    removeElementOnIndex(recipeStepArray, id);
+    rerenderRecipeStepsFeed();
+    console.log(`Removed step input with id ${id}`);
 }
 
 function saveCurrentStepInputs() {
@@ -39,8 +47,7 @@ function saveCurrentStepInputs() {
     recipeStepArray = newArray;
 }
 
-
-function rerenderRecipeSteps() {
+function rerenderRecipeStepsFeed() {
     resetSteps();
 
     for (let i = 0; i < recipeStepArray.length; i++) {
@@ -70,6 +77,8 @@ function createAndAppendStepInput(stepNumber) {
         html += `<button onclick="moveStepInputUp(${stepNumber})">/\\</button>`;
     }
 
+    html += `<button onclick="removeStepInput(${stepNumber})">Delete</button>`
+
     newDiv.innerHTML += `</div>`;
 
     newDiv.innerHTML = html;
@@ -95,5 +104,15 @@ function createAndAppendStepInput(stepNumber) {
 function resetSteps() {
     clearElement(recipeStepFeed);
     recipeStepInputArray = []; // clear the array of step inputs
+}
+
+function getFormattedRecipeSteps() {
+  var newRecipeStepArray = [];
+  for (let i = 0; i < recipeStepArray.length; i++) {
+    const stepDescription = recipeStepArray[i];
+    const newRecipeStep = { description: stepDescription };
+    newRecipeStepArray.push(newRecipeStep);
+  }
+  return newRecipeStepArray;
 }
 

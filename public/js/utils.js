@@ -10,7 +10,7 @@ function appendOptionsToSelect(optionsArray, select) {
   }
 
   function appendIngredientsToSelect(ingredients, select) {
-    console.log(`Set values to ingredients selector`);
+    // console.log(`Set values to ingredients selector`);
     for (let i = 0; i < ingredients.length; i++) {
       var option = document.createElement('option');
       // console.log(`ingredient ${ingredients[i].name}`);
@@ -34,11 +34,11 @@ function appendOptionsToSelect(optionsArray, select) {
 
 function setValueInSelectorIfExists(selector, value) {
     var element = 0;
-    console.log(`This selector has ${selector.options.length} options`);
+    // console.log(`This selector has ${selector.options.length} options`);
     for (let i = 0; i < selector.options.length; i++) {
       if (selector.options[i].value == value) {
         element = i;
-        console.log(`Value in selector was found`);
+        // console.log(`Value in selector was found`);
         break;
       }
     }
@@ -49,6 +49,10 @@ function clearElement(element) {
     while (element.firstChild) {
       element.removeChild(element.firstChild);
     }
+}
+
+function removeElementOnIndex(array, index) {
+  array.splice(index, 1);
 }
 
 function swapElementsOnIndexes(array, x, y) {
