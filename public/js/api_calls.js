@@ -106,3 +106,17 @@ async function createFullRecipe(recipe) {
   }
   return await fetch(targetUrl, config)
 }
+
+async function updateFullRecipe(payload) {
+  
+  const targetUrl = apiUrl + "/fullRecipe"
+  
+  const config = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  }
+  return await fetch(targetUrl, config)
+}
