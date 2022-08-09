@@ -43,7 +43,7 @@ app.get("/recipes/:id", (req, res) => {
 
 app.get("/add-recipe", (req, res) => {
   console.log(`Displaying page to add new recipe`)
-  res.render("add-update-recipe", { data: -1 })
+  res.render("add-recipe");
 })
 
 app.get("/edit/:id", (req, res) => {
@@ -53,7 +53,7 @@ app.get("/edit/:id", (req, res) => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data)
-      res.render("add-update-recipe", { data: data })
+      res.render("edit-recipe", { data: data })
     });
 })
 

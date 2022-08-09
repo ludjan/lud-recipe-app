@@ -13,7 +13,12 @@
         <input id="recipe-description" type="text" name="hist" />
         <br />
         <br />
-        <input type="submit" id="save-recipe-btn" value="Submit" />
+        <input
+          type="submit"
+          id="save-recipe-btn"
+          value="Submit"
+          disabled="disabled"
+        />
       </form>
 
       <br />
@@ -30,13 +35,7 @@
 
       <br />
       <br />
-      <button id="before-send-btn">
-        Before send button (logs what will be sent)
-      </button>
-
-      <br />
-      <br />
-      <button id="dummy-create">Dummy</button>
+      <button id="save-btn">Log and save</button>
 
       <div id="recipeId"></div>
     </div>
@@ -55,7 +54,7 @@
 
       // for testing
       const dummyCreateButton = document.getElementById('dummy-create');
-      const beforeSendBtn = document.getElementById('before-send-btn');
+      const saveBtn = document.getElementById('save-btn');
 
       // ejs values
       var data = '<%- JSON.stringify(data) %>';
@@ -150,11 +149,11 @@
       addStepInputBtn.addEventListener('click', () => {
         saveCurrentStepInputs();
         recipeStepArray.push(''); // push an empty string as the last element of recipeStepArray
-        rerenderRecipeSteps();
+        rerenderRecipeStepsFeed();
       });
 
-      beforeSendBtn.addEventListener('click', () => {
-        console.log('beforeSendButton was clicked');
+      saveBtn.addEventListener('click', () => {
+        console.log('SaveBtn was clicked');
 
         // the object we are sending
         var newRecipe = {
@@ -183,68 +182,27 @@
         console.log(`About to send:`);
         console.log(newRecipe);
 
-        updateFullRecipe(1, newRecipe).then((response) => {
-          if (!response.ok) {
-            const errorMessage = `Error ${response.status} - ${response.statusText}`;
-            console.log(errorMessage);
-            return alert(errorMessage);
-          } else {
-            window.location.pathname = `/..`;
-          }
-        });
-      });
-
-      dummyCreateButton.addEventListener('click', () => {
-        const newRecipe = {
-          recipe: {
-            name: 'Goda pannkakor',
-            description: 'Supergoda pannkakor',
-            portions: 4,
-          },
-          ingredients: [
-            {
-              ingredientId: 2,
-              quantity: 2,
-              unit: 'piece',
-            },
-            {
-              ingredientId: 4,
-              quantity: 2,
-              unit: 'spicespoon',
-            },
-            {
-              ingredientId: 3,
-              quantity: 2,
-              unit: 'deciliter',
-            },
-            {
-              ingredientId: 5,
-              quantity: 4,
-              unit: 'deciliter',
-            },
-          ],
-          steps: [
-            {
-              description: 'A first step',
-            },
-            {
-              description: 'A second step',
-            },
-            {
-              description: 'A third step',
-            },
-          ],
-        };
-        console.log(`About to create ${newRecipe}`);
-        createFullRecipe(newRecipe).then((response) => {
-          if (!response.ok) {
-            const errorMessage = `Error ${response.status} - ${response.statusText}`;
-            console.log(errorMessage);
-            return alert(errorMessage);
-          } else {
-            window.location.pathname = `/..`;
-          }
-        });
+        if (data == -1) {
+          createFullRecipe(newRecipe).then((response) => {
+            if (!response.ok) {
+              const errorMessage = `Error ${response.status} - ${response.statusText}`;
+              console.log(errorMessage);
+              return alert(errorMessage);
+            } else {
+              return (window.location.href = '../');
+            }
+          });
+        } else {
+          updateFullRecipe(id, newRecipe).then((response) => {
+            if (!response.ok) {
+              const errorMessage = `Error ${response.status} - ${response.statusText}`;
+              console.log(errorMessage);
+              return alert(errorMessage);
+            } else {
+              return alert('Change was saved');
+            }
+          });
+        }
       });
 
       // if new entry, then rId is set to -1
@@ -253,8 +211,10 @@
         var id = data.id;
         console.log(`Id: ${id}`);
 
+        id = 1;
+
         // fetch the recipe, available ingredients and units
-        Promise.all([getFullRecipe(1), getIngredients(), getUnits()])
+        Promise.all([getFullRecipe(id), getIngredients(), getUnits()])
           .then((responses) => Promise.all(responses.map((res) => res.json())))
           .then(([recipeResponse, ingredientResponse, unitResponse]) => {
             // ingredients and units must be set first

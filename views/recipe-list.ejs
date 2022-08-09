@@ -1,41 +1,38 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="utf-8" />
     <title>Some app</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
 
   <body>
     <section>
       <p id="greetings-text">
-        <br>
+        <br />
       </p>
     </section>
 
     <section>
-      <br>
-      <a href="https://lud-recipe-app.herokuapp.com/add-recipe">Add a new recipe</a>
-      <br>
-    </section> 
+      <br />
+      <a href="<%= url %>/add-recipe">Add a new recipe</a>
+      <br />
+    </section>
 
     <section>
       <h1>RECIPES</h1>
 
       <div id="recipe-feed">
-          
-        <% for (let i = 0; i < data.length; i++) { %> 
-            <p> 
-                <a href="<%= url %>/recipes/<%= data[i].id %>">
-                    <%= data[i].id %> <%= data[i].name %> <%= data[i].taste %>
-                </a> 
-            </p>
+        <% for (let i = 0; i < data.length; i++) { %>
+        <p>
+          <a href="<%= url %>/recipes/<%= data[i].id %>">
+            <%= data[i].id %> <%= data[i].name %> <%= data[i].taste %>
+          </a>
+        </p>
         <% } %>
       </div>
     </section>
 
     <script type="text/javascript" src="/static/js/animation.js"></script>
   </body>
-
 </html>
