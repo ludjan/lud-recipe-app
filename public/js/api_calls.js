@@ -107,9 +107,9 @@ async function createFullRecipe(recipe) {
   return await fetch(targetUrl, config)
 }
 
-async function updateFullRecipe(payload) {
+async function updateFullRecipe(id, payload) {
   
-  const targetUrl = apiUrl + "/fullRecipe"
+  const targetUrl = apiUrl + "/fullRecipe/" + id
   
   const config = {
     method: 'PUT',

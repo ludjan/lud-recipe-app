@@ -183,7 +183,7 @@
         console.log(`About to send:`);
         console.log(newRecipe);
 
-        updateFullRecipe(newRecipe).then((response) => {
+        updateFullRecipe(1, newRecipe).then((response) => {
           if (!response.ok) {
             const errorMessage = `Error ${response.status} - ${response.statusText}`;
             console.log(errorMessage);
