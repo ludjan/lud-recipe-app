@@ -80,6 +80,7 @@
       ('<%}%>');
 
       rId = parseInt(strRecipeId);
+      console.log(`rId = ${rId}`);
 
       saveRecipeForm.addEventListener('submit', () => {});
 
@@ -126,7 +127,7 @@
             console.log(errorMessage);
             return alert(errorMessage);
           } else {
-            return alert('../');
+            return (window.location.href = `../../recipes/${rId}`);
           }
         });
       });
@@ -134,7 +135,7 @@
       // if new entry, then rId is set to -1
 
       // fetch the recipe, available ingredients and units
-      Promise.all([getFullRecipe(5), getIngredients(), getUnits()])
+      Promise.all([getFullRecipe(rId), getIngredients(), getUnits()])
         .then((responses) => Promise.all(responses.map((res) => res.json())))
         .then(([recipeResponse, ingredientResponse, unitResponse]) => {
           // ingredients and units must be set first
