@@ -10,11 +10,17 @@ import expressOpenIdConnect from 'express-openid-connect'
 const { auth } = expressOpenIdConnect;
 const { requiresAuth } = expressOpenIdConnect;
 
+var appUrl = "https://lud-recipe-app.herokuapp.com"
+if (port == localPort) {
+  appUrl = `http://localhost:${localPort}`
+  console.log(`Configured for running locally`);
+}
+
 const config = {
   authRequired: false,
   auth0Logout: true,
   secret: 'a long, randomly-generated string stored in env', // hehe
-  baseURL: `https://lud-recipe-app.herokuapp.com`,
+  baseURL: appUrl,
   clientID: '49RVwIDwigQS5KYFNGsypJS9U8dn4FQQ',
   issuerBaseURL: 'https://dev-z293vi6n.us.auth0.com'
 }
@@ -25,12 +31,6 @@ var app = express() // use the express framework to handle dynamic responses to 
   app.set("view engine", "ejs") // set view engine to ejs
   app.use(auth(config));
 const apiUrl = "https://lud-recipe-api.herokuapp.com"
-var appUrl = "https://lud-recipe-app.herokuapp.com"
-if (port == localPort) {
-  appUrl = `http://localhost:${localPort}`
-  console.log(`Running locally`);
-}
-
 
 app.get('/isAuthenticated', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
