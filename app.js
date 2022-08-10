@@ -14,7 +14,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: 'a long, randomly-generated string stored in env', // hehe
-  baseURL: `http://localhost:${localPort}`,
+  baseURL: `https://lud-recipe-app.herokuapp.com`,
   clientID: '49RVwIDwigQS5KYFNGsypJS9U8dn4FQQ',
   issuerBaseURL: 'https://dev-z293vi6n.us.auth0.com'
 }
