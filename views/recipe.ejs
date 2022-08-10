@@ -11,9 +11,11 @@
     <div><%= data.description %></div>
     <div><%= data.created_on %></div>
 
+    <% if (user != null) { %>
     <button type="edit" id="edit-recipe-btn">EDIT</button>
     <button type="delete" id="delete-recipe-btn">DELETE</button>
     <br />
+    <% } %>
     <h2>Ingredients</h2>
     <div id="ingredients-list"></div>
     <br />
@@ -23,8 +25,12 @@
     <script src="/static/js/api_calls.js"></script>
     <script type="text/javascript">
       var recipeId = '<%= data.id %>';
+
+      ('<% if (user != null) { %>');
       const deleteBtn = document.getElementById('delete-recipe-btn');
       const editBtn = document.getElementById('edit-recipe-btn');
+      ('<% } %>');
+
       const stepsList = document.getElementById('steps-list');
       const ingredientList = document.getElementById('ingredients-list');
 
@@ -46,20 +52,7 @@
         console.log('Rendered ingredients');
       }
 
-      // getIngredientsForRecipe(recipeId)
-      //     .then((response) => response.json())
-      //     .then((data) => {
-      //         console.log(data)
-      //         renderIngredients(data)
-      //     })
-
-      // getStepsForRecipe(recipeId)
-      //     .then((response) => response.json())
-      //     .then((data) => {
-      //         console.log(data)
-      //         renderSteps(data)
-      //     })
-
+      ('<% if (user != null) { %>');
       deleteBtn.addEventListener('click', () => {
         deleteRecipe(recipeId).then((window.location.pathname = '/..')); // navigates user back to main page
       });
@@ -68,6 +61,9 @@
         window.location.pathname = '/../edit/' + recipeId;
       });
 
+      ('<% } %>');
+
+      console.log(recipeId);
       getFullRecipe(recipeId)
         .then((response) => response.json())
         .then((data) => {

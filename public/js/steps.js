@@ -4,6 +4,12 @@ const recipeStepFeed = document.getElementById('recipe-step-feed');
 var recipeStepArray = []; // actual recipeSteps
 var recipeStepInputArray = []; // the inputs
 
+function addStepInput() {
+  saveCurrentStepInputs();
+  recipeStepArray.push(''); // push empty step
+  rerenderRecipeStepsFeed();
+}
+
 function getStepDescriptionArray(array) {
     var newArray = [];
     for (let i = 0; i < array.length; i++) {

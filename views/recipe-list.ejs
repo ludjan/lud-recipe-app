@@ -7,17 +7,8 @@
   </head>
 
   <body>
-    <section>
-      <p id="greetings-text">
-        <br />
-      </p>
-    </section>
-
-    <section>
-      <br />
-      <a href="<%= url %>/add-recipe">Add a new recipe</a>
-      <br />
-    </section>
+    <%- include('partials/header.ejs') %> <%-
+    include('partials/add-new-recipe-button.ejs') %>
 
     <section>
       <h1>RECIPES</h1>
@@ -33,6 +24,6 @@
       </div>
     </section>
 
-    <script type="text/javascript" src="/static/js/animation.js"></script>
+    <!-- <script type="text/javascript" src="/static/js/animation.js"></script> -->
   </body>
 </html>

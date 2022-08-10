@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Recipe - Add or edit recipe</title>
+    <title>Recipe - Edit recipe</title>
   </head>
   <body>
     <div>
@@ -9,8 +9,13 @@
       <form id="save-recipe-form" onsubmit="return false">
         <label for="recipe-name">Recipe name</label><br />
         <input id="recipe-name" type="text" name="hest" /><br />
+
         <label for="recipe-description">Recipe Description</label><br />
-        <input id="recipe-description" type="text" name="hist" />
+        <input id="recipe-description" type="text" name="hist" /><br />
+
+        <label for="recipe-portions">Recipe portions</label><br />
+        <input id="recipe-portions" type="text" name="hast" />
+
         <br />
         <br />
         <input
@@ -50,6 +55,7 @@
       const recipeNameInput = document.getElementById('recipe-name');
       const recipeDescriptionInput =
         document.getElementById('recipe-description');
+      const recipePortionsInput = document.getElementById('recipe-portions');
       const saveRecipeForm = document.getElementById('save-recipe-form');
 
       // for testing
@@ -64,96 +70,33 @@
       var ingredients = [];
       var units = [];
 
-      // getIngredients()
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     console.log(data);
-      //     ingredients = data;
-      //     // appendIngredientsToSelect(data, ingredientsSelect)
-      //   });
-
-      // getUnits()
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     console.log(data);
-      //     units = data;
-      //     // appendUnitToSelect(data, unitSelect)
-      //   });
-
       console.log(`data: ${data}`);
       ('<% if (data != -1) { %>');
-      rId = '<%= data %>';
+      strRecipeId = '<%= data.id %>';
       recipeHeading.innerText = 'Edit recipe';
       recipeNameInput.value = '<%= data.name %>';
       recipeDescriptionInput.value = '<%= data.description %>';
+      recipePortionsInput.value = '<%= data.portions %>';
       ('<%}%>');
 
-      saveRecipeForm.addEventListener('submit', () => {
-        const recipeName = recipeNameInput.value;
-        const recipeDescription = recipeDescriptionInput.value;
+      rId = parseInt(strRecipeId);
 
-        if (!isAlphaNumeric(recipeName)) {
-          return alert(`Name '${recipeName}' is not alphanumeric`);
-        }
-        if (!isAlphaNumeric(recipeDescription)) {
-          return alert(
-            `Description '${recipeDescription}' is not alphanumeric`
-          );
-        }
-
-        // // create the new entry
-        // const newRecipe = {
-        //   name: recipeNameInput.value,
-        //   description: recipeDescriptionInput.value
-        // }
-        // console.log(newRecipe)
-
-        // console.log(`Data = ${data}`)
-
-        // if (rId == null) {
-
-        //   // async add, then re-render
-        //   addRecipe(newRecipe).then(response => {
-        //     if (!response.ok) {
-        //       const errorMessage = `Error ${response.status} - ${response.statusText}`
-        //       console.log(errorMessage)
-        //     } else {
-        //       window.location.pathname = ('/..') // navigates user back to main page
-        //     }
-        //   })
-
-        // } else {
-        //   console.log(`About to update recipe with id ${rId}`)
-        //   updateRecipe(newRecipe, rId).then(response => {
-        //     if (!response.ok) {
-        //       const errorMessage = `Error ${response.status} - ${response.statusText}`
-        //       console.log(errorMessage)
-        //       return alert(errorMessage)
-        //     } else {
-        //       window.location.pathname = (`/../recipes/${rId}`)
-        //     }
-        //   })
-        // }
-      });
+      saveRecipeForm.addEventListener('submit', () => {});
 
       addIngredientInputBtn.addEventListener('click', () => {
-        saveCurrentIngredientInputs();
-        recipeIngredientArray.push({
-          ingredient: null,
-          quantity: null,
-          unit: null,
-        });
-        rerenderRecipeIngredientsFeed();
+        addIngredientInput();
       });
 
       addStepInputBtn.addEventListener('click', () => {
-        saveCurrentStepInputs();
-        recipeStepArray.push(''); // push an empty string as the last element of recipeStepArray
-        rerenderRecipeStepsFeed();
+        addStepInput();
       });
 
       saveBtn.addEventListener('click', () => {
         console.log('SaveBtn was clicked');
+
+        saveCurrentIngredientInputs();
+        saveCurrentStepInputs();
+        if (!allRecipeInputsAreValid()) return;
 
         // the object we are sending
         var newRecipe = {
@@ -169,67 +112,46 @@
         // recipe
         newRecipe.recipe.name = recipeNameInput.value;
         newRecipe.recipe.description = recipeDescriptionInput.value;
-        newRecipe.recipe.portions = 2; // for testing
+        newRecipe.recipe.portions = recipePortionsInput.value;
 
-        // ingredients
-        saveCurrentIngredientInputs();
         newRecipe.ingredients = getFormattedRecipeIngredients();
-
-        // steps
-        saveCurrentStepInputs();
         newRecipe.steps = getFormattedRecipeSteps();
 
         console.log(`About to send:`);
         console.log(newRecipe);
 
-        if (data == -1) {
-          createFullRecipe(newRecipe).then((response) => {
-            if (!response.ok) {
-              const errorMessage = `Error ${response.status} - ${response.statusText}`;
-              console.log(errorMessage);
-              return alert(errorMessage);
-            } else {
-              return (window.location.href = '../');
-            }
-          });
-        } else {
-          updateFullRecipe(id, newRecipe).then((response) => {
-            if (!response.ok) {
-              const errorMessage = `Error ${response.status} - ${response.statusText}`;
-              console.log(errorMessage);
-              return alert(errorMessage);
-            } else {
-              return alert('Change was saved');
-            }
-          });
-        }
+        updateFullRecipe(rId, newRecipe).then((response) => {
+          if (!response.ok) {
+            const errorMessage = `Error ${response.status} - ${response.statusText}`;
+            console.log(errorMessage);
+            return alert(errorMessage);
+          } else {
+            return alert('../');
+          }
+        });
       });
 
       // if new entry, then rId is set to -1
-      if (data != -1) {
-        console.log(`About to get full recipe with id ${data}`);
-        var id = data.id;
-        console.log(`Id: ${id}`);
 
-        id = 1;
+      // fetch the recipe, available ingredients and units
+      Promise.all([getFullRecipe(5), getIngredients(), getUnits()])
+        .then((responses) => Promise.all(responses.map((res) => res.json())))
+        .then(([recipeResponse, ingredientResponse, unitResponse]) => {
+          // ingredients and units must be set first
+          ingredients = ingredientResponse;
+          console.log(ingredients);
+          units = unitResponse;
+          console.log(units);
+          // recipe
+          console.log(recipeResponse);
+          recipeIngredientArray = recipeResponse.ingredients;
+          recipeStepArray = getStepDescriptionArray(recipeResponse.steps);
+          console.log(recipeIngredientArray);
 
-        // fetch the recipe, available ingredients and units
-        Promise.all([getFullRecipe(id), getIngredients(), getUnits()])
-          .then((responses) => Promise.all(responses.map((res) => res.json())))
-          .then(([recipeResponse, ingredientResponse, unitResponse]) => {
-            // ingredients and units must be set first
-            ingredients = ingredientResponse;
-            console.log(ingredients);
-            units = unitResponse;
-            console.log(units);
-            // recipe
-            recipeIngredientArray = recipeResponse.ingredients;
-            recipeStepArray = getStepDescriptionArray(recipeResponse.steps);
-            // rerender the feeds
-            rerenderRecipeIngredientsFeed();
-            rerenderRecipeStepsFeed();
-          });
-      }
+          // rerender the feeds
+          rerenderRecipeIngredientsFeed();
+          rerenderRecipeStepsFeed();
+        });
     </script>
   </body>
 </html>

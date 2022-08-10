@@ -8,6 +8,17 @@ const addIngredientInputBtn = document.getElementById(
   var recipeIngredientArray = []; // actual recipeIngredients
   var recipeIngredientInputArray = []; // the inputs
   
+  function addIngredientInput() {
+    saveCurrentIngredientInputs();
+    // push empty recipeIngredient
+    recipeIngredientArray.push({
+      ingredient: null,
+      quantity: null,
+      unit: null,
+    });
+    rerenderRecipeIngredientsFeed();
+  }
+
   function rerenderRecipeIngredientsFeed() {
     resetIngredients();
 

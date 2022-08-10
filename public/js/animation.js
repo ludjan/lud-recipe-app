@@ -1,4 +1,4 @@
-const text = document.getElementById("greetings-text")
+// const text = document.getElementById("greetings-text")
 
 let id = null
 
