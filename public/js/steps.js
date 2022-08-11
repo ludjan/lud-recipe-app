@@ -66,26 +66,38 @@ function rerenderRecipeStepsFeed() {
 
 function createAndAppendStepInput(stepNumber) {
     var newDiv = document.createElement('div');
-    var html = `<div>`;
+    var html = `<div class="recipe-feed-item row">`;
 
-    html += `<label for="step-description-${stepNumber}">${stepNumber + 1} - Step description:</label>
-          <input type="text" name="step" id="step-description-${stepNumber}"></select>`;
-    
+    html += `
+      <div class="col-xs-12 col-sm-1">
+        <label for="step-description${stepNumber}">${stepNumber + 1}</label>
+      </div>
+
+      <div class="col-xs-12 col-sm-7">
+        <textarea rows="4" name="step" id="step-description-${stepNumber}"></textarea>
+      </div>`;
+
+    html += `
+      <div class="col-xs-12 col-sm-4">`
     if (stepNumber == recipeStepArray.length-1) {
-        html += `<button onclick="moveStepInputDown(${stepNumber})" disabled>\\/</button>`
+        html += `<button class="btn btn-secondary btn-margin" onclick="moveStepInputDown(${stepNumber})" disabled>\\/</button>`
     } else {
-        html += `<button onclick="moveStepInputDown(${stepNumber})">\\/</button>`
+        html += `<button class="btn btn-secondary btn-margin" onclick="moveStepInputDown(${stepNumber})">\\/</button>`
     }
 
     if (stepNumber == 0) {
-      html += `<button onclick="moveStepInputUp(${stepNumber})" disabled>/\\</button>`;
+      html += `<button class="btn btn-secondary btn-margin" onclick="moveStepInputUp(${stepNumber})" disabled>/\\</button>`;
     } else {
-        html += `<button onclick="moveStepInputUp(${stepNumber})">/\\</button>`;
+        html += `<button class="btn btn-secondary btn-margin" onclick="moveStepInputUp(${stepNumber})">/\\</button>`;
     }
 
-    html += `<button onclick="removeStepInput(${stepNumber})">Delete</button>`
+    html += `<button class="btn btn-secondary btn-margin" onclick="removeStepInput(${stepNumber})">Delete</button>`
 
-    newDiv.innerHTML += `</div>`;
+    html += `</div>`
+
+    html += `<hr>`
+
+    html += `</div>`;
 
     newDiv.innerHTML = html;
 

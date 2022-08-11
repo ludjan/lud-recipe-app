@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
+    <%- include('partials/head-links.ejs') %>
     <title>Some app</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
 
   <body>
-    <%- include('partials/header.ejs') %> <%-
-    include('partials/add-new-recipe-button.ejs') %>
+    <div class="wrapper">
+      <%- include('partials/login-logout.ejs') %> <%-
+      include('partials/add-new-recipe-button.ejs') %>
 
-    <section>
-      <h1>RECIPES</h1>
+      <div class="container">
+        <section>
+          <h1>RECIPES</h1>
 
-      <div id="recipe-feed">
-        <% for (let i = 0; i < data.length; i++) { %>
-        <p>
-          <a href="<%= url %>/recipes/<%= data[i].id %>">
-            <%= data[i].id %> <%= data[i].name %> <%= data[i].taste %>
-          </a>
-        </p>
-        <% } %>
+          <div id="recipe-feed">
+            <% for (let i = 0; i < data.length; i++) { %>
+            <p>
+              <a href="<%= url %>/recipes/<%= data[i].id %>">
+                <%= data[i].id %> <%= data[i].name %> <%= data[i].taste %>
+              </a>
+            </p>
+            <% } %>
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
 
     <!-- <script type="text/javascript" src="/static/js/animation.js"></script> -->
   </body>

@@ -57,17 +57,27 @@ function resetIngredients() {
 function createAndAppendIngredientInput2(inputNumber) {
     // create the html element
     var newDiv = document.createElement('div');
-    newDiv.innerHTML = `<div id="ingredient-input-${inputNumber}">
-          <label for="ingredients-select-${inputNumber}">Choose ingredient:</label>
-          <select name="ingredient" id="ingredients-select-${inputNumber}"></select>
-
-          <label for="ingredients-amount-${inputNumber}">Amount:</label>
-          <input type="number" min="1" name="amount" id="ingredients-amount-${inputNumber}"</select>
-
-          <label for="unit-select-${inputNumber}">Choose unit:</label>
-          <select name="unit" id="unit-select-${inputNumber}"></select>
-
-          <button onclick="removeIngredientInput(${inputNumber})">Delete</button>
+    newDiv.innerHTML = `
+        <div id="ingredient-input-${inputNumber}" class="recipe-feed-item row">
+          <div class="col-xs-12 col-sm-3">
+            <!-- <label for="ingredients-select-${inputNumber}">Ingredient</label> -->
+            <select name="ingredient" id="ingredients-select-${inputNumber}"></select>
+          </div>
+          
+          <div class="col-xs-12 col-sm-3">
+            <!-- <label for="ingredients-amount-${inputNumber}">Amount</label> -->
+            <input type="number" min="1" name="amount" maxlength="4" size="4" id="ingredients-amount-${inputNumber}"</select>
+          </div>
+          
+          <div class="col-xs-12 col-sm-3">
+            <!-- <label for="unit-select-${inputNumber}">Unit</label> -->
+            <select name="unit" id="unit-select-${inputNumber}"></select>
+          </div>
+          
+          <div class="col-xs-12 col-sm-3">
+          <button class="btn btn-secondary" onclick="removeIngredientInput(${inputNumber})">Delete</button>
+          </div>
+          <hr>
         </div>`;
 
     // add new html to the file

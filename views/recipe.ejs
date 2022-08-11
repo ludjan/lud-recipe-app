@@ -1,26 +1,58 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%- include('partials/head-links.ejs') %>
     <title>Recipe - <%= data.name %></title>
   </head>
   <body>
-    <div>
-      <a href="/..">&lt-- To the recipe list</a>
-    </div>
-    <h1><%= data.name %> (<%= data.id %>)</h1>
-    <div><%= data.description %></div>
-    <div><%= data.created_on %></div>
+    <div class="wrapper">
+      <section>
+        <div class="container">
+          <a href="/..">&lt-- To the recipe list</a>
+        </div>
+      </section>
 
-    <% if (user != null) { %>
-    <button type="edit" id="edit-recipe-btn">EDIT</button>
-    <button type="delete" id="delete-recipe-btn">DELETE</button>
-    <br />
-    <% } %>
-    <h2>Ingredients</h2>
-    <div id="ingredients-list"></div>
-    <br />
-    <h2>Steps</h2>
-    <div id="steps-list"></div>
+      <section>
+        <div class="container">
+          <h1><%= data.name %> (<%= data.id %>)</h1>
+          <div><%= data.description %></div>
+          <div><%= data.created_on %></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h2>Ingredients</h2>
+          <div id="ingredients-list"></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h2>Steps</h2>
+          <div id="steps-list"></div>
+        </div>
+      </section>
+
+      <% if (user != null) { %>
+      <section>
+        <div class="container">
+          <div class="text-center">
+            <button class="btn btn-secondary" type="edit" id="edit-recipe-btn">
+              EDIT
+            </button>
+            <button
+              class="btn btn-secondary"
+              type="delete"
+              id="delete-recipe-btn"
+            >
+              DELETE
+            </button>
+          </div>
+        </div>
+      </section>
+      <% } %>
+    </div>
 
     <script src="/static/js/api_calls.js"></script>
     <script type="text/javascript">

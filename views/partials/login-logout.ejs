@@ -1,0 +1,15 @@
+<div class="container">
+  <section>
+    <br />
+    <% if (user == null) { %>
+    <a href="/login">Log in</a>
+    <% } else { %>
+    <div>
+      Hello <%= user.nickname %> -
+      <a href="/logout">Log out</a>
+    </div>
+
+    <% } %>
+    <br />
+  </section>
+</div>

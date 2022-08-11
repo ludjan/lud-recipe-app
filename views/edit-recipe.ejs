@@ -1,48 +1,91 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%- include('partials/head-links.ejs') %>
     <title>Recipe - Edit recipe</title>
   </head>
   <body>
-    <div>
-      <h1 id="recipe-heading">New recipe</h1>
-      <form id="save-recipe-form" onsubmit="return false">
-        <label for="recipe-name">Recipe name</label><br />
-        <input id="recipe-name" type="text" name="hest" /><br />
+    <div class="wrapper">
+      <section>
+        <div class="container text-center">
+          <h1 id="recipe-heading">Edit recipe</h1>
+        </div>
+      </section>
 
-        <label for="recipe-description">Recipe Description</label><br />
-        <input id="recipe-description" type="text" name="hist" /><br />
+      <section>
+        <div class="container">
+          <form id="save-recipe-form" onsubmit="return false">
+            <label for="recipe-name">Name</label><br />
+            <input id="recipe-name" type="text" name="recipe-name" /><br />
 
-        <label for="recipe-portions">Recipe portions</label><br />
-        <input id="recipe-portions" type="text" name="hast" />
+            <label for="recipe-description">Description</label><br />
+            <input
+              id="recipe-description"
+              type="text"
+              name="recipe-description"
+            /><br />
 
-        <br />
-        <br />
-        <input
-          type="submit"
-          id="save-recipe-btn"
-          value="Submit"
-          disabled="disabled"
-        />
-      </form>
+            <label for="recipe-portions">Portions</label><br />
+            <input id="recipe-portions" type="text" name="recipe-portions" />
 
-      <br />
-      <br />
-      <div id="recipe-ingredient-feed"></div>
-      <br />
-      <button id="add-ingredient-input-btn">Add ingredient input</button>
+            <br />
+            <br />
+            <!-- <input
+              type="submit"
+              id="save-recipe-btn"
+              value="Submit"
+              disabled="disabled"
+              /> -->
+          </form>
+        </div>
+      </section>
 
-      <br />
-      <br />
-      <div id="recipe-step-feed"></div>
-      <br />
-      <button id="add-step-input-btn">Add recipe input</button>
+      <section>
+        <div class="container">
+          <div class="recipe-feed">
+            <p>Ingredient - quantity - unit</p>
+            <div id="recipe-ingredient-feed" class="recipe-feed"></div>
+            <div class="text-center">
+              <button id="add-ingredient-input-btn" class="btn btn-secondary">
+                Add ingredient input +
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <br />
-      <br />
-      <button id="save-btn">Log and save</button>
+      <section>
+        <div class="container">
+          <div class="recipe-feed">
+            <p>Steps</p>
+            <div id="recipe-step-feed" class="recipe-feed"></div>
+            <div class="text-center">
+              <button id="add-step-input-btn" class="btn btn-secondary">
+                Add recipe input +
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <div id="recipeId"></div>
+      <section>
+        <div class="container">
+          <button
+            id="save-btn"
+            style="float: right"
+            class="btn btn-primary btn-lg"
+          >
+            Save
+          </button>
+          <button
+            id="back-btn"
+            style="float: left"
+            class="btn btn-secondary btn-lg"
+          >
+            Back
+          </button>
+        </div>
+      </section>
     </div>
 
     <script src="/static/js/api_calls.js"></script>
@@ -50,16 +93,16 @@
     <script src="/static/js/steps.js"></script>
     <script src="/static/js/check_input.js"></script>
     <script src="/static/js/utils.js"></script>
+    <script src="/static/js/autocomplete.js"></script>
     <script type="text/javascript">
       const recipeHeading = document.getElementById('recipe-heading');
       const recipeNameInput = document.getElementById('recipe-name');
       const recipeDescriptionInput =
         document.getElementById('recipe-description');
       const recipePortionsInput = document.getElementById('recipe-portions');
-      const saveRecipeForm = document.getElementById('save-recipe-form');
 
-      // for testing
-      const dummyCreateButton = document.getElementById('dummy-create');
+      // const saveRecipeForm = document.getElementById('save-recipe-form');
+
       const saveBtn = document.getElementById('save-btn');
 
       // ejs values
@@ -82,7 +125,7 @@
       rId = parseInt(strRecipeId);
       console.log(`rId = ${rId}`);
 
-      saveRecipeForm.addEventListener('submit', () => {});
+      // saveRecipeForm.addEventListener('submit', () => {});
 
       addIngredientInputBtn.addEventListener('click', () => {
         addIngredientInput();
@@ -120,6 +163,7 @@
 
         console.log(`About to send:`);
         console.log(newRecipe);
+        console.log(`rId rett foer ${rId}`);
 
         updateFullRecipe(rId, newRecipe).then((response) => {
           if (!response.ok) {
