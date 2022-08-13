@@ -1,12 +1,15 @@
 const localPort = 3000
 var port = process.env.PORT || localPort;
 
+import dotenv from 'dotenv'
 import express from 'express'
 import cors from 'cors'
 import http from 'http'
 import os from 'os'
 import fetch from "node-fetch"
 import expressOpenIdConnect from 'express-openid-connect'
+
+dotenv.config();
 const { auth } = expressOpenIdConnect;
 const { requiresAuth } = expressOpenIdConnect;
 
@@ -19,10 +22,10 @@ if (port == localPort) {
 const config = {
   authRequired: false,
   auth0Logout: true,
-  secret: 'a long, randomly-generated string stored in env', // hehe
+  secret: process.env.AUTH0_CLIENT_SECRET,
   baseURL: appUrl,
-  clientID: '49RVwIDwigQS5KYFNGsypJS9U8dn4FQQ',
-  issuerBaseURL: 'https://dev-z293vi6n.us.auth0.com'
+  clientID: process.env.AUTH0_CLIENT_ID,
+  issuerBaseURL: process.env.AUTH0_DOMAIN
 }
 
 var app = express() // use the express framework to handle dynamic responses to different pages
