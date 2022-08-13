@@ -2,6 +2,8 @@ const localPort = 3000
 var port = process.env.PORT || localPort;
 
 import dotenv from 'dotenv'
+dotenv.config();
+
 import express from 'express'
 import cors from 'cors'
 import http from 'http'
@@ -9,7 +11,6 @@ import os from 'os'
 import fetch from "node-fetch"
 import expressOpenIdConnect from 'express-openid-connect'
 
-dotenv.config();
 const { auth } = expressOpenIdConnect;
 const { requiresAuth } = expressOpenIdConnect;
 
