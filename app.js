@@ -73,7 +73,6 @@ app.get("/recipes/:id", (req, res) => {
   app.get("/add-recipe", requiresAuth(), (req, res) => {
   console.log(`Displaying page to add new recipe`);
   var user = req.oidc.isAuthenticated()? req.oidc.user : null;
-
   res.render("add-recipe", { user: user });
 })
 

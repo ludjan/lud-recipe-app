@@ -98,7 +98,8 @@
     <script src="/static/js/utils.js"></script>
     <script src="/static/js/autocomplete.js"></script>
     <script type="text/javascript">
-      '<% console.log(user); %>';
+      var nickname = '<%- user.nickname %>';
+      console.log(nickname);
 
       const recipeHeading = document.getElementById('recipe-heading');
       const recipeNameInput = document.getElementById('recipe-name');
