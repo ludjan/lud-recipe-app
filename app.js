@@ -59,7 +59,7 @@ app.get("/", (req, res) => {
 
 app.get("/recipes/:id", (req, res) => {
   var user = req.oidc.isAuthenticated()? req.oidc.user : null;
-
+  
   const targetUrl = apiUrl + "/api/recipes/" + req.params.id
   console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
@@ -68,11 +68,13 @@ app.get("/recipes/:id", (req, res) => {
       console.log(data)
       res.render("recipe", { data: data, user: user})
     });
-})
+  })
+  
+  app.get("/add-recipe", requiresAuth(), (req, res) => {
+  console.log(`Displaying page to add new recipe`);
+  var user = req.oidc.isAuthenticated()? req.oidc.user : null;
 
-app.get("/add-recipe", requiresAuth(), (req, res) => {
-  console.log(`Displaying page to add new recipe`)
-  res.render("add-recipe");
+  res.render("add-recipe", { user: user });
 })
 
 app.get("/edit/:id", requiresAuth(), (req, res) => {
