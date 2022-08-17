@@ -26,7 +26,7 @@ const config = {
   secret: process.env.AUTH0_CLIENT_SECRET,
   baseURL: appUrl,
   clientID: process.env.AUTH0_CLIENT_ID,
-  issuerBaseURL: process.env.AUTH0_DOMAIN
+  issuerBaseURL: process.env.AUTH0_DOMAIN,
 }
 
 var app = express() // use the express framework to handle dynamic responses to different pages
@@ -84,6 +84,30 @@ app.get("/edit/:id", requiresAuth(), (req, res) => {
     .then((data) => {
       console.log(data)
       res.render("edit-recipe", { data: data })
+    });
+})
+
+app.get('/getToken', requiresAuth(), (req, res) => {
+  const targetUrl = 'https://dev-z293vi6n.us.auth0.com/oauth/token'
+  
+  const authBody = {
+      'client_id': '49RVwIDwigQS5KYFNGsypJS9U8dn4FQQ',
+      'client_secret':'oQfGlM0vqsx976ZY1A-CldSDr3AP7HAmtrfQ6OmuJrHbJYv8SJ7Q_FErtblCyku7',
+      'audience':'https://lud-recipe-api.herokuapp.com',
+      'grant_type':'client_credentials'
+  }
+
+  const config = {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(authBody)
+  }
+  fetch(targetUrl, config)
+    .then((response) => response.json())
+    .then((data) => {
+      res.status(200).json(data.access_token);
     });
 })
 

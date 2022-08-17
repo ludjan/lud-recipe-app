@@ -1,3 +1,4 @@
+
 // ingredients
 const addIngredientInputBtn = document.getElementById(
     'add-ingredient-input-btn'
