@@ -33,17 +33,17 @@ function appendOptionsToSelect(optionsArray, select) {
   }
 
 function setValueInSelectorIfExists(selector, value) {
-    var element = 0;
-    // console.log(`This selector has ${selector.options.length} options`);
-    for (let i = 0; i < selector.options.length; i++) {
-      if (selector.options[i].value == value) {
-        element = i;
-        // console.log(`Value in selector was found`);
-        break;
-      }
+  var element = 0;
+  // console.log(`This selector has ${selector.options.length} options`);
+  for (let i = 0; i < selector.options.length; i++) {
+    if (selector.options[i].value == value) {
+      element = i;
+      // console.log(`Value in selector was found`);
+      break;
     }
-    selector.selectedIndex = element;
   }
+  selector.selectedIndex = element;
+}
 
 function clearElement(element) {
     while (element.firstChild) {
