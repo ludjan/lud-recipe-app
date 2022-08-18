@@ -105,10 +105,10 @@ app.get('/getToken', requiresAuth(), (req, res) => {
     body: JSON.stringify(authBody)
   }
   fetch(targetUrl, config)
-    .then((response) => response.json())
-    .then((data) => {
-      res.status(200).json(data.access_token);
-    });
+  .then((response) => response.json())
+  .then((data) => {
+    res.status(200).json(data.access_token);
+  });
 })
 
 // make js, css and other static files available from the 
