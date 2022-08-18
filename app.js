@@ -88,7 +88,7 @@ app.get("/edit/:id", requiresAuth(), (req, res) => {
 })
 
 app.get('/getToken', requiresAuth(), (req, res) => {
-  const targetUrl = 'https://dev-z293vi6n.us.auth0.com/oauth/token'
+  const targetUrl = `${process.env.AUTH0_DOMAIN}/oauth/token`
   
   const authBody = {
       'client_id': process.env.AUTH0_CLIENT_ID,
