@@ -95,7 +95,7 @@
     <script src="/static/js/ingredients.js"></script>
     <script src="/static/js/steps.js"></script>
     <script src="/static/js/check_input.js"></script>
-    <script src="/static/js/utils.js"></script>
+    <script src="/static/js/utils.cjs"></script>
     <script src="/static/js/autocomplete.js"></script>
     <script type="text/javascript">
       var nickname = '<%- user.nickname %>';
@@ -152,15 +152,19 @@
         console.log(`About to send:`);
         console.log(newRecipe);
 
-        createFullRecipe(newRecipe).then((response) => {
-          if (!response.ok) {
-            const errorMessage = `Error ${response.status} - ${response.statusText}`;
-            console.log(errorMessage);
-            return alert(errorMessage);
-          } else {
-            return (window.location.href = '../');
-          }
-        });
+        getToken()
+          .then((response) => response.json())
+          .then((token) => {
+            createFullRecipe(newRecipe, token).then((response) => {
+              if (!response.ok) {
+                const errorMessage = `Error ${response.status} - ${response.statusText}`;
+                console.log(errorMessage);
+                return alert(errorMessage);
+              } else {
+                return (window.location.href = '../');
+              }
+            });
+          });
       });
 
       Promise.all([getIngredients(), getUnits()])

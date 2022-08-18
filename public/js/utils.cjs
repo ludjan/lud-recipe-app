@@ -52,15 +52,21 @@ function clearElement(element) {
 }
 
 function removeElementOnIndex(array, index) {
+  if (!isIndexInsideBounds(array, index)) return -1;
   array.splice(index, 1);
 }
 
+function isIndexInsideBounds(arr, index) {
+  if (index < 0) return 0;
+  if (index > arr.length-1) return 0;
+  return 1;
+}
+
 function swapElementsOnIndexes(array, x, y) {
-    if (x >= 0 && x <= array.length && y >= 0 && y <= array.length) {
-      const tmp = array[x];
-      array[x] = array[y];
-      array[y] = tmp;
-      return;
-    }
-    console.log(`Did not swap for x=${x} and y=${y}`);
+  if (!isIndexInsideBounds(array, x)) return -1;
+  if (!isIndexInsideBounds(array, y)) return -1;
+      
+  const tmp = array[x];
+  array[x] = array[y];
+  array[y] = tmp;
 }

@@ -86,7 +86,13 @@
 
       ('<% if (user != null) { %>');
       deleteBtn.addEventListener('click', () => {
-        deleteRecipe(recipeId).then((window.location.pathname = '/..')); // navigates user back to main page
+        getToken()
+          .then((response) => response.json())
+          .then((token) => {
+            deleteRecipe(recipeId, token).then(
+              (window.location.pathname = '/..')
+            ); // navigates user back to main page
+          });
       });
 
       editBtn.addEventListener('click', () => {

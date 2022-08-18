@@ -85,7 +85,7 @@
     <script src="/static/js/ingredients.js"></script>
     <script src="/static/js/steps.js"></script>
     <script src="/static/js/check_input.js"></script>
-    <script src="/static/js/utils.js"></script>
+    <script src="/static/js/utils.cjs"></script>
     <script src="/static/js/autocomplete.js"></script>
     <script type="text/javascript">
       const recipeHeading = document.getElementById('recipe-heading');
@@ -158,15 +158,21 @@
         console.log(newRecipe);
         console.log(`rId rett foer ${rId}`);
 
-        updateFullRecipe(rId, newRecipe).then((response) => {
-          if (!response.ok) {
-            const errorMessage = `Error ${response.status} - ${response.statusText}`;
-            console.log(errorMessage);
-            return alert(errorMessage);
-          } else {
-            return (window.location.href = `../../recipes/${rId}`);
-          }
-        });
+        // get access token from back of web server
+        getToken()
+          .then((response) => response.json())
+          .then((token) => {
+            // then send token along with update request
+            updateFullRecipe(rId, newRecipe, token).then((response) => {
+              if (!response.ok) {
+                const errorMessage = `Error ${response.status} - ${response.statusText}`;
+                console.log(errorMessage);
+                return alert(errorMessage);
+              } else {
+                return (window.location.href = `../../recipes/${rId}`);
+              }
+            });
+          });
       });
 
       // if new entry, then rId is set to -1
@@ -177,14 +183,18 @@
         .then(([recipeResponse, ingredientResponse, unitResponse]) => {
           // ingredients and units must be set first
           ingredients = ingredientResponse;
-          console.log(ingredients);
+          // console.log(ingredients);
           units = unitResponse;
-          console.log(units);
+          // console.log(units);
+
           // recipe
           console.log(recipeResponse);
           recipeIngredientArray = recipeResponse.ingredients;
           recipeStepArray = getStepDescriptionArray(recipeResponse.steps);
           console.log(recipeIngredientArray);
+
+          recipePortionsInput.value = recipeResponse.recipe.portions;
+          console.log('Set portions');
 
           // rerender the feeds
           rerenderRecipeIngredientsFeed();
