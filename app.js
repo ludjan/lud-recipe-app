@@ -91,8 +91,8 @@ app.get('/getToken', requiresAuth(), (req, res) => {
   const targetUrl = 'https://dev-z293vi6n.us.auth0.com/oauth/token'
   
   const authBody = {
-      'client_id': '49RVwIDwigQS5KYFNGsypJS9U8dn4FQQ',
-      'client_secret':'oQfGlM0vqsx976ZY1A-CldSDr3AP7HAmtrfQ6OmuJrHbJYv8SJ7Q_FErtblCyku7',
+      'client_id': process.env.AUTH0_CLIENT_ID,
+      'client_secret': process.env.AUTH0_CLIENT_SECRET,
       'audience':'https://lud-recipe-api.herokuapp.com',
       'grant_type':'client_credentials'
   }
