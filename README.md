@@ -1,8 +1,8 @@
 # lud-recipe-app
 
-A simple web front end to CRUD recipes.
-https://lud-recipe-app.herokuapp.com
+Available at https://lud-recipe-app.herokuapp.com
 
+A simple web front end to CRUD recipes at https://lud-recipe-api.herokuapp.com
 
-To CUD you must log in. 
+To create, update and delete you must be logged in. 
 Authentication provided by Auth0.
