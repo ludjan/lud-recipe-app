@@ -73,7 +73,7 @@ describe('test-utils.js', () => {
 
     const appendUnitsToSelect = utils.__get__('appendUnitsToSelect');
     describe('#appendUnitsToSelect()', function () {
-        it('appends supplied units to select', () => {
+        it('should append supplied units to select', () => {
 
             const units = [
                 { name: 'deciliter'},
@@ -125,6 +125,23 @@ describe('test-utils.js', () => {
 
             // check
             assert.equal(select.selectedIndex, 0);
+        });
+    });
+
+    const clearElement = utils.__get__('clearElement');
+    describe('#clearElement()', function () {
+        it('should no longer have children', () => {
+
+            const document = getSetBasicJSDOMDocument();
+            const parent = document.createElement('div');
+            const firstChild = document.createElement('div');
+            const secondChild = document.createElement('div');
+            parent.appendChild(firstChild);
+            parent.appendChild(secondChild);
+
+            clearElement(parent);
+
+            assert.equal(parent.childNodes.length, 0);
         });
     });
 });
