@@ -144,4 +144,55 @@ describe('test-utils.js', () => {
             assert.equal(parent.childNodes.length, 0);
         });
     });
+
+    const getArrayOfProperty = utils.__get__('getArrayOfProperty');
+    describe('#getArrayOfProperty()', function () {
+        it('should get array when string property exists', () => {
+
+            const h1 = { name: 'h1', age: 4 }
+            const h2 = { name: 'h2', age: 6 }
+            const h3 = { name: 'h3', age: 5 }
+            const fullArray = [h1, h2, h3];
+
+            const nameArray = getArrayOfProperty(fullArray, 'name');
+            
+            assert.equal(nameArray[0], 'h1');
+            assert.equal(nameArray[1], 'h2');
+            assert.equal(nameArray[2], 'h3');
+        });
+
+        it('should get array when int property exists', () => {
+
+            const h1 = { name: 'h1', age: 4 }
+            const h2 = { name: 'h2', age: 6 }
+            const h3 = { name: 'h3', age: 5 }
+            const fullArray = [h1, h2, h3];
+
+            const numberArray = getArrayOfProperty(fullArray, 'age');
+
+            assert.equal(numberArray[0], 4);
+            assert.equal(numberArray[1], 6);
+            assert.equal(numberArray[2], 5);  
+        });
+
+        it('should return empty array if property does not exist', () => {
+            const h1 = { name: 'h1', age: 4 }
+            const h2 = { name: 'h2', age: 6 }
+            const h3 = { name: 'h3', age: 5 }
+            const fullArray = [h1, h2, h3];
+
+            const horseArray = getArrayOfProperty(fullArray, 'horse');
+            assert.equal(horseArray.length, 0)
+
+        });
+
+        it('should return empty array if input array is empty', () => {
+            const fullArray = [];
+
+            const emptyArray = getArrayOfProperty(fullArray, 'property');
+            assert.equal(fullArray.length, 0);
+
+        });
+
+    });
 });

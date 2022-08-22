@@ -18,9 +18,17 @@ function autocomplete(inp, arr) {
         /*append the DIV element as a child of the autocomplete container:*/
         this.parentNode.appendChild(a);
         /*for each item in the array...*/
+
+        var completeMatchFound = false;
         for (i = 0; i < arr.length; i++) {
+
           /*check if the item starts with the same letters as the text field value:*/
           if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+
+            if (arr[i].toUpperCase() == val.toUpperCase()) {
+              completeMatchFound = true;
+            }
+
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
             /*make the matching letters bold:*/
@@ -37,7 +45,21 @@ function autocomplete(inp, arr) {
                 closeAllLists();
             });
             a.appendChild(b);
+            matchFound = true;
           }
+        }
+
+        if (!completeMatchFound) {
+          console.log('There is no match')
+          // create the box for 'create new'
+          b = document.createElement('div');
+          b.innerHTML = "Create <strong>" + this.value + "</strong> + ";
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          b.addEventListener("click", (e) => {
+            console.log('Create was clicked!');
+            closeAllLists();
+          });
+          a.appendChild(b);
         }
     });
     /*execute a function presses a key on the keyboard:*/

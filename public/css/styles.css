@@ -99,3 +99,7 @@ textarea {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
   }
+
+.recipe-image {
+  max-width: 200px;
+}

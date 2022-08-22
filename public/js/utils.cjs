@@ -70,3 +70,14 @@ function swapElementsOnIndexes(array, x, y) {
   array[x] = array[y];
   array[y] = tmp;
 }
+
+function getArrayOfProperty(array, property) {
+  const newArray = [];
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    if (element[property] != null) {
+      newArray.push(element[property]);
+    }
+  }
+  return newArray;
+}

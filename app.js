@@ -33,8 +33,8 @@ var app = express() // use the express framework to handle dynamic responses to 
   app.use(express.json()) // make sure express parses bodies with json
   app.use(cors()) // make sure we can access the api from the outside
   app.set("view engine", "ejs") // set view engine to ejs
-  app.use(auth(config));
-const apiUrl = "https://lud-recipe-api.herokuapp.com"
+  app.use(auth(config)); // setup the authentication
+const apiUrl = "https://lud-recipe-api.herokuapp.com/api"
 
 app.get('/isAuthenticated', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
@@ -47,7 +47,7 @@ app.get('/profile', requiresAuth(), (req, res) => {
 app.get("/", (req, res) => {
   var user = req.oidc.isAuthenticated()? req.oidc.user : null;
   
-  const targetUrl = apiUrl + "/api/recipes"
+  const targetUrl = `${apiUrl}/recipes`
   console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
     .then((response) => response.json())
@@ -60,7 +60,7 @@ app.get("/", (req, res) => {
 app.get("/recipes/:id", (req, res) => {
   var user = req.oidc.isAuthenticated()? req.oidc.user : null;
   
-  const targetUrl = apiUrl + "/api/recipes/" + req.params.id
+  const targetUrl = `${apiUrl}/recipes/${req.params.id}`;
   console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
     .then((response) => response.json())
@@ -77,7 +77,7 @@ app.get("/recipes/:id", (req, res) => {
 })
 
 app.get("/edit/:id", requiresAuth(), (req, res) => {
-  const targetUrl = apiUrl + "/api/recipes/" + req.params.id
+  const targetUrl = apiUrl + "/recipes/" + req.params.id
   console.log(`Target url: ${targetUrl}`)
   fetch(targetUrl)
     .then((response) => response.json())
