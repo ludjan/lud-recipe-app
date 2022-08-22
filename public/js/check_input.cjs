@@ -1,64 +1,104 @@
+const bannedCharacters = ['"', "'", '`', '\\', '/'];
+
+function allRecipeInputsAreValid() {
+
+  if (!isInputFieldValidText(recipeNameInput.name, recipeNameInput.value)) return false;
+
+  if (!isInputFieldValidText(recipeDescriptionInput.name, recipeDescriptionInput.value)) return false;
+
+  if (!isInputFieldValidNumberGreaterThanZero(recipePortionsInput.name, recipePortionsInput.value)) return false;
+
+  var validRecipeIngredientCount = 0;
+  
+  for (let i = 0; i < recipeIngredientArray.length; i++) {
+    const { quantity } = recipeIngredientArray[i];
+    if (!isInputFieldValidNumberGreaterThanZero(`Ingredient input ${i+1}`, quantity)) {
+      // remove this row ?
+      return false;
+    } else {
+      validRecipeIngredientCount++;
+    }
+  }
+  if (validRecipeIngredientCount <= 0) {
+    inputError(`Must have at least 1 valid ingredients`);
+    return false;
+  }
+
+  // validate ingredients
+  var validStepCount = 0;
+  // console.log(`RecipeStepArray length = ${recipeStepArray.length}`);
+  for (let i = 0; i < recipeStepArray.length; i++) {
+    const description = recipeStepArray[i];
+    if (isBlank(description)) {
+      // remove this ?
+      console.log(`Description cannot be blank`);
+    } else {
+      validStepCount++;
+    }
+  }
+  if (validStepCount <= 0) {
+    inputError(`Must have at least 1 valid step`);
+    return false;
+  }
+
+  return true;
+}
+
+function isInputFieldValidNumberGreaterThanZero(fieldName, value) {
+  if (isBlank(value)) {
+    inputError(`${fieldName} is blank`);
+    return false;
+  }
+  if (!isNumeric(value)) {
+    inputError(`${fieldName} is not an whole number`);
+    return false;
+  }
+
+  if (parseInt(value) <= 0) {
+    inputError(`${fieldName} must be greater than 0`);
+    return false;
+  }
+
+  return true;
+}
+
+function isInputFieldValidText(fieldName, value) {
+  if (isBlank(value)) {
+    inputError(`${fieldName} is blank`);
+    return false;
+  }
+  if (containsBannedCharachters(value)) {
+    inputError(`${fieldName} contains banned characters ${formattedBannedCharacters()}`);
+    return false;
+  }
+  return true;
+}
+
 const isAlphaNumeric = str => /^[\w\-\s]+$/gi.test(str);
 const isNumeric = str => isNotBlank(str) && isAlphaNumeric(str) && !isNaN(str);
 const isBlank = str => str === "";
 const isNotBlank = str => !isBlank(str);
 
-function allRecipeInputsAreValid() {
-    const recipeName = recipeNameInput.value;
-    const recipeDescription = recipeDescriptionInput.value;
-    const recipePortions = recipePortionsInput.value;
-
-    if (!isAlphaNumeric(recipeName)) {
-      alert(`Name '${recipeName}' is not alphanumeric`);
-      return false;
-    }
-    if (!isAlphaNumeric(recipeDescription)) {
-      alert(`Description '${recipeDescription}' is not alphanumeric`);
-      return false;
-    }
-    if (!isNumeric(recipePortions)) {
-      alert(`Portions '${recipePortions}'' is not numeric`);
-      return false;
-    }
-
-    // validate ingredients
-    var validRecipeIngredientCount = 0;
-    console.log(
-      `RecipeIngredientsArray length = ${recipeIngredientArray.length}`
-    );
-    for (let i = 0; i < recipeIngredientArray.length; i++) {
-      const { quantity } = recipeIngredientArray[i];
-      if (!isNumeric(quantity) || parseInt(quantity) <= 0) {
-        console.log(
-          `This amount ${quantity} was not a number or too small`
-        );
-        // remove this ?
-        // removeIngredientInput
-      } else {
-        validRecipeIngredientCount++;
+const containsSymbols = (str, symbols) => {
+  for (let i = 0; i < str.length; i++) {
+    const character = str.substr(i, 1);
+    for (let j = 0; j < symbols.length; j++) {
+      if (character == symbols[j]) {
+        return true;
       }
     }
-    if (validRecipeIngredientCount <= 0) {
-      alert(`Must have at least 1 valid ingredients`);
-      return false;
-    }
-
-    // validate ingredients
-    var validStepCount = 0;
-    console.log(`RecipeStepArray length = ${recipeStepArray.length}`);
-    for (let i = 0; i < recipeStepArray.length; i++) {
-      const description = recipeStepArray[i];
-      if (isBlank(description)) {
-        // remove this ?
-        console.log(`Description cannot be blank`);
-      } else {
-        validStepCount++;
-      }
-    }
-    if (validStepCount <= 0) {
-      alert(`Must have at least 1 valid step`);
-      return false;
-    }
-
-    return true;
   }
+  return false;
+}
+
+function inputError(str) {
+  alert(str);
+}
+
+function formattedBannedCharacters() {
+  return `(${reduceStringArray(bannedCharacters)})`
+}
+
+const containsBannedCharachters = (str) => {
+  return containsSymbols(str, bannedCharacters);
+}

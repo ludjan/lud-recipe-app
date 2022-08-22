@@ -69,6 +69,22 @@ app.get("/recipes/:id", (req, res) => {
       res.render("recipe", { data: data, user: user})
     });
   })
+
+  app.get("/ingredients", (req, res) => {
+
+    res.render('ingredients-view');
+
+    // // var user = req.oidc.isAuthenticated()? req.oidc.user : null;
+    
+    // const targetUrl = `${apiUrl}/recipes`
+    // console.log(`Target url: ${targetUrl}`)
+    // fetch(targetUrl)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     // console.log(data)
+    //     res.render("ingredients-view", { data: data, url : appUrl, user: user })
+    //   })
+  })
   
   app.get("/add-recipe", requiresAuth(), (req, res) => {
   console.log(`Displaying page to add new recipe`);

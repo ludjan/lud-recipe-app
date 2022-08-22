@@ -2,7 +2,7 @@ import assert from 'assert';
 import rewire from 'rewire';
 import { JSDOM } from 'jsdom';
 
-const utils = rewire('./public/js/utils.cjs');
+const file = rewire('./public/js/utils.cjs');
 
 function getSetBasicJSDOMDocument() {
     const dom = new JSDOM(`<!DOCTYPE html>`);
@@ -13,7 +13,7 @@ function getSetBasicJSDOMDocument() {
 
 describe('test-utils.js', () => {
     
-    const isIndexInsideBounds = utils.__get__('isIndexInsideBounds');
+    const isIndexInsideBounds = file.__get__('isIndexInsideBounds');
     describe('#isIndexInsideBounds()', function () {
         it('should not allow index to be too small', () => {
             const arr = [1,2,3];
@@ -32,7 +32,7 @@ describe('test-utils.js', () => {
         });
     });
 
-    const removeElementOnIndex = utils.__get__('removeElementOnIndex');
+    const removeElementOnIndex = file.__get__('removeElementOnIndex');
     describe('#removeElementOnIndex()', function () {
         it('should return -1 when index is smaller than 0', function () {
             assert.equal(removeElementOnIndex([1, 2, 3], -1), -1);
@@ -52,7 +52,7 @@ describe('test-utils.js', () => {
         });
     });
 
-    const swapElementsOnIndexes = utils.__get__('swapElementsOnIndexes');
+    const swapElementsOnIndexes = file.__get__('swapElementsOnIndexes');
     describe('#swapElementsOnIndexes()', function () {
         it('should not allow first argument to be to be out of bounds', () => {
             const arr = [1,2,3];
@@ -71,7 +71,7 @@ describe('test-utils.js', () => {
         });
     });
 
-    const appendUnitsToSelect = utils.__get__('appendUnitsToSelect');
+    const appendUnitsToSelect = file.__get__('appendUnitsToSelect');
     describe('#appendUnitsToSelect()', function () {
         it('should append supplied units to select', () => {
 
@@ -89,9 +89,56 @@ describe('test-utils.js', () => {
             assert.equal(select.children[0].innerHTML, 'deciliter');
             assert.equal(select.children[1].innerHTML, 'centiliter');
         });
+
+        it('should allow no ingredients', () => {
+
+            const units = [];
+            const document = getSetBasicJSDOMDocument();
+            const select = document.createElement('select');
+
+            // apply function
+            appendUnitsToSelect(units, select);
+
+            // check
+            assert.ok(select.children.length == 0);
+        });
+
     });
 
-    const setValueInSelectorIfExists = utils.__get__('setValueInSelectorIfExists');
+    const appendIngredientsToSelect = file.__get__('appendIngredientsToSelect');
+    describe('#appendIngredientsToSelect()', function () {
+        it('should append supplied ingredients to select', () => {
+
+            const ingredients = [
+                { name: 'vatten'},
+                { name: 'melk'}
+            ];
+            const document = getSetBasicJSDOMDocument();
+            const select = document.createElement('select');
+
+            // apply function
+            appendIngredientsToSelect(ingredients, select);
+
+            // check
+            assert.equal(select.children[0].innerHTML, 'vatten');
+            assert.equal(select.children[1].innerHTML, 'melk');
+        });
+
+        it('should allow no ingredients', () => {
+
+            const ingredients = [];
+            const document = getSetBasicJSDOMDocument();
+            const select = document.createElement('select');
+
+            // apply function
+            appendIngredientsToSelect(ingredients, select);
+
+            // check
+            assert.ok(select.children.length == 0);
+        });
+    });
+
+    const setValueInSelectorIfExists = file.__get__('setValueInSelectorIfExists');
     describe('#setValueInSelectorIfExists()', function () {
         it('should set value if it exists', () => {
 
@@ -128,7 +175,7 @@ describe('test-utils.js', () => {
         });
     });
 
-    const clearElement = utils.__get__('clearElement');
+    const clearElement = file.__get__('clearElement');
     describe('#clearElement()', function () {
         it('should no longer have children', () => {
 
@@ -145,7 +192,7 @@ describe('test-utils.js', () => {
         });
     });
 
-    const getArrayOfProperty = utils.__get__('getArrayOfProperty');
+    const getArrayOfProperty = file.__get__('getArrayOfProperty');
     describe('#getArrayOfProperty()', function () {
         it('should get array when string property exists', () => {
 
@@ -193,6 +240,5 @@ describe('test-utils.js', () => {
             assert.equal(fullArray.length, 0);
 
         });
-
     });
 });

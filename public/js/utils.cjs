@@ -9,28 +9,16 @@ function appendOptionsToSelect(optionsArray, select) {
     }
   }
 
-  function appendIngredientsToSelect(ingredients, select) {
-    // console.log(`Set values to ingredients selector`);
-    for (let i = 0; i < ingredients.length; i++) {
-      var option = document.createElement('option');
-      // console.log(`ingredient ${ingredients[i].name}`);
-      option.value = ingredients[i].name;
-      option.innerHTML = ingredients[i].name;
-      select.appendChild(option);
-    }
-  }
+function appendIngredientsToSelect(ingredients, select) {
+  const ingredientNames = getArrayOfProperty(ingredients, 'name');
+  appendOptionsToSelect(ingredientNames, select);
 
+}
 
-  function appendUnitsToSelect(units, select) {
-    for (let i = 0; i < units.length; i++) {
-      // new select element
-      var option = document.createElement('option');
-      // console.log(`Unit: ${units[i].name}`);
-      option.value = units[i].name;
-      option.innerHTML = units[i].name;
-      select.appendChild(option);
-    }
-  }
+function appendUnitsToSelect(units, select) {
+  const unitNames = getArrayOfProperty(units, 'name');
+  appendOptionsToSelect(unitNames, select);
+}
 
 function setValueInSelectorIfExists(selector, value) {
   var element = 0;
@@ -81,3 +69,12 @@ function getArrayOfProperty(array, property) {
   }
   return newArray;
 }
+
+function reduceStringArray(strArr) {
+  var str = "";
+  for (let i = 0; i < strArr.length; i++) {
+    str += strArr[i];
+  }
+  return str;
+}
+

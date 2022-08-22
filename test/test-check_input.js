@@ -8,61 +8,88 @@ describe('test-check_input.js', () => {
     const isAlphaNumeric = file.__get__('isAlphaNumeric');
     describe('#isAlphaNumeric()', function () {
         it('should allow letters', () => {
-            const str = 'hei';
-            assert.ok(isAlphaNumeric(str));
+            assert.ok(isAlphaNumeric('hei'));
         });
         it('should allow numbers', () => {
-            const str = '98764';
-            assert.ok(isAlphaNumeric(str));
+            assert.ok(isAlphaNumeric('98764'));
         });
         it('should allow whitespace', () => {
-            const str = ' ';
-            assert.ok(isAlphaNumeric(str));
+            assert.ok(isAlphaNumeric(' '));
         });
-        it('should allow common special characters', () => {
-            const str = '.,#@`';
-            assert.ok(isAlphaNumeric(str));
+        it('should not allow common special characters', () => {
+            assert.ok(!isAlphaNumeric('.,#@`'));
         });
         it('should not allow empty string', () => {
-            const str = '';
-            assert.ok(!isAlphaNumeric(str));
+            assert.ok(!isAlphaNumeric(''));
         });
     });
 
     const isNumeric = file.__get__('isNumeric');
     describe('#isNumeric()', () => {
         it('should allow numbers', () => {
-            const str = '1234567890'
-            assert.ok(isNumeric(str))
+            assert.ok(isNumeric('1234567890'))
         })
         it('should not allow empty string', () => {
-            const str = ''
-            assert.ok(!isNumeric(str))
+            assert.ok(!isNumeric(''))
         })
     })
     
     const isBlank = file.__get__('isBlank');
     describe('#isBlank()', () => {
         it('should return true on blank', () => {
-            const str = ''
-            assert.ok(isBlank(str))
+            assert.ok(isBlank(''))
         })
         it('should return false on not blank', () => {
-            const str = '1234567890asdfg asd'
-            assert.ok(!isBlank(str))
+            assert.ok(!isBlank('1234567890asdfg asd'))
         })
     })
     
     const isNotBlank = file.__get__('isNotBlank');
     describe('#isNotBlank()', () => {
         it('should return false on blank', () => {
-            const str = ''
-            assert.ok(!isNotBlank(str))
-        })
+            assert.ok(!isNotBlank(''));
+        });
         it('should return true on not blank', () => {
-            const str = '1234567890asdfg asd'
-            assert.ok(isNotBlank(str))
+            assert.ok(isNotBlank('1234567890asdfg asd'));
+        });
+    });
+
+    const containsSymbols = file.__get__('containsSymbols');
+    describe('#containsSymbols()', () => {
+        it('should return true if one symbol exists', () => {
+            assert.ok(containsSymbols('abc', ['a']));
+        })
+        it('should return true if two symbols exists', () => {
+            assert.ok(containsSymbols('abc!!', ['!']));
+        });
+        it('should return false if symbol does not exist', () => {
+            assert.ok(!containsSymbols('abc', ['d']));
+        })
+        it('should return false if input str is empty', () => {
+            assert.ok(!containsSymbols('', ['a']));
+        })
+        it('should return false if input symbols is empty', () => {
+            assert.ok(!containsSymbols('abc', []));
         })
     })
     
+    const containsBannedCharachters = file.__get__('containsBannedCharachters');
+    describe('#containsBannedCharachters()', () => {
+        it('should return true if str contains double quote', () => {
+            assert.ok(containsBannedCharachters('Hei "Peter"'));
+        })
+        it('should return true if str contains backslash', () => {
+            assert.ok(containsBannedCharachters('Dette er et backslash \\'));
+        });
+        it('should return true if str contains forwardslash', () => {
+            assert.ok(containsBannedCharachters('Dette er et forwardslash /'));
+        })
+        it('should return true if str contains single quote', () => {
+            assert.ok(containsBannedCharachters("Dette er et single quote '"));
+        })
+        it('should return true if str contains apostrophe', () => {
+            assert.ok(containsBannedCharachters('Dette er en apostrofe`'));
+        })
+    })
+
 });

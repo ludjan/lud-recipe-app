@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/head-links.ejs') %>
+    <title>Ingredients</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import { LudIngredientSection } from '/static/js/LudIngredientSection.js';
+
+      const root = document.getElementById('root');
+
+      const ludIngredientSection = new LudIngredientSection();
+
+      root.appendChild(ludIngredientSection);
+    </script>
+  </body>
+</html>

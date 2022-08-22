@@ -160,3 +160,13 @@ function getFormattedRecipeIngredients() {
   }
   return newRecipeIngredientArray;
 }
+
+function appendIngredientsToSelect(ingredients, select) {
+  const ingredientNames = getArrayOfProperty(ingredients, 'name');
+  appendOptionsToSelect(ingredientNames, select);
+}
+
+function appendUnitsToSelect(units, select) {
+  const unitNames = getArrayOfProperty(units, 'name');
+  appendOptionsToSelect(unitNames, select);
+}
