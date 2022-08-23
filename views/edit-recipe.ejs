@@ -6,9 +6,34 @@
   </head>
   <body>
     <div class="wrapper">
+      <!-- <section>
+        <div class="container"> 
+          <form autocomplete="off" action="">
+            <div class="autocomplete" style="width: 300px">
+              <input
+                id="test-ingredient-input"
+                type="text"
+                name="testIngredient"
+                placeholder="Ingredient"
+              />
+            </div>
+            <input type="submit" />
+          </form>
+        </div>
+      </section> 
+
+      <br />
+      <br /> -->
+
       <section>
         <div class="container text-center">
           <h1 id="recipe-heading">Edit recipe</h1>
+        </div>
+      </section>
+
+      <section>
+        <div class="container text-center">
+          <img class="recipe-image" src="/static/images/dog.jpg" />
         </div>
       </section>
 
@@ -82,7 +107,7 @@
     </div>
 
     <script src="/static/js/api_calls.js"></script>
-    <script src="/static/js/ingredients.js"></script>
+    <script src="/static/js/ingredients.cjs"></script>
     <script src="/static/js/steps.js"></script>
     <script src="/static/js/check_input.cjs"></script>
     <script src="/static/js/utils.cjs"></script>
@@ -95,6 +120,8 @@
       const recipePortionsInput = document.getElementById('recipe-portions');
 
       // const saveRecipeForm = document.getElementById('save-recipe-form');
+
+      var testIngredients = [];
 
       const saveBtn = document.getElementById('save-btn');
 
@@ -183,7 +210,14 @@
         .then(([recipeResponse, ingredientResponse, unitResponse]) => {
           // ingredients and units must be set first
           ingredients = ingredientResponse;
-          // console.log(ingredients);
+
+          testIngredients = getArrayOfProperty(ingredients, 'name');
+          // autocomplete(
+          //   document.getElementById('test-ingredient-input'),
+          //   testIngredients
+          // );
+
+          console.log(ingredients);
           units = unitResponse;
           // console.log(units);
 

@@ -1,3 +1,5 @@
+import { LudButton } from './LudButton.js';
+
 class IngredientRow {
     constructor(ingredient) {
         this.name = ingredient.name;
@@ -10,12 +12,29 @@ class IngredientRow {
 
     init() {
 
+        this.addClasses();
+        this.createNameParagraph();
+        this.createEditButton();
+    }
+    
+    addClasses() {
         this.element.classList.add('col-xs-12');
-        this.element.classList.add('col-sm-6');
+    }
 
-        const ingredientParagraph = document.createElement('p');
+    createNameParagraph() {
+        const ingredientParagraph = document.createElement('div');
         ingredientParagraph.innerHTML = `${this.name} <i>${this.id}</i>`;
         this.element.appendChild(ingredientParagraph);
+    }
+
+    createEditButton() {
+        const editButton = new LudButton("Edit");
+
+        editButton.element.addEventListener("click", () => {
+            console.log(`Clicked edit button ${this.id}`);
+        });
+
+        this.element.appendChild(editButton.element);
     }
 }
 

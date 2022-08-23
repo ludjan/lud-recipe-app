@@ -1,5 +1,5 @@
+// import { LudButton } from './LudButton.js';
 import { LudButton } from './LudButton.js';
-// import { ludIngredientsFeed } from './LudIngredientsFeed.js';
 import { LudIngredientsFeed } from './LudIngredientsFeed.js';
 import { LudSearchField } from './LudSearchField.js';
 import { getIngredients } from './modules/api_calls.js';
@@ -46,6 +46,7 @@ class LudIngredientSection {
 
 
     updateFeed(str) {
+        
         Utils.clearElement(this.ingredientsFeed.element);
 
         var copyArray = Utils.copyArray(this.ingredients);
@@ -55,13 +56,22 @@ class LudIngredientSection {
         } 
 
         var newArray = [];
+        var hasCompleteMatch = false;
         for (let i = 0; i < copyArray.length; i++) {
             const { name } = copyArray[i];
             if (Utils.strMatchesStr(name, str)) {
                 newArray.push(copyArray[i]);
+                if (Utils.isCompleteMatch(name, str)) {
+                    hasCompleteMatch = true;
+                }
             }
         }
-        this.ingredientsFeed.displayIngredients(newArray); 
+        this.ingredientsFeed.displayIngredients(newArray);
+        
+        if (str != '' && !hasCompleteMatch) {
+            this.ingredientsFeed.displayCreateNewButton(str);
+            console.log('Create new button');
+        }
     }
 }
 

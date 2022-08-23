@@ -69,6 +69,24 @@ async function createFullRecipe(recipe, token) {
   return await fetch(targetUrl, config)
 }
 
+async function createIngredient(ingredient, token) {
+  const targetUrl = `${apiBaseURL}/ingredients`;
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `bearer ${token}`
+    },
+    body: JSON.stringify(ingredient)
+  }
+  
+  console.log(targetUrl);
+  console.log(config);
+
+  return await fetch(targetUrl, config)
+
+}
+
 async function updateFullRecipe(id, recipe, token) {
   const targetUrl = `${apiBaseURL}/fullRecipe/${id}`;
   const config = {
@@ -82,4 +100,8 @@ async function updateFullRecipe(id, recipe, token) {
   return await fetch(targetUrl, config)
 }
 
-export { getIngredients };
+export { 
+  getToken,
+  getIngredients, 
+  createIngredient 
+};

@@ -92,15 +92,12 @@ class Utils {
         const secondStrToUpper = secondStr.toUpperCase();
         const len = secondStr.length;
         
-        /*check if the item starts with the same letters as the text field value:*/
-        if (firstStrToUpper.substr(0, len) == secondStrToUpper) {
-            return true;
-            
-            // newArray.push(element);
-            // if (firstStrToUpper == secondStrToUpper) {
-            //     // completeMatchFound = true;
-            // }
-        }
+        if (firstStrToUpper.substr(0, len) == secondStrToUpper) return true;
+        return false;
+    }
+
+    static isCompleteMatch(firstStr, secondStr) {
+        if (firstStr == secondStr) return true;
         return false;
     }
 }
