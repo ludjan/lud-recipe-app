@@ -20,24 +20,24 @@ class LudIngredientsFeed {
 
     displayCreateNewButton(str) {
         this.createNewButton = new LudButton(`Create ingredient '${str}' + `);
-        this.createNewButton.element.addEventListener('click', () => {
-            const newIngredient = { name: str };
+        // this.createNewButton.element.addEventListener('click', () => {
+        //     const newIngredient = { name: str };
 
-            getToken()
-            .then((response) => response.json())
-            .then((token) => {
+        //     getToken()
+        //     .then((response) => response.json())
+        //     .then((token) => {
 
-                // then send token along with update request
-                createIngredient(newIngredient, token)
-                .then((response) => {
-                    if (!response.ok) {
-                        const errorMessage = `Error ${response.status} - ${response.statusText}`;
-                        console.log(errorMessage);
-                        return alert(errorMessage);
-                    }
-                });
-            });
-        });
+        //         // then send token along with update request
+        //         createIngredient(newIngredient, token)
+        //         .then((response) => {
+        //             if (!response.ok) {
+        //                 const errorMessage = `Error ${response.status} - ${response.statusText}`;
+        //                 console.log(errorMessage);
+        //                 return alert(errorMessage);
+        //             }
+        //         });
+        //     });
+        // });
         this.element.appendChild(this.createNewButton.element);
     }
 }

@@ -2,7 +2,7 @@
 import { LudButton } from './LudButton.js';
 import { LudIngredientsFeed } from './LudIngredientsFeed.js';
 import { LudSearchField } from './LudSearchField.js';
-import { getIngredients } from './modules/api_calls.js';
+import { getIngredients, createIngredient, getToken } from './modules/api_calls.js';
 import { Utils } from './modules/utils.js';
 
 
@@ -14,14 +14,17 @@ class LudIngredientSection {
     }
 
     init() {
+
         this.searchField = new LudSearchField(this.query);
         this.section.appendChild(this.searchField.element);
 
-        // this.addBtn = new LudButton('Search');
-        // this.section.appendChild(this.addBtn.element);
-        // this.addBtn.element.addEventListener("click", () => {
-        //     console.log('Clicked when input was ' + this.searchField.element.value);
-        // });
+        this.addBtn = new LudButton('Add + ');
+        this.section.appendChild(this.addBtn.element);
+        this.addBtn.element.addEventListener("click", () => {
+            console.log('Clicked when input was ' + this.searchField.element.value);
+        });
+
+
 
         this.ingredientsFeed = new LudIngredientsFeed();
         this.section.appendChild(this.ingredientsFeed.element);
@@ -42,8 +45,6 @@ class LudIngredientSection {
             this.updateFeed('');
         });
     }
-
-
 
     updateFeed(str) {
         
@@ -71,6 +72,28 @@ class LudIngredientSection {
         if (str != '' && !hasCompleteMatch) {
             this.ingredientsFeed.displayCreateNewButton(str);
             console.log('Create new button');
+
+            this.ingredientsFeed.createNewButton.element.addEventListener('click', () => {
+                
+                const newIngredient = { name: str };
+    
+                getToken()
+                .then((response) => response.json())
+                .then((token) => {
+    
+                    // then send token along with update request
+                    createIngredient(newIngredient, token)
+                    .then((response) => {
+                        if (!response.ok) {
+                            const errorMessage = `Error ${response.status} - ${response.statusText}`;
+                            console.log(errorMessage);
+                            return alert(errorMessage);
+                        }
+                        console.log(`Successfully created ${newIngredient}`);
+                        this.updateFeed(this.searchField.element.value);
+                    });
+                });
+            });
         }
     }
 }

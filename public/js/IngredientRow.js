@@ -11,14 +11,13 @@ class IngredientRow {
     }
 
     init() {
-
         this.addClasses();
         this.createNameParagraph();
         this.createEditButton();
     }
     
     addClasses() {
-        this.element.classList.add('col-xs-12');
+        this.element.classList.add('row');
     }
 
     createNameParagraph() {
@@ -30,9 +29,10 @@ class IngredientRow {
     createEditButton() {
         const editButton = new LudButton("Edit");
 
-        editButton.element.addEventListener("click", () => {
-            console.log(`Clicked edit button ${this.id}`);
-        });
+        // editButton.element.click = reloadIngredients() 
+        // editButton.elements.addEventListener("click", () => {
+        //     console.log(`Clicked edit button ${this.id}`);
+        // });
 
         this.element.appendChild(editButton.element);
     }
